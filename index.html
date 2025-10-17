@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="img/x-icon" href="img/fevicon.png"> 
+    
+    <title>Sajid Inamdar — Python Developer</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <div class="brand">
+                <a href="#home">SAJID INAMDAR</a>
+            </div>
+            <nav class="nav">
+                <button class="nav-toggle menu-toggle" id="menuToggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+                <ul class="nav-list" id="navList">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero-section section-padding">
+            <div class="container hero-content">
+                <div class="hero-text">
+                    <p class="greeting">Hello, I'm</p>
+                    <h2>Sajid Inamdar</h2>
+                    <p class="role-text">Python Developer & BCA Student | Building creative AI + web experiences</p>
+                    <a href="#projects" class="btn primary-btn">VIEW MY WORK</a>
+                </div>
+                
+                <div class="hero-image-card">
+                    <div class="profile-frame">
+                        <img src="img/myphoto.png" alt="Sajid Inamdar Portrait" class="profile-photo">
+                    </div>
+                    <div class="social-icons">
+                        <a href="https://github.com/inamdarsajid" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="https://linkedin.com/in/inamdarsajid" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://instagram.com/sajid__8080" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about-section section-padding">
+            <div class="container">
+                <h2 class="section-title">MY <span class="accent-text">BACKGROUND</span></h2>
+                <div class="about-content-card">
+                    <p class="about-lead">
+                        A **Python-focused developer** and **BCA student (1st Year)** dedicated to building fast, reliable, and visually appealing software solutions.
+                        I enjoy searching for new things, exploring **cybersecurity** and **AI tools**.
+                    </p>
+                    <div class="detail-card">
+                        <i class="fas fa-code-branch detail-icon"></i>
+                        <h4>Core Focus</h4>
+                        <p>Backend development using Python (FastAPI/Flask), Data Analysis (Pandas, Seaborn), and essential web technologies (HTML, CSS, JS).</p>
+                    </div>
+                    <div class="detail-card">
+                        <i class="fas fa-graduation-cap detail-icon"></i>
+                        <h4>Education</h4>
+                        <p>Currently pursuing my **Bachelor of Computer Applications (BCA)** in India, with a strong commitment to self-learning and project-based experience.</p>
+                    </div>
+                    <div class="about-action">
+                        <a href="#skills" class="btn primary-btn">Explore My Technical Skills</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="skills" class="skills-section section-padding">
+            <div class="container">
+                <h2 class="section-title">TECHNICAL <span class="accent-text">SKILLS</span></h2>
+                <div class="skills-grid-layout">
+                    <div class="skills-summary">
+                        <h3>Why Python & Data?</h3>
+                        <p>I specialize in **Python backend development**, creating robust and efficient APIs, and managing data for analysis. My passion lies in bridging the gap between creative problem-solving and technical execution, making me adept at full-stack development with a strong backend bias.</p>
+                        <p>I constantly seek to improve my skills to deliver impactful and secure software solutions.</p>
+                    </div>
+                    
+                    <div class="skills-list">
+                        <div class="skill-category">
+                            <h4>Backend & Data</h4>
+                            <div class="skill-tags">
+                                <span>Python</span>
+                                <span>FastAPI</span>
+                                <span>Flask</span>
+                                <span>Pandas</span>
+                                <span>Seaborn</span>
+                                <span>SQL/PostgreSQL</span>
+                            </div>
+                        </div>
+
+                        <div class="skill-category">
+                            <h4>Web & Tools</h4>
+                            <div class="skill-tags">
+                                <span>HTML/CSS</span>
+                                <span>JavaScript</span>
+                                <span>Git & GitHub</span>
+                                <span>Terminal/CLI</span>
+                            </div>
+                        </div>
+
+                        <div class="skill-category">
+                            <h4>Concepts & Interest</h4>
+                            <div class="skill-tags">
+                                <span>Problem Solving</span>
+                                <span>RESTful APIs</span>
+                                <span>Authentication</span>
+                                <span>Cybersecurity</span>
+                                <span>AI Tools</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="projects-section section-padding">
+            <div class="container">
+                <h2 class="section-title">MY <span class="accent-text">PROJECTS</span></h2>
+                <div class="projects-grid">
+                    
+                    <div class="project-card no-img">
+                        <div class="project-info">
+                            <h3>My FastAPI Project</h3>
+                            <p class="project-tech">Tech Stack: Python, FastAPI, Backend, PostgreSQL</p>
+                            <p class="project-description">A robust template for creating production-ready APIs with authentication and database integration.</p>
+                            <div class="project-actions">
+                                <a href="https://github.com/inamdarsajid/my-fastapi-project-" target="_blank" class="btn btn-small primary-btn">View Code <i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card no-img">
+                        <div class="project-info">
+                            <h3>Harisetu (Farmer Web)</h3>
+                            <p class="project-tech">Tech Stack: Python, Flask, HTML/CSS, Database</p>
+                            <p class="project-description">It is an online platform that connects farmers with buyers, providing them with information about crops, prices, and market trends. It also allows farmers to sell their produce directly to customers through the website.</p>
+                            <div class="project-actions">
+                                <a href="https://github.com/inamdarsajid/Harisetu" target="_blank" class="btn btn-small primary-btn">View Code <i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card no-img">
+                        <div class="project-info">
+                            <h3>Caterserv (Order Management)</h3>
+                            <p class="project-tech">Tech Stack: Python, Django, Web Management</p>
+                            <p class="project-description">A system for managing catering orders, client details, and inventory with a full-stack Python framework.</p>
+                            <div class="project-actions">
+                                <a href="https://github.com/inamdarsajid/Caterserv" target="_blank" class="btn btn-small primary-btn">View Code <i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card no-img">
+                        <div class="project-info">
+                            <h3>Python Chatbot</h3>
+                            <p class="project-tech">Tech Stack: Python, NLTK, Machine Learning Basics</p>
+                            <p class="project-description">A basic console-based chatbot implementation to explore natural language processing fundamentals.</p>
+                            <div class="project-actions">
+                                <a href="https://github.com/inamdarsajid/Python-chatbot" target="_blank" class="btn btn-small primary-btn">View Code <i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="view-all-button">
+                    <a href="https://github.com/inamdarsajid" target="_blank" class="btn ghost-btn">View All Repositories on GitHub</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact-section section-padding">
+            <div class="container">
+                <h2 class="section-title">LET'S <span class="accent-text">CONNECT</span></h2>
+                <div class="contact-box">
+                    <form class="contact-form" id="contactForm">
+                        <label>Name
+                            <input type="text" name="name" required />
+                        </label>
+                        <label>Email
+                            <input type="email" name="email" required />
+                        </label>
+                        <label>Message
+                            <textarea name="message" rows="5" required></textarea>
+                        </label>
+                        <button class="btn primary-btn" type="submit">Send Message</button>
+                        <p class="form-status" id="formStatus" aria-live="polite"></p>
+                    </form>
+
+                    <div class="contact-info-panel">
+                        <h3>Get in Touch</h3>
+                        <p>I'm always open to connect. </p> 
+                        <div class="contact-details">
+                            <p><strong>Email:</strong> <a href="mailto:sajitenamdar@gmail.com">sajitenamdar@gmail.com</a></p>
+                            <p><strong>Location:</strong> Sangamner Maharashtra</p>
+                        </div>
+                        <div class="social-row">
+                            <a class="icon-btn-contact" href="https://github.com/inamdarsajid" target="_blank" rel="noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                            <a class="icon-btn-contact" href="https://linkedin.com/in/inamdarsajid" target="_blank" rel="noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a class="icon-btn-contact" href="https://instagram.com/sajid__8080" target="_blank" rel="noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>© <span id="current-year"></span> Sajid Inamdar — Python Developer. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
