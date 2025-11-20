@@ -51,7 +51,7 @@
                 
                 <div class="hero-image-card">
                     <div class="profile-frame">
-                        <img src="img/myphoto.png" alt="Sajid Inamdar Portrait" class="profile-photo">
+                        <img src="img/myphoto.png" alt="Sajid Inamdar Portrait" class="profile-photo" loading="lazy">
                     </div>
                     <div class="social-icons">
                         <a href="https://github.com/sajidinamdar" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
@@ -99,6 +99,7 @@
         <section id="skills" class="skills-section section-padding">
             <div class="container">
                 <h2 class="section-title">TECHNICAL <span class="accent-text">SKILLS</span></h2>
+                <p class="skills-note">Core languages and frameworks I use daily, plus tools and concepts I work with regularly.</p>
 
                 <div class="skills-grid">
                     <!-- Backend & Data -->
@@ -186,6 +187,11 @@
                     <div class="project-card">
                         <div class="project-info">
                             <h3>My FastAPI Project</h3>
+                            <div class="project-tags">
+                                <span class="project-tag">FastAPI</span>
+                                <span class="project-tag">PostgreSQL</span>
+                                <span class="project-tag">Auth</span>
+                            </div>
                             <p class="project-tech">Python · FastAPI · PostgreSQL</p>
                             <p class="project-description">Production-ready FastAPI template with auth, database integration and clean project structure for building APIs quickly.</p>
                         </div>
@@ -197,6 +203,11 @@
                     <div class="project-card">
                         <div class="project-info">
                             <h3>Harisetu (Farmer Web)</h3>
+                            <div class="project-tags">
+                                <span class="project-tag">Flask</span>
+                                <span class="project-tag">HTML/CSS</span>
+                                <span class="project-tag">Database</span>
+                            </div>
                             <p class="project-tech">Python · Flask · HTML/CSS · DB</p>
                             <p class="project-description">Platform that connects farmers and buyers, shows crop and price info, and lets farmers sell produce online.</p>
                         </div>
@@ -208,6 +219,10 @@
                     <div class="project-card">
                         <div class="project-info">
                             <h3>Caterserv (Order Management)</h3>
+                            <div class="project-tags">
+                                <span class="project-tag">Django</span>
+                                <span class="project-tag">Management System</span>
+                            </div>
                             <p class="project-tech">Python · Django · Management</p>
                             <p class="project-description">Order management system for catering services with client, menu and inventory management.</p>
                         </div>
@@ -219,6 +234,10 @@
                     <div class="project-card">
                         <div class="project-info">
                             <h3>Python Chatbot</h3>
+                            <div class="project-tags">
+                                <span class="project-tag">Python</span>
+                                <span class="project-tag">NLTK</span>
+                            </div>
                             <p class="project-tech">Python · NLTK</p>
                             <p class="project-description">Console-based chatbot built to experiment with basic NLP concepts and conversational flows.</p>
                         </div>
@@ -230,6 +249,10 @@
                     <div class="project-card">
                         <div class="project-info">
                             <h3>WebSocket Demo</h3>
+                            <div class="project-tags">
+                                <span class="project-tag">WebSockets</span>
+                                <span class="project-tag">Real-time</span>
+                            </div>
                             <p class="project-tech">Python · WebSockets</p>
                             <p class="project-description">Experiments with real-time communication using WebSockets for interactive web applications.</p>
                         </div>
@@ -241,6 +264,10 @@
                     <div class="project-card">
                         <div class="project-info">
                             <h3>Weather API</h3>
+                            <div class="project-tags">
+                                <span class="project-tag">API</span>
+                                <span class="project-tag">HTTP</span>
+                            </div>
                             <p class="project-tech">Python · API</p>
                             <p class="project-description">Small project for fetching and displaying weather information from an external API.</p>
                         </div>
@@ -268,7 +295,7 @@
                             <button class="btn btn-small ghost-btn certificate-toggle" data-target="cert-py">View Certificate</button>
                         </div>
                         <div class="certificate-image-wrapper" id="cert-py">
-                            <img src="img/py.jpg" alt="Python Certificate" class="certificate-image">
+                            <img src="img/py.jpg" alt="Python Certificate" class="certificate-image" loading="lazy">
                         </div>
                     </div>
 
@@ -279,7 +306,7 @@
                             <button class="btn btn-small ghost-btn certificate-toggle" data-target="cert-sql">View Certificate</button>
                         </div>
                         <div class="certificate-image-wrapper" id="cert-sql">
-                            <img src="img/sql.jpg" alt="SQL Certificate" class="certificate-image">
+                            <img src="img/sql.jpg" alt="SQL Certificate" class="certificate-image" loading="lazy">
                         </div>
                     </div>
 
@@ -290,7 +317,7 @@
                             <button class="btn btn-small ghost-btn certificate-toggle" data-target="cert-css">View Certificate</button>
                         </div>
                         <div class="certificate-image-wrapper" id="cert-css">
-                            <img src="img/css.png" alt="CSS Certificate" class="certificate-image">
+                            <img src="img/css.png" alt="CSS Certificate" class="certificate-image" loading="lazy">
                         </div>
                     </div>
 
@@ -301,7 +328,7 @@
                             <button class="btn btn-small ghost-btn certificate-toggle" data-target="cert-js">View Certificate</button>
                         </div>
                         <div class="certificate-image-wrapper" id="cert-js">
-                            <img src="img/js.png" alt="JavaScript Certificate" class="certificate-image">
+                            <img src="img/js.png" alt="JavaScript Certificate" class="certificate-image" loading="lazy">
                         </div>
                     </div>
 
@@ -312,7 +339,7 @@
                             <button class="btn btn-small ghost-btn certificate-toggle" data-target="cert-cloud">View Certificate</button>
                         </div>
                         <div class="certificate-image-wrapper" id="cert-cloud">
-                            <img src="img/cloud.png" alt="Cloud Concepts Certificate" class="certificate-image">
+                            <img src="img/cloud.png" alt="Cloud Concepts Certificate" class="certificate-image" loading="lazy">
                         </div>
                     </div>
 
@@ -371,6 +398,6 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
 </body>
 </html>

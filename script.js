@@ -153,8 +153,9 @@ document.addEventListener('DOMContentLoaded', () => {
         'section, .project-card, .certificate-card, .detail-card, .skill-item, .contact-box'
     );
 
-    revealTargets.forEach(el => {
+    revealTargets.forEach((el, index) => {
         el.classList.add('reveal-on-scroll');
+        el.style.transitionDelay = `${index * 80}ms`;
     });
 
     const observer = new IntersectionObserver((entries) => {

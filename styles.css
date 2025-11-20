@@ -38,6 +38,17 @@ body {
     overflow-x: hidden;
 }
 
+.reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 a {
     color: var(--color-accent-main);
     text-decoration: none;
@@ -264,6 +275,12 @@ a:hover {
     margin-bottom: var(--spacing-lg);
 }
 
+.hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
 /* Hero Image Card Styling */
 .hero-image-card {
     display: flex;
@@ -411,6 +428,13 @@ a:hover {
     margin-bottom: var(--spacing-md);
 }
 
+.skills-note {
+    max-width: 620px;
+    margin: 0 auto var(--spacing-md);
+    text-align: center;
+    color: var(--color-text-muted);
+}
+
 .skills-grid {
     margin-top: var(--spacing-xl);
     display: grid;
@@ -479,7 +503,7 @@ a:hover {
 }
 
 .project-card:hover {
-    transform: translateY(-6px);
+    transform: translateY(-6px) scale(1.02);
     border-color: var(--color-accent-secondary);
     box-shadow: 0 18px 40px rgba(15, 23, 42, 0.95);
     background: linear-gradient(145deg, rgba(15,23,42,1), rgba(37,99,235,0.08));
@@ -496,6 +520,23 @@ a:hover {
     margin-bottom: var(--spacing-sm);
     border-bottom: 1px dashed var(--color-border);
     padding-bottom: 5px;
+}
+
+.project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 6px;
+    margin-bottom: 4px;
+}
+
+.project-tag {
+    font-size: 0.75rem;
+    padding: 3px 8px;
+    border-radius: 999px;
+    background-color: rgba(37, 99, 235, 0.15);
+    border: 1px solid rgba(59, 130, 246, 0.5);
+    color: var(--color-text-secondary);
 }
 
 .project-tech {
@@ -547,7 +588,7 @@ a:hover {
 }
 
 .certificate-card:hover {
-    transform: translateY(-6px);
+    transform: translateY(-6px) scale(1.02);
     border-color: var(--color-accent-main);
     box-shadow: 0 16px 35px rgba(15, 23, 42, 0.9);
 }
