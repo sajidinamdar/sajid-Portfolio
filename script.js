@@ -1,173 +1,206 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Mobile Navigation Toggle
-    const menuToggle = document.getElementById('menuToggle');
-    const navList = document.getElementById('navList');
 
-    if (menuToggle && navList) {
-        menuToggle.addEventListener('click', () => {
-            const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true' || false;
-            menuToggle.setAttribute('aria-expanded', !isExpanded);
-            navList.classList.toggle('active');
+
+    // --- Audio Player Logic ---
+    const audio = document.getElementById('bg-audio');
+    const playBtn = document.getElementById('play-btn');
+    const mobilePlayBtn = document.getElementById('mobile-play-btn'); // Mobile button
+    const playIcon = playBtn.querySelector('i');
+
+    // Safety check if mobile button exists's icon
+    const mobilePlayIcon = mobilePlayBtn ? mobilePlayBtn.querySelector('i') : null;
+
+    const audioContainer = document.querySelector('.audio-player-container');
+    const audioText = document.querySelector('.audio-text');
+
+    let isPlaying = false;
+
+    function toggleAudio() {
+        if (isPlaying) {
+            audio.pause();
+            playIcon.classList.remove('fa-pause');
+            playIcon.classList.add('fa-play');
+
+            if (mobilePlayIcon) {
+                mobilePlayIcon.classList.remove('fa-pause');
+                mobilePlayIcon.classList.add('fa-play');
+            }
+
+            audioContainer.classList.add('paused');
+            audioText.textContent = "Sound Off";
+        } else {
+            audio.play().then(() => {
+                playIcon.classList.remove('fa-play');
+                playIcon.classList.add('fa-pause');
+
+                if (mobilePlayIcon) {
+                    mobilePlayIcon.classList.remove('fa-play');
+                    mobilePlayIcon.classList.add('fa-pause');
+                }
+
+                audioContainer.classList.remove('paused');
+                audioText.textContent = "Sound On";
+            }).catch(e => {
+                console.log("Audio play failed (browser policy):", e);
+            });
+        }
+        isPlaying = !isPlaying;
+    }
+
+    playBtn.addEventListener('click', (e) => {
+        e.stopPropagation(); // Prevent triggering document click
+        toggleAudio();
+    });
+
+    if (mobilePlayBtn) {
+        mobilePlayBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleAudio();
         });
-        
-        // Close menu when a link is clicked (important for mobile UX)
-        navList.querySelectorAll('a').forEach(link => {
+    }
+
+    // Auto-play attempt
+    const attemptPlay = () => {
+        audio.play().then(() => {
+            isPlaying = true;
+            playIcon.classList.remove('fa-play');
+            playIcon.classList.add('fa-pause');
+
+            if (mobilePlayIcon) {
+                mobilePlayIcon.classList.remove('fa-play');
+                mobilePlayIcon.classList.add('fa-pause');
+            }
+
+            audioContainer.classList.remove('paused');
+            audioText.textContent = "Sound On";
+            // Remove listener once played
+            document.removeEventListener('click', attemptPlay);
+            document.removeEventListener('touchstart', attemptPlay);
+        }).catch(error => {
+            console.log("Autoplay prevented by browser, waiting for interaction.");
+        });
+    };
+
+    // Try immediately
+    attemptPlay();
+
+    // Try on first interaction if blocked
+    document.addEventListener('click', attemptPlay, { once: true });
+    document.addEventListener('touchstart', attemptPlay, { once: true });
+
+
+    // --- Active Link Highlight on Scroll ---
+
+    // --- Mobile Menu Toggle ---
+    const menuToggle = document.querySelector('.menu-toggle');
+    const sidebar = document.querySelector('.sidebar');
+
+    if (menuToggle) {
+        menuToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('mobile-open');
+
+            // Change icon & Toggle Scroll
+            const icon = menuToggle.querySelector('i');
+            if (sidebar.classList.contains('mobile-open')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+                document.body.style.overflow = 'hidden'; // Disable scroll
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+                document.body.style.overflow = ''; // Enable scroll
+            }
+        });
+
+        // Close menu when a link is clicked
+        const mobileNavLinks = document.querySelectorAll('.nav-link');
+        mobileNavLinks.forEach(link => {
             link.addEventListener('click', () => {
-                if (window.innerWidth <= 768) {
-                    menuToggle.setAttribute('aria-expanded', 'false');
-                    navList.classList.remove('active');
+                sidebar.classList.remove('mobile-open');
+                document.body.style.overflow = ''; // Enable scroll
+                const icon = menuToggle.querySelector('i');
+                if (icon) {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
                 }
             });
         });
     }
 
-    // 2. Dynamic Footer Year
-    const yearSpan = document.getElementById('current-year');
-    if (yearSpan) {
-        yearSpan.textContent = new Date().getFullYear();
-    }
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.nav-link');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
 
-    // 3. Contact Form Placeholder Submission (Simulated)
-    const contactForm = document.getElementById('contactForm');
-    const formStatus = document.getElementById('formStatus');
+    window.addEventListener('scroll', () => {
+        let current = '';
 
-    if (contactForm && formStatus) {
-        contactForm.addEventListener('submit', (e) => {
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+
+            // Offset to trigger earlier
+            if (pageYOffset >= (sectionTop - sectionHeight / 3)) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href').includes(current)) {
+                link.classList.add('active');
+            }
+        });
+
+        mobileLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href').includes(current)) {
+                link.classList.add('active');
+            }
+        });
+    });
+
+    // --- Smooth Scroll for older browsers (Optional, CSS usually handles it) ---
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
             e.preventDefault();
-            
-            if (!contactForm.checkValidity()) {
-                formStatus.textContent = "Please fill out all required fields.";
-                formStatus.style.color = '#ffa000'; // Amber warning color
-                return;
-            }
-
-            formStatus.textContent = "Sending message...";
-            formStatus.style.color = '#ffc107'; // Gold sending color
-
-            // Simulate form submission success after 2 seconds
-            setTimeout(() => {
-                formStatus.textContent = "Message sent successfully! Thank you for reaching out.";
-                formStatus.style.color = '#ffc107'; // Gold success color
-                contactForm.reset();
-                
-                setTimeout(() => {
-                    formStatus.textContent = "";
-                }, 5000);
-            }, 2000);
-        });
-    }
-
-    // 4. Background music autoplay (best-effort)
-    const bgAudio = document.getElementById('bg-audio');
-    const audioToggleBtn = document.getElementById('audioToggle');
-
-    if (bgAudio) {
-
-        const tryPlayAudio = () => {
-            bgAudio.play().catch(() => {
-                // Autoplay blocked; wait for user interaction
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
             });
-        };
-
-        // Try immediately on load
-        tryPlayAudio();
-
-        // Ensure playback once user interacts somewhere on the page
-        const unlockAudio = () => {
-            tryPlayAudio();
-            document.removeEventListener('click', unlockAudio);
-        };
-        if (!audioToggleBtn) {
-            document.addEventListener('click', unlockAudio);
-        }
-    }
-
-    if (bgAudio && audioToggleBtn) {
-        const updateStateClass = () => {
-            audioToggleBtn.classList.toggle('on', !bgAudio.paused);
-        };
-
-        audioToggleBtn.addEventListener('click', () => {
-            if (bgAudio.paused) {
-                bgAudio.play().catch(() => {});
-            } else {
-                bgAudio.pause();
-            }
-            updateStateClass();
         });
+    });
 
-        // Initial state
-        updateStateClass();
-    }
+    // --- Image Viewer Modal Logic ---
+    const imageModal = document.getElementById('image-modal');
+    const modalImg = imageModal.querySelector('img');
+    const closeModal = document.querySelector('.close-modal');
+    const lightboxTriggers = document.querySelectorAll('.lightbox-trigger');
 
-    // 5. Certificate Modal View
-    const certButtons = document.querySelectorAll('.certificate-toggle');
-    const certModal = document.getElementById('certificateModal');
-    const certModalImg = document.getElementById('certificateModalImage');
-    const certModalClose = certModal?.querySelector('.certificate-modal-close');
-    const certModalBackdrop = certModal?.querySelector('.certificate-modal-backdrop');
+    lightboxTriggers.forEach(trigger => {
+        trigger.addEventListener('click', function (e) {
+            e.preventDefault();
+            const imgSrc = this.getAttribute('href');
+            modalImg.src = imgSrc;
+            imageModal.classList.add('open');
+            document.body.style.overflow = 'hidden'; // Disable scroll
+        });
+    });
 
-    const closeCertModal = () => {
-        if (!certModal) return;
-        certModal.classList.remove('visible');
-        certModal.setAttribute('aria-hidden', 'true');
-        if (certModalImg) {
-            certModalImg.src = '';
-            certModalImg.alt = 'Certificate';
-        }
+    // Close Modal Functions
+    const closeModalFunc = () => {
+        imageModal.classList.remove('open');
+        document.body.style.overflow = ''; // Enable scroll
+        setTimeout(() => {
+            modalImg.src = ''; // Clear src after transition
+        }, 300);
     };
 
-    const openCertModal = (imgSrc, imgAlt) => {
-        if (!certModal || !certModalImg) return;
-        certModalImg.src = imgSrc;
-        certModalImg.alt = imgAlt || 'Certificate';
-        certModal.classList.add('visible');
-        certModal.setAttribute('aria-hidden', 'false');
-    };
+    closeModal.addEventListener('click', closeModalFunc);
 
-    certButtons.forEach(btn => {
-        const targetId = btn.getAttribute('data-target');
-        const wrapper = document.getElementById(targetId);
-        const img = wrapper?.querySelector('img');
-        if (!img) return;
-
-        btn.addEventListener('click', () => {
-            openCertModal(img.src, img.alt);
-        });
-    });
-
-    if (certModalClose) {
-        certModalClose.addEventListener('click', closeCertModal);
-    }
-    if (certModalBackdrop) {
-        certModalBackdrop.addEventListener('click', closeCertModal);
-    }
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-            closeCertModal();
+    // Close on background click
+    imageModal.addEventListener('click', (e) => {
+        if (e.target === imageModal) {
+            closeModalFunc();
         }
     });
 
-    // 6. Scroll reveal animations
-    const revealTargets = document.querySelectorAll(
-        'section, .project-card, .certificate-card, .detail-card, .skill-item, .contact-box'
-    );
-
-    revealTargets.forEach((el, index) => {
-        el.classList.add('reveal-on-scroll');
-        el.style.transitionDelay = `${index * 80}ms`;
-    });
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('is-visible');
-                observer.unobserve(entry.target);
-            }
-        });
-    }, {
-        threshold: 0.15
-    });
-
-    revealTargets.forEach(el => observer.observe(el));
 });

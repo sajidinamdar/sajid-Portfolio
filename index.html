@@ -1,403 +1,460 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="img/x-icon" href="img/fevicon.png"> 
-    
-    <title>Sajid Inamdar — Python Developer</title>
+    <title>Sajid Inamdar | Portfolio</title>
+    <link rel="icon" type="image/x-icon" href="img/logo.png">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,600&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="responsive.css">
+    <!-- Unicons for more icons -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
 </head>
+
 <body>
-    <!-- Background music (user must provide audio file at the specified path) -->
-    <audio id="bg-audio" src="audio.mp3" loop></audio>
-    <header class="site-header">
-        <div class="container header-inner">
-            <div class="brand">
-                <a href="#home" class="brand-logo" aria-label="Home">
-                    <img src="img/images.png" alt="Sajid Logo" />
-                </a>
-            </div>
-            <nav class="nav">
-                <button class="nav-toggle menu-toggle" id="menuToggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
-                <ul class="nav-list" id="navList">
-                    <li class="nav-home-audio">
-                        <button id="audioToggle" class="audio-toggle" type="button" aria-label="Toggle music">
-                            <i class="fas fa-music"></i>
+
+    <div class="app-container">
+
+        <!-- Vertical Sidebar / Navbar -->
+        <aside class="sidebar">
+            <div class="sidebar-main-content">
+                <div class="sidebar-header">
+                    <h2 class="logo-text">Sajid<br>Inamdar</h2>
+                    <div class="header-controls">
+                        <button id="mobile-play-btn" class="audio-btn mobile-audio-btn">
+                            <i class="fas fa-play"></i>
                         </button>
-                        <a href="#home">Home</a>
-                    </li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#skills">Skills</a></li>
-                    <li><a href="#certificates">Certificates</a></li>
-                    <li><a href="#projects">Projects</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
-    <main>
-        <section id="home" class="hero-section section-padding">
-            <div class="container hero-content">
-                <div class="hero-text">
-                    <p class="greeting">Hello, I'm</p>
-                    <h2>Sajid Inamdar</h2>
-                    <p class="role-text">Python Developer & BCA Student | AI/ML & Cybersecurity Enthusiast | Web Developer</p>
-                    <a href="#projects" class="btn primary-btn">VIEW MY WORK</a>
+                        <div class="menu-toggle">
+                            <i class="fas fa-bars"></i>
+                        </div>
+                    </div>
                 </div>
-                
-                <div class="hero-image-card">
-                    <div class="profile-frame">
-                        <img src="img/myphoto.png" alt="Sajid Inamdar Portrait" class="profile-photo" loading="lazy">
+
+                <nav class="nav-menu">
+                    <a href="#home" class="nav-link active">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    <a href="#about" class="nav-link">
+                        <i class="fas fa-user"></i>
+                        <span>About</span>
+                    </a>
+                    <a href="#skills" class="nav-link">
+                        <i class="fas fa-code"></i>
+                        <span>Skills</span>
+                    </a>
+                    <a href="#certificates" class="nav-link">
+                        <i class="fas fa-certificate"></i>
+                        <span>Certificates</span>
+                    </a>
+                    <a href="#projects" class="nav-link">
+                        <i class="fas fa-layer-group"></i>
+                        <span>Projects</span>
+                    </a>
+                    <a href="#contact" class="nav-link">
+                        <i class="fas fa-envelope"></i>
+                        <span>Contact</span>
+                    </a>
+                </nav>
+            </div>
+
+            <div class="sidebar-footer">
+                <div class="audio-player-container">
+                    <button id="play-btn" class="audio-btn">
+                        <i class="fas fa-play"></i>
+                    </button>
+                    <div class="audio-info">
+                        <span class="audio-text">Click to Play</span>
+                        <div class="audio-wave">
+                            <span></span><span></span><span></span><span></span>
+                        </div>
                     </div>
-                    <div class="social-icons">
-                        <a href="https://github.com/sajidinamdar" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
-                        <a href="https://linkedin.com/in/inamdarsajid" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="https://instagram.com/sajid__8080" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                    </div>
+                    <!-- Audio with autoplay attribute, though browser might block without interaction -->
+                    <audio id="bg-audio" loop>
+                        <source src="audio.mp3" type="audio/mpeg">
+                    </audio>
+                </div>
+
+                <div class="social-links-mini">
+                    <a href="https://github.com/sajidinamdar" target="_blank"><i class="uil uil-github-alt"></i></a>
+                    <a href="https://www.linkedin.com/in/inamdarsajid" target="_blank"><i
+                            class="uil uil-linkedin-alt"></i></a>
+                    <a href="https://instagram.com/sajid__8080" target="_blank"><i class="uil uil-instagram"></i></a>
                 </div>
             </div>
-        </section>
+        </aside>
 
-        <section id="about" class="about-section section-padding">
-            <div class="container">
-                <h2 class="section-title">ABOUT <span class="accent-text">ME</span></h2>
-                <div class="about-content-card">
-                    <p class="about-lead">
-                        Hi, I'm <strong>Sajid Inamdar</strong>, a <strong>BCA student</strong>, <strong>Python Developer</strong>, and <strong>AI/ML enthusiast</strong>. I love building clean, efficient digital experiences that solve real-world problems and make technology more useful for people.
-                    </p>
-                    <div class="detail-card">
-                        <i class="fas fa-code-branch detail-icon"></i>
-                        <h4>What I Work With</h4>
-                        <p>Python-based backend development with <strong>Flask</strong> and <strong>FastAPI</strong>, real-time apps using <strong>WebSockets</strong>, and modern web interfaces built with <strong>HTML</strong>, <strong>CSS</strong>, <strong>Bootstrap</strong>, and <strong>JavaScript</strong>.</p>
-                    </div>
-                    <div class="detail-card">
-                        <i class="fas fa-graduation-cap detail-icon"></i>
-                        <h4>Education</h4>
-                        <p>Currently pursuing my <strong>Bachelor of Computer Applications (BCA)</strong>, while continuously learning through hands-on projects in <strong>AI/ML</strong>, <strong>cybersecurity concepts</strong>, and backend development.</p>
-                    </div>
-                    <div class="detail-card">
-                        <i class="fas fa-rocket detail-icon"></i>
-                        <h4>What I Love Building</h4>
-                        <p>AI & ML–based projects, real-time <strong>WebSocket</strong> applications, creative automation scripts, and tools that are secure, reliable, and easy to use.</p>
-                    </div>
-                    <div class="detail-card">
-                        <i class="fas fa-bullseye detail-icon"></i>
-                        <h4>My Goal</h4>
-                        <p>To grow into a skilled <strong>AI/ML developer</strong> with strong <strong>cybersecurity awareness</strong>, building meaningful projects that help people and improve technology.</p>
-                    </div>
-                    <div class="about-action">
-                        <a href="#skills" class="btn primary-btn">Explore My Technical Skills</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <section id="skills" class="skills-section section-padding">
-            <div class="container">
-                <h2 class="section-title">TECHNICAL <span class="accent-text">SKILLS</span></h2>
-                <p class="skills-note">Core languages and frameworks I use daily, plus tools and concepts I work with regularly.</p>
+        <!-- Mobile Bottom Navigation -->
+        <nav class="mobile-nav">
+            <a href="#home" class="mobile-link active"><i class="fas fa-home"></i></a>
+            <a href="#about" class="mobile-link"><i class="fas fa-user"></i></a>
+            <a href="#skills" class="mobile-link"><i class="fas fa-code"></i></a>
+            <a href="#projects" class="mobile-link"><i class="fas fa-layer-group"></i></a>
+            <a href="#contact" class="mobile-link"><i class="fas fa-envelope"></i></a>
+        </nav>
 
-                <div class="skills-grid">
-                    <!-- Backend & Data -->
-                    <div class="skill-item">
-                        <div class="skill-icon"><i class="fab fa-python"></i></div>
-                        <div class="skill-label">Python</div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-icon"><i class="fas fa-bolt"></i></div>
-                        <div class="skill-label">FastAPI</div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-icon"><i class="fas fa-flask"></i></div>
-                        <div class="skill-label">Flask</div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-icon"><i class="fas fa-database"></i></div>
-                        <div class="skill-label">SQL / PostgreSQL</div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-icon"><i class="fas fa-chart-line"></i></div>
-                        <div class="skill-label">Pandas / Plotting</div>
-                    </div>
+        <!-- Main Content Area -->
+        <main class="content-area">
 
-                    <!-- Frontend & Tools -->
-                    <div class="skill-item">
-                        <div class="skill-icon"><i class="fab fa-html5"></i></div>
-                        <div class="skill-label">HTML / CSS</div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-icon"><i class="fab fa-js"></i></div>
-                        <div class="skill-label">JavaScript</div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-icon"><i class="fab fa-bootstrap"></i></div>
-                        <div class="skill-label">Bootstrap</div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-icon"><i class="fab fa-git-alt"></i></div>
-                        <div class="skill-label">Git / GitHub / GitLab</div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-icon"><i class="fas fa-terminal"></i></div>
-                        <div class="skill-label">Terminal / CLI</div>
-                    </div>
-
-                    <!-- Concepts & Interests -->
-                    <div class="skill-item">
-                        <div class="skill-icon"><i class="fas fa-puzzle-piece"></i></div>
-                        <div class="skill-label">Problem Solving</div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-icon"><i class="fas fa-network-wired"></i></div>
-                        <div class="skill-label">RESTful APIs</div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-icon"><i class="fas fa-user-shield"></i></div>
-                        <div class="skill-label">Authentication & Security</div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-icon"><i class="fas fa-shield-alt"></i></div>
-                        <div class="skill-label">Cybersecurity Concepts</div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-icon"><i class="fas fa-robot"></i></div>
-                        <div class="skill-label">AI / ML</div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-icon"><i class="fas fa-plug"></i></div>
-                        <div class="skill-label">API Integrations</div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-icon"><i class="fas fa-exchange-alt"></i></div>
-                        <div class="skill-label">WebSockets</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="projects" class="projects-section section-padding">
-            <div class="container">
-                <h2 class="section-title">MY <span class="accent-text">PROJECTS</span></h2>
-                <div class="projects-grid">
-
-                    <div class="project-card">
-                        <div class="project-info">
-                            <h3>My FastAPI Project</h3>
-                            <div class="project-tags">
-                                <span class="project-tag">FastAPI</span>
-                                <span class="project-tag">PostgreSQL</span>
-                                <span class="project-tag">Auth</span>
+            <!-- HOME SECTION -->
+            <section id="home" class="section home-section">
+                <div class="container">
+                    <div class="hero-layout">
+                        <div class="hero-text-content">
+                            <span class="greeting">Hello, I'm</span>
+                            <h1 class="hero-name">Sajid Inamdar</h1>
+                            <h2 class="hero-role" style="font-size: 1.1rem; line-height: 1.5; margin-top: 0.5rem;">
+                                Python Developer & BCA Student <br> AI/ML & Cybersecurity Enthusiast | Web Developer
+                            </h2>
+                            <div class="hero-cta">
+                                <a href="https://www.linkedin.com/in/inamdarsajid" target="_blank"
+                                    class="btn btn-primary">
+                                    <i class="fab fa-linkedin"></i> Connect on LinkedIn
+                                </a>
                             </div>
-                            <p class="project-tech">Python · FastAPI · PostgreSQL</p>
-                            <p class="project-description">Production-ready FastAPI template with auth, database integration and clean project structure for building APIs quickly.</p>
                         </div>
-                        <div class="project-actions">
-                            <a href="https://github.com/sajidinamdar/my-fastapi-project-" target="_blank" class="btn btn-small primary-btn">View on GitHub <i class="fab fa-github"></i></a>
-                        </div>
-                    </div>
-
-                    <div class="project-card">
-                        <div class="project-info">
-                            <h3>Harisetu (Farmer Web)</h3>
-                            <div class="project-tags">
-                                <span class="project-tag">Flask</span>
-                                <span class="project-tag">HTML/CSS</span>
-                                <span class="project-tag">Database</span>
+                        <div class="hero-image-content">
+                            <div class="img-frame">
+                                <img src="img/myphoto.jpg" alt="Sajid Inamdar">
                             </div>
-                            <p class="project-tech">Python · Flask · HTML/CSS · DB</p>
-                            <p class="project-description">Platform that connects farmers and buyers, shows crop and price info, and lets farmers sell produce online.</p>
-                        </div>
-                        <div class="project-actions">
-                            <a href="https://github.com/sajidinamdar/Harisetu" target="_blank" class="btn btn-small primary-btn">View on GitHub <i class="fab fa-github"></i></a>
-                        </div>
-                    </div>
-
-                    <div class="project-card">
-                        <div class="project-info">
-                            <h3>Caterserv (Order Management)</h3>
-                            <div class="project-tags">
-                                <span class="project-tag">Django</span>
-                                <span class="project-tag">Management System</span>
-                            </div>
-                            <p class="project-tech">Python · Django · Management</p>
-                            <p class="project-description">Order management system for catering services with client, menu and inventory management.</p>
-                        </div>
-                        <div class="project-actions">
-                            <a href="https://github.com/sajidinamdar/Caterserv" target="_blank" class="btn btn-small primary-btn">View on GitHub <i class="fab fa-github"></i></a>
-                        </div>
-                    </div>
-
-                    <div class="project-card">
-                        <div class="project-info">
-                            <h3>Python Chatbot</h3>
-                            <div class="project-tags">
-                                <span class="project-tag">Python</span>
-                                <span class="project-tag">NLTK</span>
-                            </div>
-                            <p class="project-tech">Python · NLTK</p>
-                            <p class="project-description">Console-based chatbot built to experiment with basic NLP concepts and conversational flows.</p>
-                        </div>
-                        <div class="project-actions">
-                            <a href="https://github.com/sajidinamdar/Python-chatbot" target="_blank" class="btn btn-small primary-btn">View on GitHub <i class="fab fa-github"></i></a>
-                        </div>
-                    </div>
-
-                    <div class="project-card">
-                        <div class="project-info">
-                            <h3>WebSocket Demo</h3>
-                            <div class="project-tags">
-                                <span class="project-tag">WebSockets</span>
-                                <span class="project-tag">Real-time</span>
-                            </div>
-                            <p class="project-tech">Python · WebSockets</p>
-                            <p class="project-description">Experiments with real-time communication using WebSockets for interactive web applications.</p>
-                        </div>
-                        <div class="project-actions">
-                            <a href="https://github.com/sajidinamdar/WebSocket" target="_blank" class="btn btn-small primary-btn">View on GitHub <i class="fab fa-github"></i></a>
-                        </div>
-                    </div>
-
-                    <div class="project-card">
-                        <div class="project-info">
-                            <h3>Weather API</h3>
-                            <div class="project-tags">
-                                <span class="project-tag">API</span>
-                                <span class="project-tag">HTTP</span>
-                            </div>
-                            <p class="project-tech">Python · API</p>
-                            <p class="project-description">Small project for fetching and displaying weather information from an external API.</p>
-                        </div>
-                        <div class="project-actions">
-                            <a href="https://github.com/sajidinamdar/Weather_api" target="_blank" class="btn btn-small primary-btn">View on GitHub <i class="fab fa-github"></i></a>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="view-all-button">
-                    <a href="https://github.com/sajidinamdar" target="_blank" class="btn ghost-btn">View All Repositories on GitHub</a>
-                </div>
-            </div>
-        </section>
-
-        <section id="certificates" class="certificates-section section-padding">
-            <div class="container">
-                <h2 class="section-title">MY <span class="accent-text">CERTIFICATES</span></h2>
-                <div class="certificates-grid">
-
-                    <div class="certificate-card">
-                        <div class="certificate-info">
-                            <h3>Python Programming</h3>
-                            <p>Certificate showcasing my foundation in Python and problem-solving for backend and automation projects.</p>
-                            <button class="btn btn-small ghost-btn certificate-toggle" data-target="cert-py">View Certificate</button>
-                        </div>
-                        <div class="certificate-image-wrapper" id="cert-py">
-                            <img src="img/py.jpg" alt="Python Certificate" class="certificate-image" loading="lazy">
-                        </div>
-                    </div>
-
-                    <div class="certificate-card">
-                        <div class="certificate-info">
-                            <h3>SQL & Databases</h3>
-                            <p>Certificate focused on writing queries and working with relational databases for data-driven applications.</p>
-                            <button class="btn btn-small ghost-btn certificate-toggle" data-target="cert-sql">View Certificate</button>
-                        </div>
-                        <div class="certificate-image-wrapper" id="cert-sql">
-                            <img src="img/sql.jpg" alt="SQL Certificate" class="certificate-image" loading="lazy">
-                        </div>
-                    </div>
-
-                    <div class="certificate-card">
-                        <div class="certificate-info">
-                            <h3>CSS & Web Design</h3>
-                            <p>Certificate covering modern layouts and styling concepts used to build responsive, user-friendly UIs.</p>
-                            <button class="btn btn-small ghost-btn certificate-toggle" data-target="cert-css">View Certificate</button>
-                        </div>
-                        <div class="certificate-image-wrapper" id="cert-css">
-                            <img src="img/css.png" alt="CSS Certificate" class="certificate-image" loading="lazy">
-                        </div>
-                    </div>
-
-                    <div class="certificate-card">
-                        <div class="certificate-info">
-                            <h3>JavaScript Essentials</h3>
-                            <p>Certificate highlighting core JavaScript concepts used for interactive and dynamic web applications.</p>
-                            <button class="btn btn-small ghost-btn certificate-toggle" data-target="cert-js">View Certificate</button>
-                        </div>
-                        <div class="certificate-image-wrapper" id="cert-js">
-                            <img src="img/js.png" alt="JavaScript Certificate" class="certificate-image" loading="lazy">
-                        </div>
-                    </div>
-
-                    <div class="certificate-card">
-                        <div class="certificate-info">
-                            <h3>Cloud & Dev Concepts</h3>
-                            <p>Certificate that introduces cloud and deployment concepts, supporting scalable backend and API work.</p>
-                            <button class="btn btn-small ghost-btn certificate-toggle" data-target="cert-cloud">View Certificate</button>
-                        </div>
-                        <div class="certificate-image-wrapper" id="cert-cloud">
-                            <img src="img/cloud.png" alt="Cloud Concepts Certificate" class="certificate-image" loading="lazy">
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-        <section id="contact" class="contact-section section-padding">
-            <div class="container">
-                <h2 class="section-title">LET'S <span class="accent-text">CONNECT</span></h2>
-                <div class="contact-box">
-                    <form class="contact-form" id="contactForm">
-                        <label>Name
-                            <input type="text" name="name" required />
-                        </label>
-                        <label>Email
-                            <input type="email" name="email" required />
-                        </label>
-                        <label>Message
-                            <textarea name="message" rows="5" required></textarea>
-                        </label>
-                        <button class="btn primary-btn" type="submit">Send Message</button>
-                        <p class="form-status" id="formStatus" aria-live="polite"></p>
-                    </form>
-
-                    <div class="contact-info-panel">
-                        <h3>Get in Touch</h3>
-                        <p>I'm always open to connect. </p> 
-                        <div class="contact-details">
-                            <p><strong>Email:</strong> <a href="mailto:sajitenamdar@gmail.com">sajitenamdar@gmail.com</a></p>
-                            <p><strong>Location:</strong> Sangamner Maharashtra</p>
-                        </div>
-                        <div class="social-row">
-                            <a class="icon-btn-contact" href="https://github.com/sajidinamdar" target="_blank" rel="noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
-                            <a class="icon-btn-contact" href="https://linkedin.com/in/inamdarsajid" target="_blank" rel="noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                            <a class="icon-btn-contact" href="https://instagram.com/sajid__8080" target="_blank" rel="noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            <!-- Decorative Elements -->
+                            <div class="deco-circle c1"></div>
+                            <div class="deco-circle c2"></div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
-    </main>
+            </section>
 
-    <footer class="site-footer">
-        <div class="container">
-            <p>© <span id="current-year"></span> Sajid Inamdar — Python Developer. All rights reserved.</p>
-        </div>
-    </footer>
+            <!-- ABOUT SECTION -->
+            <section id="about" class="section about-section">
+                <div class="container">
+                    <h2 class="section-title">About Me</h2>
+                    <div class="about-content">
+                        <div class="about-text">
+                            <p>
+                                I am a <strong>BCA 2nd Year Student</strong> with a relentless drive for
+                                <strong>Cybersecurity</strong> and
+                                <strong>Python Development</strong>. I don't just write code; I secure it.
+                            </p>
+                            <p>
+                                My passion lies in understanding the internal mechanics of systems to build robust
+                                applications
+                                and protect them from modern threats. I love solving complex problems and automating
+                                workflows.
+                            </p>
+                        </div>
 
-    <!-- Certificate Modal -->
-    <div id="certificateModal" class="certificate-modal" aria-hidden="true">
-        <div class="certificate-modal-backdrop"></div>
-        <div class="certificate-modal-dialog" role="dialog" aria-modal="true">
-            <button class="certificate-modal-close" aria-label="Close certificate">×</button>
-            <img id="certificateModalImage" src="" alt="Certificate" />
-        </div>
+                        <!-- New Info Cards Structure -->
+                        <div class="about-cards">
+                            <div class="about-card">
+                                <div class="card-icon"><i class="fas fa-graduation-cap"></i></div>
+                                <h3>Education</h3>
+                                <p>BCA - 2nd Year</p>
+                                <span>Pursuing Excellence</span>
+                            </div>
+
+                            <div class="about-card">
+                                <div class="card-icon"><i class="fas fa-shield-alt"></i></div>
+                                <h3>Cybersecurity</h3>
+                                <p>Rank [0x8] Hacker</p>
+                                <span>TryHackMe Top 1%</span>
+                            </div>
+
+                            <div class="about-card">
+                                <div class="card-icon"><i class="fas fa-code"></i></div>
+                                <h3>Development</h3>
+                                <p>Python Developer</p>
+                                <span>Python & Web Tech</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SKILLS SECTION -->
+            <section id="skills" class="section skills-section">
+                <div class="container">
+                    <h2 class="section-title">My Skills</h2>
+                    <div class="skills-wrapper">
+                        <!-- Skills from Image -->
+                        <div class="skill-tag"><i class="fab fa-python"></i> Python</div>
+                        <div class="skill-tag"><i class="fas fa-bolt"></i> FastAPI</div>
+                        <div class="skill-tag"><i class="fas fa-flask"></i> Flask</div>
+                        <div class="skill-tag"><i class="fas fa-database"></i> SQL / PostgreSQL</div>
+                        <div class="skill-tag"><i class="fas fa-chart-line"></i> Pandas / Plotting</div>
+                        <div class="skill-tag"><i class="fab fa-html5"></i> HTML / CSS</div>
+                        <div class="skill-tag"><i class="fab fa-js"></i> JavaScript</div>
+                        <div class="skill-tag"><i class="fab fa-bootstrap"></i> Bootstrap</div>
+                        <div class="skill-tag"><i class="fab fa-git-alt"></i> Git / GitHub</div>
+                        <div class="skill-tag"><i class="fas fa-terminal"></i> Terminal / CLI</div>
+                        <div class="skill-tag"><i class="fas fa-puzzle-piece"></i> Problem Solving</div>
+                        <div class="skill-tag"><i class="fas fa-network-wired"></i> RESTful APIs</div>
+                        <div class="skill-tag"><i class="fas fa-user-shield"></i> Auth & Security</div>
+                        <div class="skill-tag"><i class="fas fa-shield-alt"></i> Cybersecurity</div>
+                        <div class="skill-tag"><i class="fas fa-robot"></i> AI / ML</div>
+                        <div class="skill-tag"><i class="fas fa-plug"></i> API Integrations</div>
+                        <div class="skill-tag"><i class="fas fa-sync"></i> WebSockets</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CERTIFICATES SECTION -->
+            <section id="certificates" class="section cert-section">
+                <div class="container">
+                    <h2 class="section-title">Certificates</h2>
+                    <div class="cert-grid">
+
+                        <div class="cert-card">
+                            <div class="cert-header">
+                                <i class="fas fa-award"></i> <!-- Using Icon instead of img -->
+                                <div class="cert-info">
+                                    <h3>Best In Python</h3>
+                                    <p>Udemy - 2024</p>
+                                </div>
+                            </div>
+                            <a href="img/py.jpg" class="cert-btn lightbox-trigger">View Certificate</a>
+                        </div>
+
+                        <div class="cert-card">
+                            <div class="cert-header">
+                                <i class="fas fa-network-wired"></i>
+                                <div class="cert-info">
+                                    <h3>Networking Fund.</h3>
+                                    <p>Cisco - 2023</p>
+                                </div>
+                            </div>
+                            <a href="img/computer%20networking.png" class="cert-btn lightbox-trigger">View
+                                Certificate</a>
+                        </div>
+
+                        <div class="cert-card">
+                            <div class="cert-header">
+                                <i class="fas fa-cloud"></i>
+                                <div class="cert-info">
+                                    <h3>Cloud Computing</h3>
+                                    <p>Great Learning</p>
+                                </div>
+                            </div>
+                            <a href="img/cloud.png" class="cert-btn lightbox-trigger">View Certificate</a>
+                        </div>
+
+                        <div class="cert-card">
+                            <div class="cert-header">
+                                <i class="fab fa-js"></i>
+                                <div class="cert-info">
+                                    <h3>JavaScript</h3>
+                                    <p>HackerRank</p>
+                                </div>
+                            </div>
+                            <a href="img/js.png" class="cert-btn lightbox-trigger">View Certificate</a>
+                        </div>
+
+                        <div class="cert-card">
+                            <div class="cert-header">
+                                <i class="fab fa-css3-alt"></i>
+                                <div class="cert-info">
+                                    <h3>CSS3</h3>
+                                    <p>HackerRank</p>
+                                </div>
+                            </div>
+                            <a href="img/css.png" class="cert-btn lightbox-trigger">View Certificate</a>
+                        </div>
+
+                        <div class="cert-card">
+                            <div class="cert-header">
+                                <i class="fas fa-database"></i>
+                                <div class="cert-info">
+                                    <h3>SQL</h3>
+                                    <p>HackerRank</p>
+                                </div>
+                            </div>
+                            <a href="img/sql.jpg" class="cert-btn lightbox-trigger">View Certificate</a>
+                        </div>
+
+                        <div class="cert-card">
+                            <div class="cert-header">
+                                <i class="fab fa-linux"></i>
+                                <div class="cert-info">
+                                    <h3>Kali Linux</h3>
+                                    <p>Cybersecurity</p>
+                                </div>
+                            </div>
+                            <a href="img/kali.png" class="cert-btn lightbox-trigger">View Certificate</a>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- PROJECTS SECTION -->
+            <section id="projects" class="section projects-section">
+                <div class="container">
+                    <h2 class="section-title">My Projects</h2>
+                    <div class="projects-grid">
+
+                        <!-- Extracted Projects -->
+                        <div class="project-card">
+                            <div class="project-content">
+                                <h3>My FastAPI Project</h3>
+                                <p>Comprehensive template with signup, login authentication and scalable architecture.
+                                </p>
+                                <div class="project-links">
+                                    <a href="https://github.com/sajidinamdar/my-fastapi-project-" target="_blank">View
+                                        Code <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="project-card">
+                            <div class="project-content">
+                                <h3>Harisetu</h3>
+                                <p>Connecting farmers directly to markets. Modern agricultural solution platform.</p>
+                                <div class="project-links">
+                                    <a href="https://github.com/sajidinamdar/Harisetu" target="_blank">View Code <i
+                                            class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="project-card">
+                            <div class="project-content">
+                                <h3>Python Chatbot</h3>
+                                <p>An intelligent chatbot built with Python for automated interactions and assistance.
+                                </p>
+                                <div class="project-links">
+                                    <a href="https://github.com/sajidinamdar/Python-chatbot" target="_blank">View Code
+                                        <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="project-card">
+                            <div class="project-content">
+                                <h3>File Shortener</h3>
+                                <p>A tool to shorten file paths or compress files for easier sharing.</p>
+                                <div class="project-links">
+                                    <a href="https://github.com/sajidinamdar/File-Shortener" target="_blank">View Code
+                                        <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="project-card">
+                            <div class="project-content">
+                                <h3>Virtual Mouse</h3>
+                                <p>Control your mouse cursor using hand gestures and computer vision.</p>
+                                <div class="project-links">
+                                    <a href="https://github.com/sajidinamdar/virtualmouse-" target="_blank">View Code <i
+                                            class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="project-card">
+                            <div class="project-content">
+                                <h3>Weather API</h3>
+                                <p>Real-time weather data fetching application using third-party APIs.</p>
+                                <div class="project-links">
+                                    <a href="https://github.com/sajidinamdar/Weather_api" target="_blank">View Code <i
+                                            class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="project-card">
+                            <div class="project-content">
+                                <h3>Caterserv</h3>
+                                <p>Catering service management system/website.</p>
+                                <div class="project-links">
+                                    <a href="https://github.com/sajidinamdar/Caterserv" target="_blank">View Code <i
+                                            class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="view-more-container" style="text-align: center; margin-top: 3rem;">
+                        <a href="https://github.com/sajidinamdar?tab=repositories" target="_blank"
+                            class="btn btn-primary">
+                            View All Projects <i class="fas fa-arrow-right" style="margin-left: 8px;"></i>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CONTACT SECTION -->
+            <section id="contact" class="section contact-section">
+                <div class="container">
+                    <h2 class="section-title">Get In Touch</h2>
+                    <div class="contact-wrapper">
+                        <div class="contact-info">
+                            <h3>Let's Talk</h3>
+                            <p>Have a project in mind or want to discuss the latest in tech? Send me a message!</p>
+
+                            <div class="contact-detail">
+                                <i class="fas fa-envelope"></i>
+                                <span>sajitenamdar@gmail.com</span>
+                            </div>
+                            <div class="contact-detail">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Sangamner, Maharashtra</span>
+                            </div>
+
+                            <div class="social-links-big">
+                                <a href="https://github.com/sajidinamdar" target="_blank" title="GitHub"><i
+                                        class="uil uil-github-alt"></i></a>
+                                <a href="https://www.linkedin.com/in/inamdarsajid" target="_blank" title="LinkedIn"><i
+                                        class="uil uil-linkedin-alt"></i></a>
+                                <a href="https://instagram.com/sajid__8080" target="_blank" title="Instagram"><i
+                                        class="uil uil-instagram"></i></a>
+                                <a href="https://tryhackme.com/p/Sajidinamdar" target="_blank" title="TryHackMe"><i
+                                        class="fas fa-shield-alt"></i></a>
+                            </div>
+                        </div>
+
+                        <form class="contact-form">
+                            <div class="form-group">
+                                <input type="text" placeholder="Your Name" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" placeholder="Your Email" required>
+                            </div>
+                            <div class="form-group">
+                                <textarea placeholder="Message" rows="5" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <footer class="main-footer">
+                <p>&copy; 2025 Sajid Inamdar. All Rights Reserved.</p>
+            </footer>
+
+        </main>
     </div>
 
-    <script src="script.js" defer></script>
+    <!-- Image Viewer Modal -->
+    <div id="image-modal" class="image-modal">
+        <button class="close-modal">&times;</button>
+        <img src="" alt="Certificate Preview">
+    </div>
+
+    <script src="script.js"></script>
 </body>
+
 </html>
