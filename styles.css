@@ -1323,9 +1323,20 @@ ul {
     padding: 3rem;
     text-align: center;
     color: var(--text-secondary);
-    font-size: 0.85rem;
+    font-size: 1.1rem;
     border-top: 1px solid var(--border);
     margin-top: 4rem;
+}
+
+.main-footer a {
+    color: var(--accent);
+    text-decoration: underline;
+    transition: all 0.3s ease;
+}
+
+.main-footer a:hover {
+    color: var(--text-primary);
+    text-shadow: 0 0 10px var(--accent-glow);
 }
 
 
