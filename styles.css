@@ -889,11 +889,13 @@ ul {
 .skill-card:nth-child(even):hover i {
     background: linear-gradient(135deg, #fff, var(--color-4));
     -webkit-background-clip: text;
+    background-clip: text;
 }
 
 .skill-card:nth-child(3n+1):hover i {
     background: linear-gradient(135deg, #fff, var(--color-2));
     -webkit-background-clip: text;
+    background-clip: text;
 }
 
 @media (max-width: 480px) {
