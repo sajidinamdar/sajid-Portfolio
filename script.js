@@ -1,92 +1,34 @@
+// --- SI Cyber-Shield Preloader Logic ---
+window.addEventListener('load', () => {
+    const preloader = document.getElementById('preloader');
+    const percentCounter = document.getElementById('si-percent');
+    const progressFill = document.querySelector('.si-progress-fill');
+
+    if (!preloader || !percentCounter || !progressFill) return;
+
+    let count = 0;
+    const updateLoader = setInterval(() => {
+        count += Math.floor(Math.random() * 10) + 1; // Random jump for realism
+        if (count >= 100) {
+            count = 100;
+            clearInterval(updateLoader);
+
+            // Allow a small delay at 100% for impact
+            setTimeout(() => {
+                preloader.classList.add('loaded');
+                document.body.classList.remove('loading');
+            }, 500);
+        }
+
+        percentCounter.textContent = count.toString().padStart(2, '0');
+        progressFill.style.width = count + '%';
+    }, 120);
+});
+
 document.addEventListener('DOMContentLoaded', () => {
 
 
-    // --- Audio Player Logic ---
-    const audio = document.getElementById('bg-audio');
-    const playBtn = document.getElementById('play-btn');
-    const mobilePlayBtn = document.getElementById('mobile-play-btn'); // Mobile button
-    const playIcon = playBtn.querySelector('i');
 
-    // Safety check if mobile button exists's icon
-    const mobilePlayIcon = mobilePlayBtn ? mobilePlayBtn.querySelector('i') : null;
-
-    const audioContainer = document.querySelector('.audio-player-container');
-    const audioText = document.querySelector('.audio-text');
-
-    let isPlaying = false;
-
-    function toggleAudio() {
-        if (isPlaying) {
-            audio.pause();
-            playIcon.classList.remove('fa-pause');
-            playIcon.classList.add('fa-play');
-
-            if (mobilePlayIcon) {
-                mobilePlayIcon.classList.remove('fa-pause');
-                mobilePlayIcon.classList.add('fa-play');
-            }
-
-            audioContainer.classList.add('paused');
-            audioText.textContent = "Sound Off";
-        } else {
-            audio.play().then(() => {
-                playIcon.classList.remove('fa-play');
-                playIcon.classList.add('fa-pause');
-
-                if (mobilePlayIcon) {
-                    mobilePlayIcon.classList.remove('fa-play');
-                    mobilePlayIcon.classList.add('fa-pause');
-                }
-
-                audioContainer.classList.remove('paused');
-                audioText.textContent = "Sound On";
-            }).catch(e => {
-                console.log("Audio play failed (browser policy):", e);
-            });
-        }
-        isPlaying = !isPlaying;
-    }
-
-    playBtn.addEventListener('click', (e) => {
-        e.stopPropagation(); // Prevent triggering document click
-        toggleAudio();
-    });
-
-    if (mobilePlayBtn) {
-        mobilePlayBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            toggleAudio();
-        });
-    }
-
-    // Auto-play attempt
-    const attemptPlay = () => {
-        audio.play().then(() => {
-            isPlaying = true;
-            playIcon.classList.remove('fa-play');
-            playIcon.classList.add('fa-pause');
-
-            if (mobilePlayIcon) {
-                mobilePlayIcon.classList.remove('fa-play');
-                mobilePlayIcon.classList.add('fa-pause');
-            }
-
-            audioContainer.classList.remove('paused');
-            audioText.textContent = "Sound On";
-            // Remove listener once played
-            document.removeEventListener('click', attemptPlay);
-            document.removeEventListener('touchstart', attemptPlay);
-        }).catch(error => {
-            console.log("Autoplay prevented by browser, waiting for interaction.");
-        });
-    };
-
-    // Try immediately
-    attemptPlay();
-
-    // Try on first interaction if blocked
-    document.addEventListener('click', attemptPlay, { once: true });
-    document.addEventListener('touchstart', attemptPlay, { once: true });
 
 
     // --- Active Link Highlight on Scroll ---
@@ -203,4 +145,60 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // --- Scroll Animations (Lazy Load Animations) ---
+    const revealElements = document.querySelectorAll('section, .about-container, .project-card, .skill-tag');
+
+    revealElements.forEach(el => el.classList.add('reveal'));
+
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                // Optional: stop observing after reveal
+                // revealObserver.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.15
+    });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+    const contactForm = document.querySelector('.contact-form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn.textContent;
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+
+            // These IDs will be provided by user in EmailJS dashboard
+            const serviceID = 'YOUR_SERVICE_ID';
+            const templateID = 'YOUR_TEMPLATE_ID';
+
+            emailjs.sendForm(serviceID, templateID, this)
+                .then(() => {
+                    submitBtn.textContent = 'Message Sent!';
+                    submitBtn.style.background = '#10b981'; // Green success color
+                    this.reset();
+                    setTimeout(() => {
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = originalBtnText;
+                        submitBtn.style.background = '';
+                    }, 3000);
+                }, (err) => {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Error! Try Again';
+                    submitBtn.style.background = '#f43f5e'; // Red error color
+                    console.error('EmailJS Error:', err);
+                    setTimeout(() => {
+                        submitBtn.textContent = originalBtnText;
+                        submitBtn.style.background = '';
+                    }, 3000);
+                });
+        });
+    }
+
 });
+
