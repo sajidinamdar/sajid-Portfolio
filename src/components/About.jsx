@@ -9,21 +9,23 @@ const About = () => {
                         <div className="accent-bar"></div>
                         <div className="content-text">
                             <p className="about-paragraph intro">
-                                Hello! I'm <strong className="highlight">Sajid Inamdar</strong>, a passionate cybersecurity enthusiast and Python developer.
-                                My journey into tech began with a simple curiosity: <em>how do systems break?</em> This question led me down a path of discovery,
-                                learning not just how to exploit vulnerabilities, but more importantly, how to secure them.
+                                My name is <strong className="highlight">Sajid Inamdar</strong>. I am a <strong className="highlight">Cybersecurity Student and Python Developer from Sangamner, Maharashtra, India</strong>.
+                                I am passionate about ethical hacking, network security, and secure backend & API development.
                             </p>
 
                             <p className="about-paragraph">
-                                I specialize in <strong className="highlight">Ethical Hacking</strong>, <strong className="highlight">Network Security</strong>,
-                                and <strong className="highlight">Backend Development</strong>. My technical toolkit includes building secure APIs
-                                with <strong className="highlight">FastAPI</strong>, automating security workflows with <strong className="highlight">Python</strong>,
-                                and conducting penetration testing using <strong className="highlight">Kali Linux</strong>.
+                                I am currently a BCA student and I actively practice cybersecurity through platforms like
+                                <strong className="highlight"> TryHackMe</strong>, hands-on labs, and real-world security projects.
+                                My goal is to become a professional ethical hacker and cybersecurity analyst.
                             </p>
 
                             <p className="about-paragraph">
-                                When I'm not coding or hacking ethically, you'll find me solving <strong className="highlight">CTF challenges</strong> on TryHackMe,
-                                exploring the latest <strong className="highlight">vulnerability disclosures</strong>, or contributing to open-source security projects.
+                                I have experience working with <strong className="highlight">Python, Linux, networking</strong>, penetration testing tools,
+                                and web security testing. I enjoy learning new technologies and applying them to solve real cybersecurity problems.
+                            </p>
+
+                            <p className="about-paragraph">
+                                This website is my <strong className="highlight">official portfolio</strong> where I showcase my projects, certifications, blogs, and technical skills.
                             </p>
                         </div>
                     </div>

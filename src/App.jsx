@@ -42,6 +42,8 @@ function AnimationTrigger() {
   return null;
 }
 
+import About from './pages/About';
+
 function App() {
   return (
     <HelmetProvider>
@@ -55,6 +57,7 @@ function App() {
             <Routes>
               {/* Only one route for Single Page Application */}
               <Route path="/" element={<HomePage />} />
+              <Route path="/about" element={<About />} />
               {/* Reroute matching routes to home if user tries direct access */}
               <Route path="*" element={<HomePage />} />
             </Routes>
