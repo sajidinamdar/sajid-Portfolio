@@ -31,6 +31,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+    // --- Handle Direct URL Path Navigation (for /projects, /about etc.) ---
+    const path = window.location.pathname.replace(/^\/|\/$/g, ''); // Remove leading/trailing slashes
+    if (path) {
+        const targetSection = document.getElementById(path);
+        if (targetSection) {
+            // Wait slightly for layout/preloader
+            setTimeout(() => {
+                targetSection.scrollIntoView({ behavior: 'smooth' });
+            }, 800); // 800ms to ensure preloader is fading
+        }
+    }
+
     // --- Active Link Highlight on Scroll ---
 
     // --- Mobile Menu Toggle ---
