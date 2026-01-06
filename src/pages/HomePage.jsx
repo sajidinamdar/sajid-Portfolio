@@ -11,10 +11,18 @@ const HomePage = () => {
     return (
         <>
             <Helmet>
-                <title>Sajid Inamdar | Cybersecurity Student & Python Developer</title>
-                <meta name="description" content="Official portfolio of Sajid Inamdar — Cybersecurity student, Python developer, ethical hacker from India. Projects, certifications, blogs & contact." />
+                <title>Sajid Inamdar | Cybersecurity Student & Ethical Hacker</title>
+                <meta name="description" content="Official portfolio of Sajid Inamdar, Cybersecurity Student, Ethical Hacker, Python Developer." />
                 <meta name="keywords" content="Cybersecurity, Ethical Hacking, Python, Web Development, Portfolio, Sajid Inamdar" />
                 <link rel="canonical" href="https://sajid-portfolio-nine.vercel.app/" />
+
+                {/* OpenGraph */}
+                <meta property="og:title" content="Sajid Inamdar | Cybersecurity Student & Ethical Hacker" />
+                <meta property="og:description" content="Official portfolio of Sajid Inamdar, Cybersecurity Student, Ethical Hacker, Python Developer." />
+                <meta property="og:url" content="https://sajid-portfolio-nine.vercel.app/" />
+                <meta property="og:image" content="https://sajid-portfolio-nine.vercel.app/sajid-inamdar.jpg" />
+                <meta property="og:type" content="website" />
+
                 <script type="application/ld+json">
                     {`
                         {
@@ -22,13 +30,13 @@ const HomePage = () => {
                             "@type": "Person",
                             "name": "Sajid Inamdar",
                             "url": "https://sajid-portfolio-nine.vercel.app/",
-                            "image": "https://sajid-portfolio-nine.vercel.app/profile.jpg",
+                            "image": "https://sajid-portfolio-nine.vercel.app/sajid-inamdar.jpg",
                             "sameAs": [
                                 "https://github.com/sajidinamdar",
-                                "https://www.linkedin.com/in/sajid-inamdar/",
+                                "https://www.linkedin.com/in/sajidinamdar-sec/",
                                 "https://www.youtube.com/@sajidinamdar"
                             ],
-                            "jobTitle": "Cybersecurity Student & Python Developer",
+                            "jobTitle": "Cybersecurity Student & Ethical Hacker",
                             "worksFor": {
                                 "@type": "Organization",
                                 "name": "THE BAAP COMPANY"

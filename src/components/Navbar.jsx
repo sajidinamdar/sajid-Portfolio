@@ -94,7 +94,7 @@ const Navbar = () => {
 
                 {/* Hire Me Button */}
                 <a
-                    href="https://www.linkedin.com/in/inamdarsajid"
+                    href="https://www.linkedin.com/in/sajidinamdar-sec/"
                     target="_blank"
                     rel="noreferrer"
                     className="hire-btn"
@@ -136,7 +136,7 @@ const Navbar = () => {
                     ))}
                     <li>
                         <a
-                            href="https://www.linkedin.com/in/inamdarsajid"
+                            href="https://www.linkedin.com/in/sajidinamdar-sec/"
                             target="_blank"
                             rel="noreferrer"
                             className="mobile-hire-btn"

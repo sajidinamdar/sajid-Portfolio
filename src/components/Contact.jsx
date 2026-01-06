@@ -54,7 +54,7 @@ const Contact = () => {
                                 </div>
                                 <div className="info-text">
                                     <h3>Location</h3>
-                                    <p>Pune, Maharashtra, India</p>
+                                    <p>Sangamner, Maharashtra, India</p>
                                 </div>
                             </div>
                         </div>
@@ -65,7 +65,7 @@ const Contact = () => {
                                 <i className="fab fa-github"></i>
                                 <span>GitHub</span>
                             </a>
-                            <a href="https://www.linkedin.com/in/inamdarsajid" target="_blank" rel="noreferrer" className="social-btn" aria-label="LinkedIn Profile">
+                            <a href="https://www.linkedin.com/in/sajidinamdar-sec/" target="_blank" rel="noreferrer" className="social-btn" aria-label="LinkedIn Profile">
                                 <i className="fab fa-linkedin-in"></i>
                                 <span>LinkedIn</span>
                             </a>

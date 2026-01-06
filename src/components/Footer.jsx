@@ -9,7 +9,7 @@ const Footer = () => {
                         <Link to="/about" className="footer-link">About Me</Link> |
                         <a href="https://tryhackme.com/p/Sajidinamdar" target="_blank" rel="noreferrer" className="footer-link"> Verified TryHackMe Learner</a> |
                         <a href="https://github.com/sajidinamdar" target="_blank" rel="noreferrer" className="footer-link"> GitHub Developer</a> |
-                        <a href="https://www.linkedin.com/in/inamdarsajid" target="_blank" rel="noreferrer" className="footer-link"> LinkedIn Professional</a>
+                        <a href="https://www.linkedin.com/in/sajidinamdar-sec/" target="_blank" rel="noreferrer" className="footer-link"> LinkedIn Professional</a>
                         <span className="copyright-text"> © 2025 Sajid Inamdar. All Rights Reserved.</span>
                     </p>
                 </div>

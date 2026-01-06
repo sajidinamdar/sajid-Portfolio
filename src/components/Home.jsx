@@ -19,7 +19,7 @@ export default function Home() {
                             }}>
                                 <i className="fas fa-layer-group"></i> View Projects
                             </Link>
-                            <a href="https://www.linkedin.com/in/inamdarsajid" target="_blank" className="btn btn-outline" rel="noreferrer">
+                            <a href="https://www.linkedin.com/in/sajidinamdar-sec/" target="_blank" className="btn btn-outline" rel="noreferrer">
                                 <i className="fab fa-linkedin-in"></i> Connect Me
                             </a>
                         </div>
@@ -36,7 +36,7 @@ export default function Home() {
 
                 {/* SEO Power Text */}
                 <section style={{ display: 'none' }}>
-                    <h1>Sajid Inamdar – Cybersecurity Student & Python Developer</h1>
+                    <h1>Sajid Inamdar | Cybersecurity Student & Ethical Hacker</h1>
                     <p>
                         Sajid Inamdar is a cybersecurity student and Python developer specializing in ethical
                         hacking, network security, FastAPI backend development, Linux and cloud computing.
