@@ -350,6 +350,13 @@ const Blogs = () => {
                         </article>
                     ))}
                 </div>
+
+                <div className="blog-footer">
+                    <p>Want to read more in-depth articles?</p>
+                    <a href="https://medium.com/@sajid-inamdar" target="_blank" rel="noreferrer" className="medium-cta">
+                        <i className="fab fa-medium"></i> Follow on Medium
+                    </a>
+                </div>
             </div>
 
             {/* Full Blog Modal */}
@@ -384,6 +391,46 @@ const Blogs = () => {
                     display: grid;
                     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
                     gap: 24px;
+                    margin-bottom: 48px;
+                }
+
+                .blog-footer {
+                    text-align: center;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    gap: 16px;
+                    padding-top: 24px;
+                    border-top: 1px solid rgba(255, 255, 255, 0.05);
+                }
+
+                .blog-footer p {
+                    color: var(--text-secondary);
+                    font-size: 1.1rem;
+                }
+
+                .medium-cta {
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 10px;
+                    background: #fff;
+                    color: #000;
+                    padding: 12px 32px;
+                    border-radius: 50px;
+                    font-weight: 600;
+                    text-decoration: none;
+                    transition: all 0.3s ease;
+                    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+                }
+
+                .medium-cta:hover {
+                    transform: translateY(-2px);
+                    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
+                    filter: brightness(0.9);
+                }
+
+                .medium-cta i {
+                    font-size: 1.4rem;
                 }
                 
                 .blog-card {

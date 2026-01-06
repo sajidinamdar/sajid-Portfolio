@@ -34,7 +34,7 @@ const HomePage = () => {
                             "sameAs": [
                                 "https://github.com/sajidinamdar",
                                 "https://www.linkedin.com/in/sajidinamdar-sec/",
-                                "https://www.youtube.com/@sajidinamdar"
+                                "https://medium.com/@sajid-inamdar"
                             ],
                             "jobTitle": "Cybersecurity Student & Ethical Hacker",
                             "worksFor": {

@@ -77,6 +77,10 @@ const Contact = () => {
                                 <i className="fab fa-instagram"></i>
                                 <span>Instagram</span>
                             </a>
+                            <a href="https://medium.com/@sajid-inamdar" target="_blank" rel="noreferrer" className="social-btn" aria-label="Medium Blogs">
+                                <i className="fab fa-medium"></i>
+                                <span>Medium</span>
+                            </a>
                         </div>
                     </div>
 
