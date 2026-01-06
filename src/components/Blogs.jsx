@@ -353,7 +353,7 @@ const Blogs = () => {
 
                 <div className="blog-footer">
                     <p>Want to read more in-depth articles?</p>
-                    <a href="https://medium.com/@sajid-inamdar" target="_blank" rel="noreferrer" className="medium-cta">
+                    <a href="https://medium.com/@sajidinamdar" target="_blank" rel="noreferrer" className="medium-cta">
                         <i className="fab fa-medium"></i> Follow on Medium
                     </a>
                 </div>

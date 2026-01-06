@@ -29,24 +29,17 @@ const HomePage = () => {
                             "@context": "https://schema.org",
                             "@type": "Person",
                             "name": "Sajid Inamdar",
+                            "alternateName": "Sajid",
+                            "description": "Cybersecurity Student, Ethical Hacker and Python Developer from India",
                             "url": "https://sajid-portfolio-nine.vercel.app/",
                             "image": "https://sajid-portfolio-nine.vercel.app/sajid-inamdar.jpg",
                             "sameAs": [
+                                "https://www.linkedin.com/in/sajidinamdar-sec",
                                 "https://github.com/sajidinamdar",
-                                "https://www.linkedin.com/in/sajidinamdar-sec/",
-                                "https://medium.com/@sajid-inamdar"
-                            ],
-                            "jobTitle": "Cybersecurity Student & Ethical Hacker",
-                            "worksFor": {
-                                "@type": "Organization",
-                                "name": "THE BAAP COMPANY"
-                            },
-                            "address": {
-                                "@type": "PostalAddress",
-                                "addressLocality": "Sangamner",
-                                "addressRegion": "Maharashtra",
-                                "addressCountry": "India"
-                            }
+                                "https://medium.com/@sajidinamdar",
+                                "https://dev.to/sajidinamdar",
+                                "https://tryhackme.com/p/Sajidinamdar"
+                            ]
                         }
                     `}
                 </script>
