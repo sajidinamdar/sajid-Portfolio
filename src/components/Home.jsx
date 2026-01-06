@@ -26,7 +26,7 @@ export default function Home() {
                     </div>
                     <div className="hero-image-content">
                         <div className="img-frame">
-                            <img src="/img/myphoto.jpg" alt="Sajid Inamdar - Cybersecurity Student" loading="eager" />
+                            <img src="/img/sajid-inamdar.jpg" alt="Sajid Inamdar - Cybersecurity Student" loading="eager" />
                         </div>
                         {/* Decorative Elements */}
                         <div className="deco-circle c1"></div>
