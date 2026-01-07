@@ -114,6 +114,7 @@
     font-weight: 600;
     font-size: 0.95rem;
     text-decoration: none;
+    border: none;
     border-radius: 50px;
     box-shadow: 0 4px 16px rgba(0, 243, 255, 0.3);
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -122,6 +123,8 @@
     gap: 8px;
     position: relative;
     overflow: hidden;
+    cursor: pointer;
+    font-family: inherit;
 }
 
 .hire-btn::before {
@@ -250,10 +253,14 @@
     font-weight: 600;
     font-size: 1.05rem;
     text-decoration: none;
+    border: none;
     border-radius: 12px;
     box-shadow: 0 4px 20px rgba(0, 243, 255, 0.3);
     transition: all 0.3s ease;
     text-align: center;
+    cursor: pointer;
+    font-family: inherit;
+    width: 100%;
 }
 
 .mobile-hire-btn:hover {
