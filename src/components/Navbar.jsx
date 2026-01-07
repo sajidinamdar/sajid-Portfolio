@@ -1,19 +1,21 @@
 import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import './Navbar.css';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [activeSection, setActiveSection] = useState('home');
     const [scrolled, setScrolled] = useState(false);
+    const location = useLocation();
 
     const navLinks = [
-        { name: 'Home', id: 'home' },
-        { name: 'About', id: 'about' },
-        { name: 'Skills', id: 'skills' },
-        { name: 'Certifications', id: 'certifications' },
-        { name: 'Projects', id: 'projects' },
-        { name: 'Blogs', id: 'blogs' },
-        { name: 'Contact', id: 'contact' }
+        { name: 'Home', id: 'home', path: '/', isRoute: false },
+        { name: 'About', id: 'about', path: '/about', isRoute: true },
+        { name: 'Skills', id: 'skills', path: '#skills', isRoute: false },
+        { name: 'Certifications', id: 'certifications', path: '#certifications', isRoute: false },
+        { name: 'Projects', id: 'projects', path: '/projects', isRoute: true },
+        { name: 'Blogs', id: 'blogs', path: '/blogs', isRoute: true },
+        { name: 'Contact', id: 'contact', path: '#contact', isRoute: false }
     ];
 
     // Handle scroll to section
@@ -30,28 +32,39 @@ const Navbar = () => {
         }
     };
 
-    // Track active section on scroll
+    // Track active section based on route or scroll
     useEffect(() => {
+        // Set active section based on current route
+        const currentPath = location.pathname;
+        const currentLink = navLinks.find(link => link.path === currentPath);
+        if (currentLink) {
+            setActiveSection(currentLink.id);
+        } else if (currentPath === '/') {
+            setActiveSection('home');
+        }
+
         const handleScroll = () => {
             // Check if scrolled
             setScrolled(window.scrollY > 20);
 
-            // Determine active section
-            const sections = navLinks.map(link => link.id);
-            const scrollPosition = window.scrollY + 100;
+            // Only determine active section if we're on the home page
+            if (location.pathname === '/') {
+                const sections = navLinks.map(link => link.id);
+                const scrollPosition = window.scrollY + 100;
 
-            for (let i = sections.length - 1; i >= 0; i--) {
-                const section = document.getElementById(sections[i]);
-                if (section && section.offsetTop <= scrollPosition) {
-                    setActiveSection(sections[i]);
-                    break;
+                for (let i = sections.length - 1; i >= 0; i--) {
+                    const section = document.getElementById(sections[i]);
+                    if (section && section.offsetTop <= scrollPosition) {
+                        setActiveSection(sections[i]);
+                        break;
+                    }
                 }
             }
         };
 
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
+    }, [location]);
 
     // Close mobile menu on resize
     useEffect(() => {
@@ -69,38 +82,57 @@ const Navbar = () => {
         <nav className={`navbar ${scrolled ? 'scrolled' : ''}`} aria-label="Main Navigation">
             <div className="nav-container">
                 {/* Logo */}
-                <div className="nav-logo" onClick={() => scrollToSection('home')}>
+                <Link to="/" className="nav-logo" onClick={() => {
+                    if (location.pathname === '/') {
+                        scrollToSection('home');
+                    }
+                }}>
                     <span className="logo-text">Sajid Inamdar</span>
-                </div>
+                </Link>
 
                 {/* Desktop Navigation */}
                 <ul className="nav-links">
                     {navLinks.map((link) => (
                         <li key={link.id}>
-                            <a
-                                href={`#${link.id}`}
-                                className={`nav-link ${activeSection === link.id ? 'active' : ''}`}
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    scrollToSection(link.id);
-                                }}
-                                aria-current={activeSection === link.id ? 'page' : undefined}
-                            >
-                                {link.name}
-                            </a>
+                            {link.isRoute ? (
+                                <Link
+                                    to={link.path}
+                                    className={`nav-link ${activeSection === link.id ? 'active' : ''}`}
+                                    onClick={() => setIsOpen(false)}
+                                    aria-current={activeSection === link.id ? 'page' : undefined}
+                                >
+                                    {link.name}
+                                </Link>
+                            ) : (
+                                <a
+                                    href={link.path}
+                                    className={`nav-link ${activeSection === link.id ? 'active' : ''}`}
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        if (location.pathname !== '/') {
+                                            window.location.href = `/${link.path}`;
+                                        } else {
+                                            scrollToSection(link.id);
+                                        }
+                                    }}
+                                    aria-current={activeSection === link.id ? 'page' : undefined}
+                                >
+                                    {link.name}
+                                </a>
+                            )}
                         </li>
                     ))}
                 </ul>
 
-                {/* Hire Me Button */}
+                {/* Follow Me Button */}
                 <a
-                    href="https://www.linkedin.com/in/sajidinamdar-sec/"
+                    href="https://www.youtube.com/@sajid-inamdar"
                     target="_blank"
                     rel="noreferrer"
                     className="hire-btn"
-                    aria-label="Contact me to hire"
+                    aria-label="Follow me on YouTube"
                 >
-                    Hire Me
+                    Follow Me
                 </a>
 
                 {/* Mobile Menu Toggle */}
@@ -121,27 +153,43 @@ const Navbar = () => {
                 <ul className="mobile-nav-links">
                     {navLinks.map((link) => (
                         <li key={link.id}>
-                            <a
-                                href={`#${link.id}`}
-                                className={`mobile-nav-link ${activeSection === link.id ? 'active' : ''}`}
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    scrollToSection(link.id);
-                                }}
-                                aria-current={activeSection === link.id ? 'page' : undefined}
-                            >
-                                {link.name}
-                            </a>
+                            {link.isRoute ? (
+                                <Link
+                                    to={link.path}
+                                    className={`mobile-nav-link ${activeSection === link.id ? 'active' : ''}`}
+                                    onClick={() => setIsOpen(false)}
+                                    aria-current={activeSection === link.id ? 'page' : undefined}
+                                >
+                                    {link.name}
+                                </Link>
+                            ) : (
+                                <a
+                                    href={link.path}
+                                    className={`mobile-nav-link ${activeSection === link.id ? 'active' : ''}`}
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        if (location.pathname !== '/') {
+                                            window.location.href = `/${link.path}`;
+                                        } else {
+                                            scrollToSection(link.id);
+                                        }
+                                        setIsOpen(false);
+                                    }}
+                                    aria-current={activeSection === link.id ? 'page' : undefined}
+                                >
+                                    {link.name}
+                                </a>
+                            )}
                         </li>
                     ))}
                     <li>
                         <a
-                            href="https://www.linkedin.com/in/sajidinamdar-sec/"
+                            href="https://www.youtube.com/@sajid-inamdar"
                             target="_blank"
                             rel="noreferrer"
                             className="mobile-hire-btn"
                         >
-                            Hire Me
+                            Follow Me
                         </a>
                     </li>
                 </ul>

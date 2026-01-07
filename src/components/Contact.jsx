@@ -85,6 +85,10 @@ const Contact = () => {
                                 <i className="fab fa-dev"></i>
                                 <span>Dev.to</span>
                             </a>
+                            <a href="https://www.youtube.com/@sajid-inamdar" target="_blank" rel="noreferrer" className="social-btn" aria-label="YouTube Channel">
+                                <i className="fab fa-youtube"></i>
+                                <span>YouTube</span>
+                            </a>
                         </div>
                     </div>
 

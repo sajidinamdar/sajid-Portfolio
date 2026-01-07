@@ -43,6 +43,8 @@ function AnimationTrigger() {
 }
 
 import About from './pages/About';
+import ProjectsPage from './pages/ProjectsPage';
+import BlogsPage from './pages/BlogsPage';
 
 function App() {
   return (
@@ -58,6 +60,8 @@ function App() {
               {/* Only one route for Single Page Application */}
               <Route path="/" element={<HomePage />} />
               <Route path="/about" element={<About />} />
+              <Route path="/projects" element={<ProjectsPage />} />
+              <Route path="/blogs" element={<BlogsPage />} />
               {/* Reroute matching routes to home if user tries direct access */}
               <Route path="*" element={<HomePage />} />
             </Routes>
