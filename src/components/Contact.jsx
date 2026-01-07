@@ -23,388 +23,415 @@ const Contact = () => {
     };
 
     return (
-        <section id="contact" className="contact-section" aria-labelledby="contact-heading">
+        <section id="contact" className="contact-section">
+            <div className="contact-bg-glow"></div>
             <div className="container">
-                <h2 className="section-title">Let's Connect</h2>
-                <div className="contact-layout">
-                    {/* LEFT COLUMN - Contact Info */}
-                    <div className="contact-info">
-                        <h3 className="contact-subtitle">
-                            Get In Touch
-                        </h3>
-                        <p className="contact-intro">
-                            I'm always open to discussing new projects, security audits, or backend opportunities.
-                        </p>
+                <div className="section-header">
+                    <h2 className="section-title">Let's Work Together</h2>
+                    <p className="section-subtitle">Have a project in mind? Let's build something extraordinary.</p>
+                </div>
 
-                        {/* Contact Details Card */}
-                        <div className="info-card">
-                            <div className="info-item">
-                                <div className="info-icon">
-                                    <i className="fas fa-envelope"></i>
-                                </div>
-                                <div className="info-text">
-                                    <h3>Email</h3>
-                                    <a href="mailto:inamdarsajid01@gmail.com">inamdarsajid01@gmail.com</a>
-                                </div>
+                <div className="contact-wrapper">
+                    {/* Contact Info Card */}
+                    <div className="contact-card info-card">
+                        <div className="card-content">
+                            <h3>Contact Information</h3>
+                            <p className="card-desc">I'm open for freelance projects, security audits, and backend development roles.</p>
+
+                            <div className="contact-details">
+                                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=sajidinamdar@gmail.com" target="_blank" rel="noreferrer" className="contact-item">
+                                    <div className="icon-box">
+                                        <i className="fas fa-envelope"></i>
+                                    </div>
+                                    <div className="item-info">
+                                        <span>Email Me</span>
+                                        <span className="value">sajidinamdar@gmail.com</span>
+                                    </div>
+                                </a>
+
+                                <a href="https://www.google.com/maps/search/?api=1&query=Sangamner,+Maharashtra" target="_blank" rel="noreferrer" className="contact-item">
+                                    <div className="icon-box">
+                                        <i className="fas fa-map-marker-alt"></i>
+                                    </div>
+                                    <div className="item-info">
+                                        <span>Location</span>
+                                        <span className="value">Sangamner, Maharashtra</span>
+                                    </div>
+                                </a>
                             </div>
 
-                            <div className="info-item">
-                                <div className="info-icon">
-                                    <i className="fas fa-map-marker-alt"></i>
-                                </div>
-                                <div className="info-text">
-                                    <h3>Location</h3>
-                                    <p>Sangamner, Maharashtra, India</p>
+                            <div className="social-connect">
+                                <h4>Follow Me</h4>
+                                <div className="social-icons">
+                                    <a href="https://github.com/sajidinamdar" target="_blank" rel="noreferrer" aria-label="GitHub">
+                                        <i className="fab fa-github"></i>
+                                    </a>
+                                    <a href="https://www.linkedin.com/in/sajidinamdar-sec/" target="_blank" rel="noreferrer" aria-label="LinkedIn">
+                                        <i className="fab fa-linkedin-in"></i>
+                                    </a>
+                                    <a href="https://tryhackme.com/p/Sajidinamdar" target="_blank" rel="noreferrer" aria-label="TryHackMe">
+                                        <i className="fas fa-flag"></i>
+                                    </a>
+                                    <a href="https://medium.com/@sajidinamdar" target="_blank" rel="noreferrer" aria-label="Medium">
+                                        <i className="fab fa-medium"></i>
+                                    </a>
+                                    <a href="https://www.instagram.com/sajidinamdar" target="_blank" rel="noreferrer" aria-label="Instagram">
+                                        <i className="fab fa-instagram"></i>
+                                    </a>
                                 </div>
                             </div>
-                        </div>
-
-                        {/* Social Links */}
-                        <div className="social-links">
-                            <a href="https://github.com/sajidinamdar" target="_blank" rel="noreferrer" className="social-btn" aria-label="GitHub Profile">
-                                <i className="fab fa-github"></i>
-                                <span>GitHub</span>
-                            </a>
-                            <a href="https://www.linkedin.com/in/sajidinamdar-sec/" target="_blank" rel="noreferrer" className="social-btn" aria-label="LinkedIn Profile">
-                                <i className="fab fa-linkedin-in"></i>
-                                <span>LinkedIn</span>
-                            </a>
-                            <a href="https://tryhackme.com/p/Sajidinamdar" target="_blank" rel="noreferrer" className="social-btn" aria-label="TryHackMe Profile">
-                                <i className="fas fa-flag"></i>
-                                <span>TryHackMe</span>
-                            </a>
-                            <a href="https://www.instagram.com/sajidinamdar" target="_blank" rel="noreferrer" className="social-btn" aria-label="Instagram Profile">
-                                <i className="fab fa-instagram"></i>
-                                <span>Instagram</span>
-                            </a>
-                            <a href="https://medium.com/@sajidinamdar" target="_blank" rel="noreferrer" className="social-btn" aria-label="Medium Blogs">
-                                <i className="fab fa-medium"></i>
-                                <span>Medium</span>
-                            </a>
-                            <a href="https://dev.to/sajidinamdar" target="_blank" rel="noreferrer" className="social-btn" aria-label="Dev.to Profile">
-                                <i className="fab fa-dev"></i>
-                                <span>Dev.to</span>
-                            </a>
-                            <a href="https://www.youtube.com/@sajid-inamdar" target="_blank" rel="noreferrer" className="social-btn" aria-label="YouTube Channel">
-                                <i className="fab fa-youtube"></i>
-                                <span>YouTube</span>
-                            </a>
                         </div>
                     </div>
 
-                    {/* RIGHT COLUMN - Contact Form */}
-                    <div className="contact-form-wrapper">
-                        <form className="contact-form" onSubmit={handleSubmit}>
-                            <div className="form-group">
-                                <label htmlFor="name">Your Name</label>
+                    {/* Contact Form */}
+                    <form className="contact-form" onSubmit={handleSubmit}>
+                        <div className="form-header">
+                            <h3>Send a Message</h3>
+                        </div>
+
+                        <div className="form-grid">
+                            <div className="input-group">
                                 <input
                                     type="text"
-                                    id="name"
                                     name="name"
                                     value={formData.name}
                                     onChange={handleChange}
-                                    placeholder="John Doe"
+                                    placeholder=" "
                                     required
                                 />
+                                <label>Your Name</label>
                             </div>
 
-                            <div className="form-group">
-                                <label htmlFor="email">Your Email</label>
+                            <div className="input-group">
                                 <input
                                     type="email"
-                                    id="email"
                                     name="email"
                                     value={formData.email}
                                     onChange={handleChange}
-                                    placeholder="john@example.com"
+                                    placeholder=" "
                                     required
                                 />
+                                <label>Your Email</label>
                             </div>
+                        </div>
 
-                            <div className="form-group">
-                                <label htmlFor="message">Your Message</label>
-                                <textarea
-                                    id="message"
-                                    name="message"
-                                    value={formData.message}
-                                    onChange={handleChange}
-                                    placeholder="Tell me about your project or idea..."
-                                    rows="6"
-                                    required
-                                ></textarea>
-                            </div>
+                        <div className="input-group">
+                            <textarea
+                                name="message"
+                                value={formData.message}
+                                onChange={handleChange}
+                                placeholder=" "
+                                rows="5"
+                                required
+                            ></textarea>
+                            <label>Your Message</label>
+                        </div>
 
-                            <button type="submit" className="submit-btn">
-                                <i className="fas fa-paper-plane"></i>
-                                Send Message
-                            </button>
-                        </form>
-                    </div>
+                        <button type="submit" className="submit-btn">
+                            <span>Send Message</span>
+                            <i className="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
                 </div>
             </div>
 
             <style>{`
                 .contact-section {
-                    padding: 90px 0;
+                    padding: 80px 0;
+                    position: relative;
+                    overflow: hidden;
                 }
 
-                .contact-layout {
-                    display: grid;
-                    grid-template-columns: 1fr 1fr;
-                    gap: 60px;
-                    align-items: start;
+                .contact-bg-glow {
+                    position: absolute;
+                    top: 50%;
+                    right: 0;
+                    transform: translateY(-50%);
+                    width: 600px;
+                    height: 600px;
+                    background: radial-gradient(circle, rgba(56, 189, 248, 0.08) 0%, transparent 70%);
+                    pointer-events: none;
+                    z-index: 0;
                 }
 
-                /* ========== LEFT COLUMN ========== */
-                .contact-info {
-                    display: flex;
-                    flex-direction: column;
-                    gap: 32px;
+                .section-header {
+                    text-align: center;
+                    margin-bottom: 50px;
+                    position: relative;
+                    z-index: 1;
                 }
 
-                .contact-heading {
-                    font-size: 2.75rem;
-                    font-weight: 700;
-                    color: #fff;
-                    line-height: 1.2;
-                    margin: 0;
-                    letter-spacing: -0.5px;
-                }
-
-                .contact-intro {
-                    font-size: 1.05rem;
-                    line-height: 1.75;
+                .section-subtitle {
                     color: var(--text-secondary);
-                    margin: 0;
+                    font-size: 1.1rem;
+                    margin-top: 10px;
+                }
+
+                .contact-wrapper {
+                    display: grid;
+                    grid-template-columns: 1fr 1.5fr;
+                    gap: 30px;
+                    position: relative;
+                    z-index: 1;
+                    max-width: 1000px; /* Reduced max-width for better proportion */
+                    margin: 0 auto;
                 }
 
                 /* Info Card */
-                .info-card {
-                    background: rgba(30, 41, 59, 0.3);
-                    backdrop-filter: blur(12px);
-                    -webkit-backdrop-filter: blur(12px);
-                    border: 1px solid rgba(255, 255, 255, 0.08);
+                .contact-card {
+                    background: rgba(30, 41, 59, 0.6); /* Slightly more opaque for 'normal' look */
+                    border: 1px solid rgba(255, 255, 255, 0.08); /* Softer border */
                     border-radius: 16px;
+                    overflow: hidden;
+                    height: 100%;
+                    backdrop-filter: blur(12px);
+                    position: relative;
+                }
+
+                .contact-card::before {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 3px;
+                    background: linear-gradient(90deg, #38bdf8, transparent); /* Sky blue gradient */
+                }
+
+                .card-content {
                     padding: 32px;
+                    height: 100%;
                     display: flex;
                     flex-direction: column;
-                    gap: 24px;
                 }
 
-                .info-item {
-                    display: flex;
-                    align-items: flex-start;
-                    gap: 16px;
-                }
-
-                .info-icon {
-                    width: 48px;
-                    height: 48px;
-                    background: rgba(0, 243, 255, 0.1);
-                    border-radius: 12px;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    color: var(--neon-cyan);
-                    font-size: 1.3rem;
-                    flex-shrink: 0;
-                }
-
-                .info-text h3 {
-                    font-size: 0.9rem;
+                .card-content h3 {
                     color: #fff;
+                    font-size: 1.4rem;
+                    margin-bottom: 10px;
                     font-weight: 600;
-                    margin: 0 0 4px 0;
-                    text-transform: uppercase;
-                    letter-spacing: 1px;
                 }
 
-                .info-text p,
-                .info-text a {
-                    font-size: 1rem;
-                    color: var(--text-secondary);
-                    margin: 0;
+                .card-desc {
+                    color: #94a3b8; /* Slate-400 */
+                    line-height: 1.6;
+                    margin-bottom: 30px;
+                    font-size: 0.95rem;
+                }
+
+                .contact-details {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 20px;
+                    margin-bottom: 30px;
+                }
+
+                .contact-item {
+                    display: flex;
+                    align-items: center;
+                    gap: 16px;
                     text-decoration: none;
-                    transition: color 0.3s ease;
+                    group: 1;
                 }
 
-                .info-text a:hover {
-                    color: var(--neon-cyan);
-                }
-
-                /* Social Links */
-                .social-links {
-                    display: grid;
-                    grid-template-columns: repeat(2, 1fr);
-                    gap: 12px;
-                }
-
-                .social-btn {
+                .icon-box {
+                    width: 44px;
+                    height: 44px;
+                    background: rgba(56, 189, 248, 0.1); /* Sky blue tint */
+                    border-radius: 10px;
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    gap: 10px;
-                    padding: 14px 20px;
-                    background: rgba(30, 41, 59, 0.3);
-                    border: 1px solid rgba(255, 255, 255, 0.08);
-                    border-radius: 12px;
-                    color: var(--text-secondary);
-                    text-decoration: none;
-                    font-weight: 500;
-                    font-size: 0.95rem;
+                    color: #38bdf8; /* Sky blue */
+                    font-size: 1.1rem;
                     transition: all 0.3s ease;
                 }
 
-                .social-btn i {
-                    font-size: 1.1rem;
-                    transition: transform 0.3s ease;
+                .contact-item:hover .icon-box {
+                    background: #38bdf8;
+                    color: #0f172a; /* Dark slate text */
+                    transform: rotate(-5deg);
                 }
 
-                .social-btn:hover {
-                    background: rgba(30, 41, 59, 0.5);
-                    border-color: var(--neon-cyan);
-                    color: var(--neon-cyan);
-                    transform: translateY(-2px);
-                    box-shadow: 0 8px 24px rgba(0, 243, 255, 0.15);
-                }
-
-                .social-btn:hover i {
-                    transform: scale(1.1);
-                }
-
-                /* ========== RIGHT COLUMN - FORM ========== */
-                .contact-form-wrapper {
-                    background: rgba(30, 41, 59, 0.3);
-                    backdrop-filter: blur(12px);
-                    -webkit-backdrop-filter: blur(12px);
-                    border: 1px solid rgba(255, 255, 255, 0.08);
-                    border-radius: 16px;
-                    padding: 32px;
-                }
-
-                .contact-form {
+                .item-info {
                     display: flex;
                     flex-direction: column;
-                    gap: 24px;
                 }
 
-                .form-group {
-                    display: flex;
-                    flex-direction: column;
-                    gap: 10px;
-                }
-
-                .form-group label {
-                    font-size: 0.9rem;
-                    font-weight: 600;
-                    color: #fff;
+                .item-info span:first-child {
+                    color: #94a3b8;
+                    font-size: 0.8rem;
+                    margin-bottom: 2px;
                     text-transform: uppercase;
                     letter-spacing: 0.5px;
                 }
 
-                .form-group input,
-                .form-group textarea {
-                    width: 100%;
-                    padding: 14px 18px;
-                    background: rgba(15, 23, 42, 0.6);
-                    border: 1px solid rgba(255, 255, 255, 0.08);
-                    border-radius: 10px;
-                    color: #fff;
+                .item-info .value {
+                    color: #e2e8f0; /* Slate-200 */
+                    font-weight: 500;
                     font-size: 1rem;
+                    transition: color 0.3s ease;
+                }
+
+                .contact-item:hover .value {
+                    color: #38bdf8;
+                }
+
+                .social-connect h4 {
+                    color: #e2e8f0;
+                    font-size: 1rem;
+                    margin-bottom: 16px;
+                    font-weight: 600;
+                }
+
+                .social-icons {
+                    display: flex;
+                    gap: 10px;
+                    flex-wrap: wrap;
+                }
+
+                .social-icons a {
+                    width: 38px;
+                    height: 38px;
+                    background: rgba(255, 255, 255, 0.03);
+                    border: 1px solid rgba(255, 255, 255, 0.08); /* Softer border */
+                    border-radius: 8px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: #94a3b8;
+                    text-decoration: none;
+                    transition: all 0.3s ease;
+                }
+
+                .social-icons a:hover {
+                    background: #38bdf8;
+                    color: #0f172a;
+                    transform: translateY(-2px);
+                    box-shadow: 0 4px 12px rgba(56, 189, 248, 0.2);
+                    border-color: #38bdf8;
+                }
+
+                /* Form */
+                .contact-form {
+                    background: rgba(30, 41, 59, 0.6); /* Matching card background */
+                    border: 1px solid rgba(255, 255, 255, 0.08);
+                    border-radius: 16px;
+                    padding: 32px;
+                    backdrop-filter: blur(12px);
+                }
+
+                .form-header h3 {
+                    color: #fff;
+                    font-size: 1.4rem;
+                    margin-bottom: 24px;
+                    font-weight: 600;
+                }
+
+                .form-grid {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 20px;
+                    margin-bottom: 20px;
+                }
+
+                .input-group {
+                    position: relative;
+                    margin-bottom: 24px;
+                }
+
+                .input-group input,
+                .input-group textarea {
+                    width: 100%;
+                    padding: 12px 16px; /* Added horizontal padding back for better feel */
+                    background: rgba(15, 23, 42, 0.3); /* Slight background for inputs */
+                    border: 1px solid rgba(255, 255, 255, 0.08); /* Full border */
+                    border-radius: 8px; /* Rounded corners */
+                    color: #fff;
+                    font-size: 0.95rem;
                     font-family: inherit;
                     transition: all 0.3s ease;
                 }
 
-                .form-group input:focus,
-                .form-group textarea:focus {
-                    outline: none;
-                    border-color: var(--neon-cyan);
-                    box-shadow: 0 0 0 3px rgba(0, 243, 255, 0.1);
-                    background: rgba(15, 23, 42, 0.8);
+                .input-group textarea {
+                    resize: vertical;
+                    min-height: 120px;
                 }
 
-                .form-group textarea {
-                    resize: vertical;
-                    min-height: 140px;
+                /* Floating label style adjusted for bordered inputs */
+                .input-group label {
+                    position: absolute;
+                    top: 13px;
+                    left: 16px;
+                    color: #94a3b8;
+                    font-size: 0.95rem;
+                    pointer-events: none;
+                    transition: all 0.3s ease;
+                    background: transparent;
+                }
+
+                .input-group input:focus,
+                .input-group textarea:focus {
+                    border-color: #38bdf8;
+                    background: rgba(15, 23, 42, 0.5);
+                    box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.2);
+                }
+
+                .input-group input:focus + label,
+                .input-group textarea:focus + label,
+                .input-group input:not(:placeholder-shown) + label,
+                .input-group textarea:not(:placeholder-shown) + label {
+                    top: -22px;
+                    left: 0;
+                    font-size: 0.85rem;
+                    color: #38bdf8;
+                    font-weight: 500;
                 }
 
                 .submit-btn {
-                    height: 52px;
-                    background: linear-gradient(135deg, var(--neon-cyan), var(--accent));
-                    color: #000;
+                    width: auto; /* Buttons width adjusted */
+                    min-width: 160px;
+                    align-self: flex-start;
+                    padding: 14px 28px;
+                    background: #38bdf8; /* Solid Modern Blue */
                     border: none;
-                    border-radius: 10px;
-                    font-size: 1rem;
+                    border-radius: 8px;
+                    color: #0f172a;
                     font-weight: 600;
+                    font-size: 0.95rem;
                     cursor: pointer;
-                    display: flex;
+                    display: inline-flex;
                     align-items: center;
                     justify-content: center;
-                    gap: 10px;
+                    gap: 8px;
                     transition: all 0.3s ease;
-                    box-shadow: 0 4px 20px rgba(0, 243, 255, 0.3);
+                    margin-top: 10px;
                 }
 
                 .submit-btn:hover {
+                    background: #0ea5e9; /* Darker blue on hover */
                     transform: translateY(-2px);
-                    box-shadow: 0 8px 30px rgba(0, 243, 255, 0.5);
-                    filter: brightness(1.1);
+                    box-shadow: 0 4px 12px rgba(56, 189, 248, 0.3);
                 }
 
-                .submit-btn:active {
-                    transform: translateY(0);
+                .submit-btn span {
+                    letter-spacing: 0.5px;
                 }
 
-                /* ========== RESPONSIVE ========== */
                 @media (max-width: 968px) {
-                    .contact-section {
-                        padding: var(--section-padding) 0;
-                        width: 100%;
-                        overflow: hidden;
+                    .contact-wrapper {
+                        grid-template-columns: 1fr;
+                        max-width: 600px;
                     }
 
-                    .contact-layout {
-                        grid-template-columns: 1fr;
-                        gap: 24px;
-                        width: 100%;
-                        box-sizing: border-box;
-                    }
-
-                    .social-links {
-                        grid-template-columns: 1fr;
+                    .contact-form {
+                        padding: 24px;
                     }
                 }
 
-                @media (max-width: 640px) {
-                    .contact-section {
-                        padding: var(--section-padding) 10px;
-                    }
-
-                    .info-card,
-                    .contact-form-wrapper {
-                        padding: 15px;
-                        width: 100%;
-                        box-sizing: border-box;
-                    }
-
-                    .form-group input,
-                    .form-group textarea {
-                        padding: 10px 12px;
-                        width: 100%;
-                        box-sizing: border-box;
-                        font-size: 14px;
-                    }
-
-                    .submit-btn {
-                        width: 100%;
-                        box-sizing: border-box;
-                    }
-                }
-
-                @media (max-width: 350px) {
-                    .info-text a, .info-text p {
-                        font-size: 0.85rem;
-                        word-break: break-all;
+                @media (max-width: 600px) {
+                    .form-grid {
+                        grid-template-columns: 1fr;
                     }
                 }
             `}</style>

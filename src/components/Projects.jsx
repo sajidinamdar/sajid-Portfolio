@@ -1,16 +1,32 @@
+import { useState } from 'react';
+
 export default function Projects() {
+    const [showAll, setShowAll] = useState(false);
+
     const projects = [
-        {
-            title: 'FastAPI Backend Project',
-            desc: 'Full-stack backend API built with FastAPI, featuring authentication, database integration, and RESTful endpoints.',
-            link: 'https://github.com/sajidinamdar/my-fastapi-project-',
-            tech: ['FastAPI', 'Python', 'REST API']
-        },
         {
             title: 'Harisetu',
             desc: 'Agricultural technology platform designed to connect farmers with consumers and optimize farm management.',
             link: 'https://github.com/sajidinamdar/Harisetu',
             tech: ['Python', 'Web Development', 'Database']
+        },
+        {
+            title: 'WebSocket Application',
+            desc: 'Real-time communication application using WebSocket protocol for instant data exchange.',
+            link: 'https://github.com/sajidinamdar/Websocket',
+            tech: ['WebSocket', 'Python', 'Real-time']
+        },
+        {
+            title: 'FastAPI Authentication',
+            desc: 'Complete authentication system with signup and login functionality using FastAPI framework.',
+            link: 'https://github.com/sajidinamdar/fastapi_signup',
+            tech: ['FastAPI', 'Authentication', 'Security']
+        },
+        {
+            title: 'FastAPI Backend Project',
+            desc: 'Full-stack backend API built with FastAPI, featuring authentication, database integration, and RESTful endpoints.',
+            link: 'https://github.com/sajidinamdar/my-fastapi-project-',
+            tech: ['FastAPI', 'Python', 'REST API']
         },
         {
             title: 'Python Chatbot',
@@ -31,24 +47,14 @@ export default function Projects() {
             tech: ['Python', 'SMTP', 'API']
         },
         {
-            title: 'FastAPI Authentication',
-            desc: 'Complete authentication system with signup and login functionality using FastAPI framework.',
-            link: 'https://github.com/sajidinamdar/fastapi_signup',
-            tech: ['FastAPI', 'Authentication', 'Security']
-        },
-        {
             title: 'Weather API',
             desc: 'Weather information service API that fetches and displays real-time weather data.',
             link: 'https://github.com/sajidinamdar/Weather_api',
             tech: ['Python', 'API', 'Weather Data']
-        },
-        {
-            title: 'WebSocket Application',
-            desc: 'Real-time communication application using WebSocket protocol for instant data exchange.',
-            link: 'https://github.com/sajidinamdar/Websocket',
-            tech: ['WebSocket', 'Python', 'Real-time']
         }
-    ]
+    ];
+
+    const visibleProjects = showAll ? projects : projects.slice(0, 3);
 
     return (
         <section id="projects" className="section projects-section">
@@ -84,7 +90,7 @@ export default function Projects() {
                 </script>
 
                 <div className="project-grid">
-                    {projects.map((p, i) => (
+                    {visibleProjects.map((p, i) => (
                         <article key={i} className="project-card">
                             <div className="card-left-accent"></div>
 
@@ -107,8 +113,11 @@ export default function Projects() {
                 </div>
 
                 <div className="view-all-container">
-                    <a href="https://github.com/sajidinamdar?tab=repositories" target="_blank" className="view-all-btn" rel="noreferrer">
-                        View All Repositories
+                    <button className="view-all-btn" onClick={() => setShowAll(!showAll)}>
+                        {showAll ? 'Show Less' : 'View All Projects'}
+                    </button>
+                    <a href="https://github.com/sajidinamdar?tab=repositories" target="_blank" className="view-all-btn github-btn" rel="noreferrer">
+                        <i className="fab fa-github"></i> View on GitHub
                     </a>
                 </div>
             </div>
@@ -277,6 +286,8 @@ export default function Projects() {
                     display: flex;
                     justify-content: center;
                     margin-top: 48px;
+                    gap: 20px;
+                    flex-wrap: wrap;
                 }
 
                 .view-all-btn {
@@ -293,6 +304,9 @@ export default function Projects() {
                     transition: all 0.3s ease;
                     letter-spacing: 0.5px;
                     text-decoration: none;
+                    cursor: pointer;
+                    font-family: inherit;
+                    gap: 10px;
                 }
 
                 .view-all-btn:hover {
@@ -300,6 +314,18 @@ export default function Projects() {
                     color: #000;
                     transform: translateY(-2px);
                     box-shadow: 0 8px 24px rgba(0, 243, 255, 0.3);
+                }
+
+                .github-btn {
+                    border-color: rgba(255, 255, 255, 0.2);
+                    color: #fff;
+                }
+
+                .github-btn:hover {
+                    background: #fff;
+                    color: #000;
+                    border-color: #fff;
+                    box-shadow: 0 8px 24px rgba(255, 255, 255, 0.1);
                 }
                 
                 @media (max-width: 768px) {

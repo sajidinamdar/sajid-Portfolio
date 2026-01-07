@@ -59,6 +59,14 @@
 
 html {
     scroll-behavior: smooth;
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
+    /* IE and Edge */
+}
+
+html::-webkit-scrollbar {
+    display: none;
 }
 
 body {
@@ -71,6 +79,14 @@ body {
     overflow-x: hidden;
     width: 100%;
     position: relative;
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
+    /* IE and Edge */
+}
+
+body::-webkit-scrollbar {
+    display: none;
 }
 
 a {

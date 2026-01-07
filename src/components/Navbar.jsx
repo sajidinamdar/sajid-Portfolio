@@ -154,8 +154,8 @@ const Navbar = () => {
     return (
         <>
             {/* Scroll Progress Indicator */}
-            <div 
-                className="scroll-progress" 
+            <div
+                className="scroll-progress"
                 style={{
                     position: 'fixed',
                     top: '72px',
@@ -170,159 +170,159 @@ const Navbar = () => {
             />
             <nav className={`navbar ${scrolled ? 'scrolled' : ''}`} aria-label="Main Navigation">
                 <div className="nav-container">
-                {/* Logo */}
-                <Link to="/" className="nav-logo" onClick={() => {
-                    if (location.pathname === '/') {
-                        scrollToSection('home');
-                    }
-                }}>
-                    <span className="logo-text">Sajid Inamdar</span>
-                </Link>
+                    {/* Logo */}
+                    <Link to="/" className="nav-logo" onClick={() => {
+                        if (location.pathname === '/') {
+                            scrollToSection('home');
+                        }
+                    }}>
+                        <span className="logo-text">Sajid Inamdar</span>
+                    </Link>
 
-                {/* Desktop Navigation */}
-                <ul className="nav-links">
-                    {navLinks.map((link) => (
-                        <li key={link.id}>
-                            {link.isRoute ? (
-                                <Link
-                                    to={link.path}
-                                    className={`nav-link ${activeSection === link.id ? 'active' : ''}`}
-                                    onClick={() => setIsOpen(false)}
-                                    aria-current={activeSection === link.id ? 'page' : undefined}
-                                >
-                                    <i className={link.icon}></i>
-                                    <span>{link.name}</span>
-                                </Link>
-                            ) : (
-                                <a
-                                    href={link.path}
-                                    className={`nav-link ${activeSection === link.id ? 'active' : ''}`}
-                                    onClick={(e) => {
-                                        e.preventDefault();
-                                        scrollToSection(link.id);
-                                    }}
-                                    aria-current={activeSection === link.id ? 'page' : undefined}
-                                >
-                                    <i className={link.icon}></i>
-                                    <span>{link.name}</span>
-                                </a>
-                            )}
-                        </li>
-                    ))}
-                </ul>
-
-                {/* Follow Me Button */}
-                <button
-                    onClick={() => setShowSocialModal(true)}
-                    className="hire-btn"
-                    aria-label="Follow me on social media"
-                >
-                    Follow Me
-                </button>
-
-                {/* Mobile Menu Toggle */}
-                <button
-                    className={`hamburger ${isOpen ? 'active' : ''}`}
-                    onClick={() => setIsOpen(!isOpen)}
-                    aria-label="Toggle navigation menu"
-                    aria-expanded={isOpen}
-                >
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-            </div>
-
-            {/* Mobile Menu */}
-            <div className={`mobile-menu ${isOpen ? 'open' : ''}`}>
-                <ul className="mobile-nav-links">
-                    {navLinks.map((link) => (
-                        <li key={link.id}>
-                            {link.isRoute ? (
-                                <Link
-                                    to={link.path}
-                                    className={`mobile-nav-link ${activeSection === link.id ? 'active' : ''}`}
-                                    onClick={() => setIsOpen(false)}
-                                    aria-current={activeSection === link.id ? 'page' : undefined}
-                                >
-                                    <i className={link.icon}></i>
-                                    <span>{link.name}</span>
-                                </Link>
-                            ) : (
-                                <a
-                                    href={link.path}
-                                    className={`mobile-nav-link ${activeSection === link.id ? 'active' : ''}`}
-                                    onClick={(e) => {
-                                        e.preventDefault();
-                                        scrollToSection(link.id);
-                                    }}
-                                    aria-current={activeSection === link.id ? 'page' : undefined}
-                                >
-                                    <i className={link.icon}></i>
-                                    <span>{link.name}</span>
-                                </a>
-                            )}
-                        </li>
-                    ))}
-                    <li>
-                        <button
-                            onClick={() => {
-                                setShowSocialModal(true);
-                                setIsOpen(false);
-                            }}
-                            className="mobile-hire-btn"
-                        >
-                            Follow Me
-                        </button>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-
-        {/* Social Accounts Modal */}
-        {showSocialModal && (
-            <div 
-                className="social-modal-overlay" 
-                onClick={() => setShowSocialModal(false)}
-            >
-                <div 
-                    className="social-modal-content" 
-                    onClick={(e) => e.stopPropagation()}
-                >
-                    <div className="social-modal-header">
-                        <h2>Follow Me</h2>
-                        <button 
-                            className="social-modal-close"
-                            onClick={() => setShowSocialModal(false)}
-                            aria-label="Close modal"
-                        >
-                            <i className="fas fa-times"></i>
-                        </button>
-                    </div>
-                    <p className="social-modal-subtitle">Connect with me on social media</p>
-                    <div className="social-modal-grid">
-                        {socialAccounts.map((account, index) => (
-                            <a
-                                key={index}
-                                href={account.url}
-                                target="_blank"
-                                rel="noreferrer"
-                                className="social-modal-item"
-                                style={{ '--social-color': account.color }}
-                                onClick={() => setShowSocialModal(false)}
-                            >
-                                <div className="social-modal-icon">
-                                    <i className={account.icon}></i>
-                                </div>
-                                <span className="social-modal-name">{account.name}</span>
-                            </a>
+                    {/* Desktop Navigation */}
+                    <ul className="nav-links">
+                        {navLinks.map((link) => (
+                            <li key={link.id}>
+                                {link.isRoute ? (
+                                    <Link
+                                        to={link.path}
+                                        className={`nav-link ${activeSection === link.id ? 'active' : ''}`}
+                                        onClick={() => setIsOpen(false)}
+                                        aria-current={activeSection === link.id ? 'page' : undefined}
+                                    >
+                                        <i className={link.icon}></i>
+                                        <span>{link.name}</span>
+                                    </Link>
+                                ) : (
+                                    <a
+                                        href={link.path}
+                                        className={`nav-link ${activeSection === link.id ? 'active' : ''}`}
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            scrollToSection(link.id);
+                                        }}
+                                        aria-current={activeSection === link.id ? 'page' : undefined}
+                                    >
+                                        <i className={link.icon}></i>
+                                        <span>{link.name}</span>
+                                    </a>
+                                )}
+                            </li>
                         ))}
+                    </ul>
+
+                    {/* Follow Me Button */}
+                    <button
+                        onClick={() => setShowSocialModal(true)}
+                        className="hire-btn"
+                        aria-label="Follow me on social media"
+                    >
+                        Follow Me
+                    </button>
+
+                    {/* Mobile Menu Toggle */}
+                    <button
+                        className={`hamburger ${isOpen ? 'active' : ''}`}
+                        onClick={() => setIsOpen(!isOpen)}
+                        aria-label="Toggle navigation menu"
+                        aria-expanded={isOpen}
+                    >
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+
+                {/* Mobile Menu */}
+                <div className={`mobile-menu ${isOpen ? 'open' : ''}`}>
+                    <ul className="mobile-nav-links">
+                        {navLinks.map((link) => (
+                            <li key={link.id}>
+                                {link.isRoute ? (
+                                    <Link
+                                        to={link.path}
+                                        className={`mobile-nav-link ${activeSection === link.id ? 'active' : ''}`}
+                                        onClick={() => setIsOpen(false)}
+                                        aria-current={activeSection === link.id ? 'page' : undefined}
+                                    >
+                                        <i className={link.icon}></i>
+                                        <span>{link.name}</span>
+                                    </Link>
+                                ) : (
+                                    <a
+                                        href={link.path}
+                                        className={`mobile-nav-link ${activeSection === link.id ? 'active' : ''}`}
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            scrollToSection(link.id);
+                                        }}
+                                        aria-current={activeSection === link.id ? 'page' : undefined}
+                                    >
+                                        <i className={link.icon}></i>
+                                        <span>{link.name}</span>
+                                    </a>
+                                )}
+                            </li>
+                        ))}
+                        <li>
+                            <button
+                                onClick={() => {
+                                    setShowSocialModal(true);
+                                    setIsOpen(false);
+                                }}
+                                className="mobile-hire-btn"
+                            >
+                                Follow Me
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            {/* Social Accounts Modal */}
+            {showSocialModal && (
+                <div
+                    className="social-modal-overlay"
+                    onClick={() => setShowSocialModal(false)}
+                >
+                    <div
+                        className="social-modal-content"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <div className="social-modal-header">
+                            <h2>Follow Me</h2>
+                            <button
+                                className="social-modal-close"
+                                onClick={() => setShowSocialModal(false)}
+                                aria-label="Close modal"
+                            >
+                                <i className="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <p className="social-modal-subtitle">Connect with me on social media</p>
+                        <div className="social-modal-grid">
+                            {socialAccounts.map((account, index) => (
+                                <a
+                                    key={index}
+                                    href={account.url}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    className="social-modal-item"
+                                    style={{ '--social-color': account.color }}
+                                    onClick={() => setShowSocialModal(false)}
+                                >
+                                    <div className="social-modal-icon">
+                                        <i className={account.icon}></i>
+                                    </div>
+                                    <span className="social-modal-name">{account.name}</span>
+                                </a>
+                            ))}
+                        </div>
                     </div>
                 </div>
-            </div>
-        )}
+            )}
 
-        <style>{`
+            <style>{`
             .social-modal-overlay {
                 position: fixed;
                 inset: 0;
@@ -353,6 +353,12 @@ const Navbar = () => {
                 box-shadow: 0 20px 60px rgba(0, 243, 255, 0.2);
                 animation: slideUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
                 position: relative;
+                scrollbar-width: none; /* Firefox */
+                -ms-overflow-style: none;  /* IE and Edge */
+            }
+
+            .social-modal-content::-webkit-scrollbar {
+                display: none;
             }
 
             @keyframes slideUp {

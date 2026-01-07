@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 const Blogs = () => {
     const [selectedBlog, setSelectedBlog] = useState(null);
+    const [showAll, setShowAll] = useState(false);
 
     const blogs = [
         {
@@ -321,6 +322,8 @@ const Blogs = () => {
         }
     ];
 
+    const visibleBlogs = showAll ? blogs : blogs.slice(0, 3);
+
     const openBlog = (blog) => {
         setSelectedBlog(blog);
         document.body.style.overflow = 'hidden';
@@ -366,7 +369,7 @@ const Blogs = () => {
                 </script>
 
                 <div className="blogs-grid">
-                    {blogs.map((blog) => (
+                    {visibleBlogs.map((blog) => (
                         <article key={blog.id} className="blog-card">
                             <h3>{blog.title}</h3>
                             <p className="blog-date">
@@ -381,8 +384,10 @@ const Blogs = () => {
                 </div>
 
                 <div className="blog-footer">
-                    <p>Want to read more in-depth articles?</p>
-                    <a href="https://medium.com/@sajidinamdar" target="_blank" rel="noreferrer" className="medium-cta">
+                    <button className="view-all-btn" onClick={() => setShowAll(!showAll)}>
+                        {showAll ? 'Show Less' : 'View All Blogs'}
+                    </button>
+                    <a href="https://medium.com/@sajidinamdar" target="_blank" rel="noreferrer" className="view-all-btn medium-cta">
                         <i className="fab fa-medium"></i> Follow on Medium
                     </a>
                 </div>
@@ -424,66 +429,57 @@ const Blogs = () => {
                 }
 
                 .blog-footer {
-                    text-align: center;
                     display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    gap: 16px;
+                    justify-content: center;
+                    gap: 20px;
                     padding-top: 24px;
                     border-top: 1px solid rgba(255, 255, 255, 0.05);
+                    flex-wrap: wrap;
                 }
 
-                .blog-footer p {
-                    color: var(--text-secondary);
-                    font-size: 1.1rem;
+                .view-all-btn {
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 12px 36px;
+                    background: transparent;
+                    border: 2px solid var(--neon-cyan);
+                    color: var(--neon-cyan);
+                    font-weight: 600;
+                    font-size: 0.95rem;
+                    border-radius: 8px;
+                    transition: all 0.3s ease;
+                    letter-spacing: 0.5px;
+                    text-decoration: none;
+                    cursor: pointer;
+                    font-family: inherit;
+                }
+
+                .view-all-btn:hover {
+                    background: var(--neon-cyan);
+                    color: #000;
+                    transform: translateY(-2px);
+                    box-shadow: 0 8px 24px rgba(0, 243, 255, 0.3);
                 }
 
                 .medium-cta {
-                    display: inline-flex;
-                    align-items: center;
+                    border-color: rgba(255, 255, 255, 0.2);
+                    color: #fff;
+                    background: transparent;
+                    box-shadow: none;
                     gap: 10px;
-                    background: linear-gradient(135deg, #fff, #f0f0f0);
-                    color: #000;
-                    padding: 12px 32px;
-                    border-radius: 50px;
-                    font-weight: 600;
-                    text-decoration: none;
-                    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-                    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
-                    position: relative;
-                    overflow: hidden;
-                }
-
-                .medium-cta::before {
-                    content: '';
-                    position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    width: 0;
-                    height: 0;
-                    border-radius: 50%;
-                    background: rgba(0, 0, 0, 0.1);
-                    transform: translate(-50%, -50%);
-                    transition: width 0.6s ease, height 0.6s ease;
-                }
-
-                .medium-cta:hover::before {
-                    width: 300px;
-                    height: 300px;
                 }
 
                 .medium-cta:hover {
-                    transform: translateY(-4px) scale(1.05);
-                    box-shadow: 0 12px 32px rgba(255, 255, 255, 0.25);
-                    filter: brightness(1.05);
+                     background: #fff;
+                     color: #000;
+                     border-color: #fff;
+                     box-shadow: 0 8px 24px rgba(255, 255, 255, 0.1);
+                     filter: none;
                 }
-
-                .medium-cta:active {
-                    transform: translateY(-2px) scale(1.02);
-                }
-
+                
                 .medium-cta i {
-                    font-size: 1.4rem;
+                    font-size: 1.2rem;
                 }
                 
                 .blog-card {
@@ -639,6 +635,12 @@ const Blogs = () => {
                     padding: 20px;
                     overflow-y: auto;
                     animation: fadeIn 0.3s ease;
+                    scrollbar-width: none; /* Firefox */
+                    -ms-overflow-style: none;  /* IE and Edge */
+                }
+
+                .blog-modal::-webkit-scrollbar {
+                    display: none;
                 }
 
                 @keyframes fadeIn {
@@ -656,6 +658,12 @@ const Blogs = () => {
                     overflow-y: auto;
                     position: relative;
                     animation: slideUp 0.4s ease;
+                    scrollbar-width: none; /* Firefox */
+                    -ms-overflow-style: none;  /* IE and Edge */
+                }
+
+                .blog-modal-content::-webkit-scrollbar {
+                    display: none;
                 }
 
                 @keyframes slideUp {

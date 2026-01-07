@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FaEye, FaTimes } from 'react-icons/fa';
+import { FaEye, FaTimes, FaRedo } from 'react-icons/fa';
 
 const Certifications = () => {
     const [selectedCert, setSelectedCert] = useState(null);
@@ -21,8 +21,14 @@ const Certifications = () => {
         { name: "Encoding & Decoding", image: "/img/Certificates/programing/en-decoding.png", issuer: "Workshop", description: "Data encoding and decoding techniques." },
     ];
 
+    const [showAll, setShowAll] = useState(false);
+    const [rotation, setRotation] = useState(0);
+
+    const visibleCerts = showAll ? certs : certs.slice(0, 3);
+
     const openModal = (image) => {
         setSelectedCert(image);
+        setRotation(0);
         document.body.style.overflow = 'hidden';
     };
 
@@ -31,192 +37,292 @@ const Certifications = () => {
         document.body.style.overflow = 'auto';
     };
 
+    const rotateImage = (e) => {
+        e.stopPropagation();
+        setRotation(prev => prev + 90);
+    };
+
     return (
         <section id="certifications" className="section certs-section">
             <div className="container">
                 <h2 className="section-title">Certifications</h2>
                 <div className="cert-grid">
-                    {certs.map((cert, i) => (
-                        <div key={i} className="cert-card">
+                    {visibleCerts.map((cert, i) => (
+                        <div key={i} className="cert-card" onClick={() => openModal(cert.image)}>
+                            <div className="cert-img-wrapper">
+                                <img src={cert.image} alt={cert.name} loading="lazy" />
+                                <div className="cert-overlay">
+                                    <FaEye className="view-icon" />
+                                </div>
+                            </div>
                             <div className="cert-content">
+                                <div className="cert-badge">{cert.issuer}</div>
                                 <h4>{cert.name}</h4>
-                                <span className="issuer">{cert.issuer}</span>
                                 <p>{cert.description}</p>
-                                <button className="view-btn" onClick={() => openModal(cert.image)}>
-                                    <FaEye /> View Certificate
-                                </button>
                             </div>
                         </div>
                     ))}
+                </div>
+
+                <div className="view-all-container">
+                    <button className="btn btn-primary" onClick={() => setShowAll(!showAll)}>
+                        {showAll ? 'Show Less' : 'View All Certifications'}
+                    </button>
                 </div>
             </div>
 
             {selectedCert && (
                 <div className="cert-modal" onClick={closeModal}>
                     <div className="modal-content" onClick={e => e.stopPropagation()}>
-                        <button className="close-btn" onClick={closeModal}>
-                            <FaTimes />
-                        </button>
-                        <img src={selectedCert} alt={`${certs.find(c => c.image === selectedCert)?.name || 'Certificate'} - ${certs.find(c => c.image === selectedCert)?.issuer || 'Professional Certification'} by Sajid Inamdar`} />
+                        <div className="modal-controls">
+                            <button className="control-btn" onClick={rotateImage} title="Rotate Image">
+                                <FaRedo />
+                            </button>
+                            <button className="control-btn" onClick={closeModal} title="Close">
+                                <FaTimes />
+                            </button>
+                        </div>
+                        <img
+                            src={selectedCert}
+                            alt="Certificate Preview"
+                            style={{ transform: `rotate(${rotation}deg)` }}
+                        />
                     </div>
                 </div>
             )}
 
             <style>{`
+                :root {
+                    --gold-accent: #FFD700;
+                    --gold-glow: rgba(255, 215, 0, 0.2);
+                }
+
                 .cert-grid {
                     display: grid;
                     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-                    gap: var(--grid-gap);
+                    gap: 24px;
                 }
 
                 .cert-card {
-                    background: rgba(30, 41, 59, 0.4);
-                    border: 1px solid rgba(255, 255, 255, 0.05);
+                    background: rgba(0, 0, 0, 0.85); /* Darker/Black background */
+                    border: 1px solid rgba(255, 215, 0, 0.1);
                     border-radius: 16px;
                     overflow: hidden;
-                    transition: all 0.3s ease;
-                    display: flex;
-                    flex-direction: column;
-                    height: 100%;
+                    cursor: pointer;
+                    transition: all 0.4s ease;
+                    group: 1;
+                    position: relative;
+                    backdrop-filter: blur(10px);
                 }
 
                 .cert-card:hover {
-                    transform: translateY(-6px);
-                    box-shadow: 0 16px 32px -8px rgba(0, 243, 255, 0.15);
-                    border-color: var(--neon-cyan);
+                    box-shadow: 0 10px 40px rgba(255, 215, 0, 0.15);
+                    transform: translateY(-5px);
+                    border-color: rgba(255, 215, 0, 0.4);
+                    background: #000;
                 }
 
-                .certs-section {
-                    padding: var(--section-padding) 0;
+                .cert-img-wrapper {
+                    width: 100%;
+                    height: 200px;
+                    position: relative;
+                    overflow: hidden;
+                    background: #0f0f0f;
+                    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
                 }
-                .cert-content {
-                    padding: var(--card-padding);
-                    flex-grow: 1;
+
+                .cert-img-wrapper img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: fill; /* Ensures full certificate is visible */
+                    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+                    opacity: 0.9;
+                }
+
+                .cert-card:hover .cert-img-wrapper img {
+                    transform: scale(1.1);
+                    opacity: 1;
+                }
+
+                .cert-overlay {
+                    position: absolute;
+                    inset: 0;
+                    background: rgba(0, 0, 0, 0.5);
                     display: flex;
-                    flex-direction: column;
-                    gap: var(--spacing-sm);
+                    justify-content: center;
+                    align-items: center;
+                    opacity: 0;
+                    transition: opacity 0.3s ease;
+                }
+
+                .cert-card:hover .cert-overlay {
+                    opacity: 1;
+                }
+
+                .view-icon {
+                    font-size: 1.8rem;
+                    color: var(--gold-accent);
+                    transform: scale(0.5);
+                    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+                    filter: drop-shadow(0 0 10px var(--gold-accent));
+                }
+
+                .cert-card:hover .view-icon {
+                    transform: scale(1);
+                }
+
+                .cert-content {
+                    padding: 24px;
+                    position: relative;
+                }
+
+                .cert-badge {
+                    display: inline-block;
+                    font-size: 0.7rem;
+                    padding: 6px 12px;
+                    background: linear-gradient(90deg, rgba(255, 215, 0, 0.1), transparent);
+                    color: var(--gold-accent);
+                    border-left: 2px solid var(--gold-accent);
+                    margin-bottom: 12px;
+                    font-weight: 600;
+                    letter-spacing: 1px;
+                    text-transform: uppercase;
                 }
 
                 .cert-content h4 {
-                    color: #fff;
                     font-size: 1.2rem;
+                    color: #fff;
+                    margin-bottom: 10px;
                     font-weight: 600;
                     line-height: 1.4;
-                }
-
-                .issuer {
-                    color: var(--neon-cyan);
-                    font-size: 0.9rem;
-                    font-weight: 500;
-                    display: block;
+                    font-family: 'Outfit', sans-serif;
                 }
 
                 .cert-content p {
-                    color: var(--text-secondary);
                     font-size: 0.95rem;
-                    line-height: 1.7;
-                    flex-grow: 1;
+                    color: rgba(255, 255, 255, 0.7);
+                    line-height: 1.6;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 2;
+                    -webkit-box-orient: vertical;
+                    overflow: hidden;
                 }
 
-                .view-btn {
-                    background: rgba(255, 255, 255, 0.05);
-                    border: 1px solid rgba(255, 255, 255, 0.1);
-                    color: #fff;
-                    padding: var(--spacing-sm);
-                    border-radius: 8px;
-                    cursor: pointer;
+                .view-all-container {
                     display: flex;
-                    align-items: center;
                     justify-content: center;
-                    gap: var(--spacing-xs);
-                    transition: 0.3s;
-                    font-weight: 500;
-                    margin-top: auto;
+                    margin-top: 50px;
                 }
 
-                .view-btn:hover {
-                    background: var(--neon-cyan);
+                .btn {
+                    padding: 14px 36px;
+                    border-radius: 50px;
+                    font-weight: 600;
+                    font-size: 1rem;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                    border: 1px solid var(--gold-accent);
+                    background: transparent;
+                    color: var(--gold-accent);
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 10px;
+                    text-transform: uppercase;
+                    letter-spacing: 1px;
+                }
+
+                .btn:hover {
+                    background: var(--gold-accent);
                     color: #000;
-                    border-color: var(--neon-cyan);
-                    transform: translateY(-2px);
+                    box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+                    transform: translateY(-3px);
                 }
 
                 .cert-modal {
                     position: fixed;
                     inset: 0;
-                    background: rgba(0, 0, 0, 0.92);
-                    z-index: 2000;
+                    z-index: 1000;
+                    background: rgba(0, 0, 0, 0.95);
                     display: flex;
                     justify-content: center;
                     align-items: center;
-                    padding: var(--card-padding);
-                    backdrop-filter: blur(8px);
+                    padding: 20px;
                     animation: fadeIn 0.3s ease;
+                    backdrop-filter: blur(10px);
                 }
 
                 .modal-content {
                     position: relative;
-                    max-width: 90%;
-                    max-height: 90vh;
-                    box-shadow: 0 0 60px rgba(0, 243, 255, 0.25);
-                    border-radius: 12px;
-                    overflow: hidden;
-                }
-
-                .modal-content img {
-                    max-width: 100%;
-                    max-height: 90vh;
-                    display: block;
-                    object-fit: contain;
-                }
-
-                .close-btn {
-                    position: absolute;
-                    top: var(--spacing-sm);
-                    right: var(--spacing-sm);
-                    background: rgba(0, 0, 0, 0.7);
-                    color: #fff;
-                    border: none;
-                    width: 44px;
-                    height: 44px;
-                    border-radius: 50%;
-                    font-size: 1.3rem;
-                    cursor: pointer;
+                    max-width: 900px;
+                    width: 100%;
+                    background: transparent;
                     display: flex;
                     justify-content: center;
                     align-items: center;
-                    transition: 0.3s;
+                }
+
+                .modal-content img {
+                    width: auto;
+                    height: auto;
+                    max-width: 100%;
+                    max-height: 85vh;
+                    object-fit: contain;
+                    border-radius: 8px;
+                    box-shadow: 0 0 50px rgba(255, 215, 0, 0.1);
+                    border: 1px solid rgba(255, 255, 255, 0.1);
+                    transition: transform 0.3s ease;
+                }
+
+                .modal-controls {
+                    position: absolute;
+                    top: -60px;
+                    right: 0;
+                    display: flex;
+                    gap: 15px;
                     z-index: 10;
                 }
 
-                .close-btn:hover {
-                    background: var(--neon-cyan);
-                    color: #000;
-                    transform: rotate(90deg);
+                .control-btn {
+                    background: rgba(0, 0, 0, 0.5);
+                    color: #fff;
+                    border: 1px solid rgba(255, 255, 255, 0.2);
+                    width: 44px;
+                    height: 44px;
+                    border-radius: 50%;
+                    font-size: 1.2rem;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    backdrop-filter: blur(5px);
+                }
+
+                .control-btn:hover {
+                    color: var(--gold-accent);
+                    border-color: var(--gold-accent);
+                    background: rgba(255, 215, 0, 0.1);
+                    transform: scale(1.1);
                 }
 
                 @keyframes fadeIn {
                     from { opacity: 0; }
                     to { opacity: 1; }
                 }
-                
+
                 @media (max-width: 768px) {
                     .cert-grid {
                         grid-template-columns: 1fr;
-                        gap: 15px;
+                        gap: 20px;
                     }
-
-                    .cert-content {
-                        padding: 15px;
-                        gap: 10px;
-                    }
-
-                    .cert-content h4 {
-                        font-size: 1.1rem;
+                    
+                    .modal-controls {
+                        top: -50px;
+                        right: 10px;
                     }
                 }
             `}</style>
-        </section>
+        </section >
     );
 };
 

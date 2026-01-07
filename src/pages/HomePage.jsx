@@ -6,8 +6,45 @@ import Certifications from '../components/Certifications';
 import Projects from '../components/Projects';
 import Blogs from '../components/Blogs';
 import Contact from '../components/Contact';
+import { useEffect } from 'react';
 
 const HomePage = () => {
+
+    useEffect(() => {
+        const sections = document.querySelectorAll('section[id]');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    const path = id === 'home' ? '/home' : `/${id}`;
+
+                    // Only replace state if the path is different to avoid redundant updates
+                    if (window.location.pathname !== path) {
+                        try {
+                            window.history.replaceState(null, '', path);
+                        } catch (e) {
+                            console.error('Error updating URL:', e);
+                        }
+                    }
+                }
+            });
+        }, {
+            threshold: 0.2, // Lower threshold to detect sections earlier
+            rootMargin: "-20% 0px -50% 0px" // Trigger when the top of the section is near the center/top of viewport
+        });
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+        return () => {
+            sections.forEach(section => {
+                observer.unobserve(section);
+            });
+        };
+    }, []);
+
     return (
         <>
             <Helmet>

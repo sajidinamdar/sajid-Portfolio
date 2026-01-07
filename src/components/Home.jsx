@@ -1,6 +1,18 @@
 import { Link } from 'react-router-dom';
+import { motion, useMotionValue, useTransform } from 'framer-motion';
 
 export default function Home() {
+    const x = useMotionValue(0);
+    const y = useMotionValue(0);
+    const rotateX = useTransform(y, [-100, 100], [30, -30]);
+    const rotateY = useTransform(x, [-100, 100], [-30, 30]);
+
+    function handleMouseJustify(event) {
+        const rect = event.currentTarget.getBoundingClientRect();
+        x.set(event.clientX - rect.left - rect.width / 2);
+        y.set(event.clientY - rect.top - rect.height / 2);
+    }
+
     return (
         <section id="home" className="section home-section">
             <div className="container">
@@ -25,9 +37,25 @@ export default function Home() {
                         </div>
                     </div>
                     <div className="hero-image-content">
-                        <div className="img-frame">
-                            <img src="/img/sajid-inamdar.jpg" alt="Sajid Inamdar - Cybersecurity Student" loading="eager" />
-                        </div>
+                        <motion.div
+                            className="img-frame"
+                            style={{
+                                rotateX,
+                                rotateY,
+                                z: 100,
+                                perspective: 1000,
+                                cursor: 'grab'
+                            }}
+                            onMouseMove={handleMouseJustify}
+                            onMouseLeave={() => {
+                                x.set(0);
+                                y.set(0);
+                            }}
+                            whileHover={{ scale: 1.05 }}
+                            transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                        >
+                            <img src="/img/sajid-inamdar.jpg" alt="Sajid Inamdar - Cybersecurity Student" loading="eager" style={{ pointerEvents: 'none' }} />
+                        </motion.div>
                         {/* Decorative Elements */}
                         <div className="deco-circle c1"></div>
                         <div className="deco-circle c2"></div>
