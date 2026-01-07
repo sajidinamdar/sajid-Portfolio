@@ -55,6 +55,34 @@ export default function Projects() {
             <div className="container">
                 <h2 className="section-title">My Projects</h2>
 
+                {/* Projects Structured Data */}
+                <script type="application/ld+json">
+                    {JSON.stringify({
+                        "@context": "https://schema.org",
+                        "@type": "ItemList",
+                        "name": "Sajid Inamdar's Projects",
+                        "description": "Portfolio of cybersecurity and Python development projects",
+                        "itemListElement": projects.map((project, index) => ({
+                            "@type": "ListItem",
+                            "position": index + 1,
+                            "item": {
+                                "@type": "SoftwareApplication",
+                                "name": project.title,
+                                "description": project.desc,
+                                "applicationCategory": "DeveloperApplication",
+                                "operatingSystem": "Web",
+                                "offers": {
+                                    "@type": "Offer",
+                                    "price": "0",
+                                    "priceCurrency": "USD"
+                                },
+                                "url": project.link,
+                                "programmingLanguage": project.tech.join(", ")
+                            }
+                        }))
+                    })}
+                </script>
+
                 <div className="project-grid">
                     {projects.map((p, i) => (
                         <article key={i} className="project-card">

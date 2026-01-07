@@ -31,8 +31,47 @@ const BlogsPage = () => {
     return (
         <section className="page-section blogs-page">
             <Helmet>
-                <title>Blogs - Sajid Inamdar</title>
-                <meta name="description" content="Cybersecurity blogs and articles by Sajid Inamdar." />
+                <title>Blogs - Sajid Inamdar | Cybersecurity Articles & Tutorials</title>
+                <meta name="description" content="Read cybersecurity blogs and articles by Sajid Inamdar covering ethical hacking, Kali Linux, network security, TryHackMe, and cybersecurity best practices." />
+                <meta name="keywords" content="Cybersecurity Blogs, Ethical Hacking, Kali Linux, Network Security, TryHackMe, Sajid Inamdar Articles" />
+                <link rel="canonical" href="https://sajid-portfolio-nine.vercel.app/blogs" />
+
+                {/* OpenGraph */}
+                <meta property="og:title" content="Blogs - Sajid Inamdar | Cybersecurity Articles & Tutorials" />
+                <meta property="og:description" content="Read cybersecurity blogs and articles by Sajid Inamdar covering ethical hacking, Kali Linux, and network security." />
+                <meta property="og:url" content="https://sajid-portfolio-nine.vercel.app/blogs" />
+                <meta property="og:image" content="https://sajid-portfolio-nine.vercel.app/img/sajid-inamdar.jpg" />
+                <meta property="og:type" content="website" />
+
+                {/* Twitter Card */}
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:title" content="Blogs - Sajid Inamdar" />
+                <meta name="twitter:description" content="Cybersecurity blogs and articles by Sajid Inamdar covering ethical hacking and network security." />
+                <meta name="twitter:image" content="https://sajid-portfolio-nine.vercel.app/img/sajid-inamdar.jpg" />
+
+                {/* BreadcrumbList */}
+                <script type="application/ld+json">
+                    {`
+                        {
+                            "@context": "https://schema.org",
+                            "@type": "BreadcrumbList",
+                            "itemListElement": [
+                                {
+                                    "@type": "ListItem",
+                                    "position": 1,
+                                    "name": "Home",
+                                    "item": "https://sajid-portfolio-nine.vercel.app/"
+                                },
+                                {
+                                    "@type": "ListItem",
+                                    "position": 2,
+                                    "name": "Blogs",
+                                    "item": "https://sajid-portfolio-nine.vercel.app/blogs"
+                                }
+                            ]
+                        }
+                    `}
+                </script>
             </Helmet>
             <div className="container">
                 <h2 className="section-title">Cybersecurity Blogs</h2>
@@ -44,19 +83,26 @@ const BlogsPage = () => {
                             <p className="blog-summary">{blog.summary}</p>
                             <a href={blog.link} className="read-more">Read More &rarr;</a>
                             <script type="application/ld+json">
-                                {`
-                                    {
-                                        "@context": "https://schema.org",
-                                        "@type": "BlogPosting",
-                                        "headline": "${blog.title}",
-                                        "description": "${blog.summary}",
-                                        "author": {
-                                            "@type": "Person",
-                                            "name": "Sajid Inamdar"
-                                        },
-                                        "datePublished": "${blog.date}"
+                                {JSON.stringify({
+                                    "@context": "https://schema.org",
+                                    "@type": "BlogPosting",
+                                    "headline": blog.title,
+                                    "description": blog.summary,
+                                    "author": {
+                                        "@type": "Person",
+                                        "name": "Sajid Inamdar",
+                                        "url": "https://sajid-portfolio-nine.vercel.app/"
+                                    },
+                                    "datePublished": blog.date,
+                                    "publisher": {
+                                        "@type": "Person",
+                                        "name": "Sajid Inamdar"
+                                    },
+                                    "mainEntityOfPage": {
+                                        "@type": "WebPage",
+                                        "@id": `https://sajid-portfolio-nine.vercel.app/blogs#${blog.title.toLowerCase().replace(/\s+/g, '-')}`
                                     }
-                                `}
+                                })}
                             </script>
                         </article>
                     ))}

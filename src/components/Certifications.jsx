@@ -57,7 +57,7 @@ const Certifications = () => {
                         <button className="close-btn" onClick={closeModal}>
                             <FaTimes />
                         </button>
-                        <img src={selectedCert} alt="Certificate Full View" />
+                        <img src={selectedCert} alt={`${certs.find(c => c.image === selectedCert)?.name || 'Certificate'} - ${certs.find(c => c.image === selectedCert)?.issuer || 'Professional Certification'} by Sajid Inamdar`} />
                     </div>
                 </div>
             )}

@@ -336,6 +336,35 @@ const Blogs = () => {
             <div className="container">
                 <h2 className="section-title">Blogs</h2>
 
+                {/* Blogs Structured Data */}
+                <script type="application/ld+json">
+                    {JSON.stringify({
+                        "@context": "https://schema.org",
+                        "@type": "Blog",
+                        "name": "Sajid Inamdar's Cybersecurity Blog",
+                        "description": "Cybersecurity blogs and articles covering ethical hacking, Kali Linux, network security, and cybersecurity best practices",
+                        "author": {
+                            "@type": "Person",
+                            "name": "Sajid Inamdar",
+                            "url": "https://sajid-portfolio-nine.vercel.app/"
+                        },
+                        "blogPost": blogs.map(blog => ({
+                            "@type": "BlogPosting",
+                            "headline": blog.title,
+                            "description": blog.excerpt,
+                            "author": {
+                                "@type": "Person",
+                                "name": "Sajid Inamdar"
+                            },
+                            "datePublished": blog.date,
+                            "publisher": {
+                                "@type": "Person",
+                                "name": "Sajid Inamdar"
+                            }
+                        }))
+                    })}
+                </script>
+
                 <div className="blogs-grid">
                     {blogs.map((blog) => (
                         <article key={blog.id} className="blog-card">
