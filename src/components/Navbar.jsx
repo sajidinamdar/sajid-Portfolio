@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import './Navbar.css';
 
 const Navbar = () => {
@@ -9,6 +9,7 @@ const Navbar = () => {
     const [scrollProgress, setScrollProgress] = useState(0);
     const [showSocialModal, setShowSocialModal] = useState(false);
     const location = useLocation();
+    const navigate = useNavigate();
 
     const socialAccounts = [
         {
@@ -56,27 +57,45 @@ const Navbar = () => {
     ];
 
     const navLinks = [
-        { name: 'Home', id: 'home', path: '/', isRoute: false },
-        { name: 'About', id: 'about', path: '/about', isRoute: true },
-        { name: 'Skills', id: 'skills', path: '#skills', isRoute: false },
-        { name: 'Certifications', id: 'certifications', path: '#certifications', isRoute: false },
-        { name: 'Projects', id: 'projects', path: '/projects', isRoute: true },
-        { name: 'Blogs', id: 'blogs', path: '/blogs', isRoute: true },
-        { name: 'Contact', id: 'contact', path: '#contact', isRoute: false }
+        { name: 'Home', id: 'home', path: '/', isRoute: false, icon: 'fas fa-home' },
+        { name: 'About', id: 'about', path: '/about', isRoute: true, icon: 'fas fa-user' },
+        { name: 'Skills', id: 'skills', path: '#skills', isRoute: false, icon: 'fas fa-code' },
+        { name: 'Certifications', id: 'certifications', path: '#certifications', isRoute: false, icon: 'fas fa-certificate' },
+        { name: 'Projects', id: 'projects', path: '/projects', isRoute: true, icon: 'fas fa-briefcase' },
+        { name: 'Blogs', id: 'blogs', path: '/blogs', isRoute: true, icon: 'fas fa-blog' },
+        { name: 'Contact', id: 'contact', path: '#contact', isRoute: false, icon: 'fas fa-envelope' }
     ];
 
     // Handle scroll to section
     const scrollToSection = (sectionId) => {
-        const element = document.getElementById(sectionId);
-        if (element) {
-            const navHeight = 72;
-            const elementPosition = element.offsetTop - navHeight;
-            window.scrollTo({
-                top: elementPosition,
-                behavior: 'smooth'
-            });
-            setIsOpen(false);
+        // If not on home page, navigate first
+        if (location.pathname !== '/') {
+            navigate('/');
+            // Wait for navigation and DOM update, then scroll
+            setTimeout(() => {
+                const element = document.getElementById(sectionId);
+                if (element) {
+                    const navHeight = 72;
+                    const elementPosition = element.offsetTop - navHeight;
+                    window.scrollTo({
+                        top: elementPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            }, 150);
+        } else {
+            // Already on home page, just scroll
+            const element = document.getElementById(sectionId);
+            if (element) {
+                const navHeight = 72;
+                const elementPosition = element.offsetTop - navHeight;
+                window.scrollTo({
+                    top: elementPosition,
+                    behavior: 'smooth'
+                });
+            }
         }
+        setIsOpen(false);
     };
 
     // Track active section based on route or scroll
@@ -171,7 +190,8 @@ const Navbar = () => {
                                     onClick={() => setIsOpen(false)}
                                     aria-current={activeSection === link.id ? 'page' : undefined}
                                 >
-                                    {link.name}
+                                    <i className={link.icon}></i>
+                                    <span>{link.name}</span>
                                 </Link>
                             ) : (
                                 <a
@@ -179,15 +199,12 @@ const Navbar = () => {
                                     className={`nav-link ${activeSection === link.id ? 'active' : ''}`}
                                     onClick={(e) => {
                                         e.preventDefault();
-                                        if (location.pathname !== '/') {
-                                            window.location.href = `/${link.path}`;
-                                        } else {
-                                            scrollToSection(link.id);
-                                        }
+                                        scrollToSection(link.id);
                                     }}
                                     aria-current={activeSection === link.id ? 'page' : undefined}
                                 >
-                                    {link.name}
+                                    <i className={link.icon}></i>
+                                    <span>{link.name}</span>
                                 </a>
                             )}
                         </li>
@@ -228,7 +245,8 @@ const Navbar = () => {
                                     onClick={() => setIsOpen(false)}
                                     aria-current={activeSection === link.id ? 'page' : undefined}
                                 >
-                                    {link.name}
+                                    <i className={link.icon}></i>
+                                    <span>{link.name}</span>
                                 </Link>
                             ) : (
                                 <a
@@ -236,16 +254,12 @@ const Navbar = () => {
                                     className={`mobile-nav-link ${activeSection === link.id ? 'active' : ''}`}
                                     onClick={(e) => {
                                         e.preventDefault();
-                                        if (location.pathname !== '/') {
-                                            window.location.href = `/${link.path}`;
-                                        } else {
-                                            scrollToSection(link.id);
-                                        }
-                                        setIsOpen(false);
+                                        scrollToSection(link.id);
                                     }}
                                     aria-current={activeSection === link.id ? 'page' : undefined}
                                 >
-                                    {link.name}
+                                    <i className={link.icon}></i>
+                                    <span>{link.name}</span>
                                 </a>
                             )}
                         </li>
