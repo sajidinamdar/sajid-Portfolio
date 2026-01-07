@@ -128,26 +128,73 @@ export default function Home() {
                 }
                 
                 .btn-primary {
-                    background: var(--neon-cyan);
+                    background: linear-gradient(135deg, var(--neon-cyan), var(--accent));
                     color: #000;
                     border: none;
+                    position: relative;
+                    overflow: hidden;
+                }
+
+                .btn-primary::before {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: -100%;
+                    width: 100%;
+                    height: 100%;
+                    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+                    transition: left 0.5s ease;
+                }
+
+                .btn-primary:hover::before {
+                    left: 100%;
                 }
                 
                 .btn-primary:hover {
-                    transform: translateY(-2px);
-                    box-shadow: 0 8px 24px rgba(0, 243, 255, 0.3);
+                    transform: translateY(-3px) scale(1.02);
+                    box-shadow: 0 12px 32px rgba(0, 243, 255, 0.4);
+                }
+
+                .btn-primary:active {
+                    transform: translateY(-1px) scale(0.98);
                 }
                 
                 .btn-outline {
-                    background: transparent;
+                    background: rgba(255, 255, 255, 0.03);
+                    backdrop-filter: blur(10px);
                     border: 1px solid rgba(255, 255, 255, 0.2);
                     color: #fff;
+                    position: relative;
+                    overflow: hidden;
+                }
+
+                .btn-outline::before {
+                    content: '';
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    width: 0;
+                    height: 0;
+                    border-radius: 50%;
+                    background: rgba(255, 255, 255, 0.1);
+                    transform: translate(-50%, -50%);
+                    transition: width 0.6s ease, height 0.6s ease;
+                }
+
+                .btn-outline:hover::before {
+                    width: 300px;
+                    height: 300px;
                 }
                 
                 .btn-outline:hover {
-                    background: rgba(255, 255, 255, 0.05);
-                    border-color: #fff;
-                    transform: translateY(-2px);
+                    background: rgba(255, 255, 255, 0.08);
+                    border-color: rgba(255, 255, 255, 0.4);
+                    transform: translateY(-3px);
+                    box-shadow: 0 8px 24px rgba(255, 255, 255, 0.1);
+                }
+
+                .btn-outline:active {
+                    transform: translateY(-1px);
                 }
                 
                 .hero-image-content {
@@ -166,12 +213,44 @@ export default function Home() {
                     border: 2px solid rgba(255, 255, 255, 0.1);
                     position: relative;
                     z-index: 2;
+                    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+                }
+
+                .img-frame::before {
+                    content: '';
+                    position: absolute;
+                    inset: -2px;
+                    border-radius: 20px;
+                    padding: 2px;
+                    background: linear-gradient(135deg, var(--neon-cyan), var(--accent), var(--neon-cyan));
+                    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+                    -webkit-mask-composite: xor;
+                    mask-composite: exclude;
+                    opacity: 0;
+                    transition: opacity 0.4s ease;
+                    z-index: -1;
+                }
+
+                .img-frame:hover::before {
+                    opacity: 1;
+                }
+                
+                .img-frame:hover {
+                    transform: translateY(-8px) scale(1.02);
+                    box-shadow: 0 16px 48px rgba(0, 243, 255, 0.3);
+                    border-color: rgba(0, 243, 255, 0.3);
                 }
                 
                 .img-frame img {
                     width: 100%;
                     height: 100%;
                     object-fit: cover;
+                    transition: transform 0.4s ease;
+                }
+
+                .img-frame:hover img {
+                    transform: scale(1.05);
                 }
                 
                 .deco-circle {

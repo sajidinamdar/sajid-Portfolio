@@ -6,6 +6,7 @@ const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [activeSection, setActiveSection] = useState('home');
     const [scrolled, setScrolled] = useState(false);
+    const [scrollProgress, setScrollProgress] = useState(0);
     const location = useLocation();
 
     const navLinks = [
@@ -47,6 +48,13 @@ const Navbar = () => {
             // Check if scrolled
             setScrolled(window.scrollY > 20);
 
+            // Calculate scroll progress
+            const windowHeight = window.innerHeight;
+            const documentHeight = document.documentElement.scrollHeight;
+            const scrollTop = window.scrollY;
+            const progress = (scrollTop / (documentHeight - windowHeight)) * 100;
+            setScrollProgress(Math.min(progress, 100));
+
             // Only determine active section if we're on the home page
             if (location.pathname === '/') {
                 const sections = navLinks.map(link => link.id);
@@ -79,8 +87,24 @@ const Navbar = () => {
     }, [isOpen]);
 
     return (
-        <nav className={`navbar ${scrolled ? 'scrolled' : ''}`} aria-label="Main Navigation">
-            <div className="nav-container">
+        <>
+            {/* Scroll Progress Indicator */}
+            <div 
+                className="scroll-progress" 
+                style={{
+                    position: 'fixed',
+                    top: '72px',
+                    left: 0,
+                    height: '3px',
+                    background: 'linear-gradient(90deg, var(--neon-cyan), var(--accent))',
+                    width: `${scrollProgress}%`,
+                    zIndex: 999,
+                    transition: 'width 0.1s ease-out',
+                    boxShadow: '0 0 10px rgba(0, 243, 255, 0.5)'
+                }}
+            />
+            <nav className={`navbar ${scrolled ? 'scrolled' : ''}`} aria-label="Main Navigation">
+                <div className="nav-container">
                 {/* Logo */}
                 <Link to="/" className="nav-logo" onClick={() => {
                     if (location.pathname === '/') {
@@ -195,6 +219,7 @@ const Navbar = () => {
                 </ul>
             </div>
         </nav>
+        </>
     );
 };
 

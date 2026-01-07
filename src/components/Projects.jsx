@@ -130,11 +130,29 @@ export default function Projects() {
                     border: 1px solid rgba(255, 255, 255, 0.06);
                     border-radius: 12px;
                     padding: 0;
-                    transition: all 0.3s ease;
+                    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
                     position: relative;
                     overflow: hidden;
                     display: flex;
                     min-height: 180px;
+                    backdrop-filter: blur(10px);
+                }
+
+                .project-card::before {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background: linear-gradient(135deg, rgba(0, 243, 255, 0.05), transparent);
+                    opacity: 0;
+                    transition: opacity 0.4s ease;
+                    pointer-events: none;
+                }
+
+                .project-card:hover::before {
+                    opacity: 1;
                 }
 
                 .card-left-accent {
@@ -151,10 +169,10 @@ export default function Projects() {
                 }
 
                 .project-card:hover {
-                    transform: translateX(4px);
-                    border-color: rgba(0, 243, 255, 0.2);
-                    background: rgba(30, 41, 59, 0.4);
-                    box-shadow: -4px 0 24px rgba(0, 243, 255, 0.1);
+                    transform: translateX(4px) translateY(-4px);
+                    border-color: rgba(0, 243, 255, 0.3);
+                    background: rgba(30, 41, 59, 0.5);
+                    box-shadow: -4px 0 32px rgba(0, 243, 255, 0.2), 0 8px 24px rgba(0, 0, 0, 0.3);
                 }
 
                 .card-body {
@@ -228,12 +246,31 @@ export default function Projects() {
                     border: 1px solid rgba(0, 243, 255, 0.3);
                     font-weight: 500;
                     letter-spacing: 0.3px;
-                    transition: all 0.3s ease;
+                    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                    position: relative;
+                    overflow: hidden;
+                }
+
+                .tech-tag::before {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: -100%;
+                    width: 100%;
+                    height: 100%;
+                    background: linear-gradient(90deg, transparent, rgba(0, 243, 255, 0.2), transparent);
+                    transition: left 0.5s ease;
+                }
+
+                .tech-tag:hover::before {
+                    left: 100%;
                 }
 
                 .tech-tag:hover {
-                    background: rgba(0, 243, 255, 0.1);
+                    background: rgba(0, 243, 255, 0.15);
                     border-color: var(--neon-cyan);
+                    transform: translateY(-2px);
+                    box-shadow: 0 4px 12px rgba(0, 243, 255, 0.2);
                 }
                 
                 .view-all-container {

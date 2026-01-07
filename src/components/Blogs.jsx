@@ -442,20 +442,44 @@ const Blogs = () => {
                     display: inline-flex;
                     align-items: center;
                     gap: 10px;
-                    background: #fff;
+                    background: linear-gradient(135deg, #fff, #f0f0f0);
                     color: #000;
                     padding: 12px 32px;
                     border-radius: 50px;
                     font-weight: 600;
                     text-decoration: none;
-                    transition: all 0.3s ease;
+                    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
                     box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+                    position: relative;
+                    overflow: hidden;
+                }
+
+                .medium-cta::before {
+                    content: '';
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    width: 0;
+                    height: 0;
+                    border-radius: 50%;
+                    background: rgba(0, 0, 0, 0.1);
+                    transform: translate(-50%, -50%);
+                    transition: width 0.6s ease, height 0.6s ease;
+                }
+
+                .medium-cta:hover::before {
+                    width: 300px;
+                    height: 300px;
                 }
 
                 .medium-cta:hover {
-                    transform: translateY(-2px);
-                    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
-                    filter: brightness(0.9);
+                    transform: translateY(-4px) scale(1.05);
+                    box-shadow: 0 12px 32px rgba(255, 255, 255, 0.25);
+                    filter: brightness(1.05);
+                }
+
+                .medium-cta:active {
+                    transform: translateY(-2px) scale(1.02);
                 }
 
                 .medium-cta i {
@@ -467,18 +491,38 @@ const Blogs = () => {
                     border: 1px solid rgba(255,255,255,0.06);
                     padding: 28px;
                     border-radius: 16px;
-                    transition: all 0.3s ease;
+                    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
                     display: flex;
                     flex-direction: column;
                     gap: 14px;
                     height: 100%;
+                    backdrop-filter: blur(10px);
+                    position: relative;
+                    overflow: hidden;
+                }
+
+                .blog-card::before {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    height: 3px;
+                    background: linear-gradient(90deg, var(--neon-cyan), var(--accent));
+                    transform: scaleX(0);
+                    transform-origin: left;
+                    transition: transform 0.4s ease;
+                }
+
+                .blog-card:hover::before {
+                    transform: scaleX(1);
                 }
 
                 .blog-card:hover {
-                    transform: translateY(-6px);
-                    border-color: rgba(0, 243, 255, 0.2);
-                    background: rgba(30, 41, 59, 0.4);
-                    box-shadow: 0 16px 40px rgba(0, 243, 255, 0.12);
+                    transform: translateY(-8px);
+                    border-color: rgba(0, 243, 255, 0.3);
+                    background: rgba(30, 41, 59, 0.5);
+                    box-shadow: 0 20px 48px rgba(0, 243, 255, 0.2);
                 }
 
                 .blog-category {
@@ -541,15 +585,37 @@ const Blogs = () => {
                     align-items: center;
                     justify-content: center;
                     gap: 8px;
-                    transition: all 0.3s ease;
+                    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
                     margin-top: auto;
+                    position: relative;
+                    overflow: hidden;
+                }
+
+                .read-more-btn::before {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: -100%;
+                    width: 100%;
+                    height: 100%;
+                    background: var(--neon-cyan);
+                    transition: left 0.4s ease;
+                    z-index: -1;
+                }
+
+                .read-more-btn:hover::before {
+                    left: 0;
                 }
 
                 .read-more-btn:hover {
-                    background: var(--neon-cyan);
                     color: #000;
-                    transform: translateY(-2px);
-                    box-shadow: 0 8px 24px rgba(0, 243, 255, 0.3);
+                    transform: translateY(-3px);
+                    box-shadow: 0 12px 32px rgba(0, 243, 255, 0.4);
+                    border-color: var(--neon-cyan);
+                }
+
+                .read-more-btn:active {
+                    transform: translateY(-1px);
                 }
 
                 .read-more-btn i {
