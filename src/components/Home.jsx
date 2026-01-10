@@ -1,17 +1,7 @@
 import { Link } from 'react-router-dom';
-import { motion, useMotionValue, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 export default function Home() {
-    const x = useMotionValue(0);
-    const y = useMotionValue(0);
-    const rotateX = useTransform(y, [-100, 100], [30, -30]);
-    const rotateY = useTransform(x, [-100, 100], [-30, 30]);
-
-    function handleMouseJustify(event) {
-        const rect = event.currentTarget.getBoundingClientRect();
-        x.set(event.clientX - rect.left - rect.width / 2);
-        y.set(event.clientY - rect.top - rect.height / 2);
-    }
 
     return (
         <section id="home" className="section home-section">
@@ -39,20 +29,12 @@ export default function Home() {
                     <div className="hero-image-content">
                         <motion.div
                             className="img-frame"
-                            style={{
-                                rotateX,
-                                rotateY,
-                                z: 100,
-                                perspective: 1000,
-                                cursor: 'grab'
+                            animate={{ y: [-15, 15, -15] }}
+                            transition={{
+                                duration: 6,
+                                repeat: Infinity,
+                                ease: "easeInOut"
                             }}
-                            onMouseMove={handleMouseJustify}
-                            onMouseLeave={() => {
-                                x.set(0);
-                                y.set(0);
-                            }}
-                            whileHover={{ scale: 1.05 }}
-                            transition={{ type: "spring", stiffness: 400, damping: 25 }}
                         >
                             <img src="/img/sajid-inamdar.jpg" alt="Sajid Inamdar - Cybersecurity Student" loading="eager" style={{ pointerEvents: 'none' }} />
                         </motion.div>
@@ -260,26 +242,13 @@ export default function Home() {
                     z-index: -1;
                 }
 
-                .img-frame:hover::before {
-                    opacity: 1;
-                }
-                
-                .img-frame:hover {
-                    transform: translateY(-8px) scale(1.02);
-                    box-shadow: 0 16px 48px rgba(0, 243, 255, 0.3);
-                    border-color: rgba(0, 243, 255, 0.3);
-                }
-                
                 .img-frame img {
                     width: 100%;
                     height: 100%;
                     object-fit: cover;
-                    transition: transform 0.4s ease;
                 }
 
-                .img-frame:hover img {
-                    transform: scale(1.05);
-                }
+
                 
                 .deco-circle {
                     position: absolute;
@@ -303,12 +272,9 @@ export default function Home() {
                     top: 50%;
                     left: 50%;
                     transform: translate(-50%, -50%) rotate(45deg);
-                    animation: spin 20s linear infinite;
                 }
                 
-                @keyframes spin {
-                    100% { transform: translate(-50%, -50%) rotate(405deg); }
-                }
+
                 
                 @media (max-width: 968px) {
                     .home-section {

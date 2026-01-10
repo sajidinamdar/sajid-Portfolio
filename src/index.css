@@ -452,9 +452,7 @@ ul {
     transition: 0.5s;
 }
 
-.hero-image-content:hover .img-frame img {
-    transform: scale(1.05);
-}
+
 
 .deco-circle {
     position: absolute;
