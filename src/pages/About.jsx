@@ -1,17 +1,19 @@
 export default function About() {
-    return (
-        <div className="about-page-container">
-            <div className="container">
-                <h1 className="about-title">About Me</h1>
-                <div className="about-card">
-                    <p className="about-text">
-                        Sajid Inamdar is a cybersecurity student and Python developer from Sangamner, Maharashtra, India.
-                        This is his official portfolio website.
-                    </p>
-                </div>
-            </div>
+  return (
+    <div className="about-page-container">
+      <div className="container">
+        <h1 className="about-title">About Me</h1>
+        <div className="about-card">
+          <p className="about-text">
+            I am a BCA student and an aspiring Cybersecurity professional with a strong foundation in Python development. My journey is driven by a fascination with how systems work—and how to protect them.
+          </p>
+          <p className="about-text">
+            I spend my time at the intersection of development and security, whether I'm building scalable backends with FastAPI or navigating complex CTF challenges on TryHackMe. With a deep understanding of networking fundamentals like TCP/IP, NAT, and Subnetting, I aim to build secure, efficient software that stands up to modern threats.
+          </p>
+        </div>
+      </div>
 
-            <style>{`
+      <style>{`
         .about-page-container {
           min-height: 80vh;
           padding: 100px 20px;
@@ -54,6 +56,6 @@ export default function About() {
           }
         }
       `}</style>
-        </div>
-    );
+    </div>
+  );
 }
