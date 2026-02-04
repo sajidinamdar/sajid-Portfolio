@@ -42,9 +42,12 @@ function AnimationTrigger() {
   return null;
 }
 
-import About from './pages/About';
+import About from './pages/AboutPage';
 import ProjectsPage from './pages/ProjectsPage';
 import BlogsPage from './pages/BlogsPage';
+import SkillsPage from './pages/SkillsPage';
+import CertificationsPage from './pages/CertificationsPage';
+import ContactPage from './pages/ContactPage';
 
 function App() {
   return (
@@ -62,6 +65,9 @@ function App() {
               <Route path="/about" element={<About />} />
               <Route path="/projects" element={<ProjectsPage />} />
               <Route path="/blogs" element={<BlogsPage />} />
+              <Route path="/skills" element={<SkillsPage />} />
+              <Route path="/certifications" element={<CertificationsPage />} />
+              <Route path="/contact" element={<ContactPage />} />
               {/* Reroute matching routes to home if user tries direct access */}
               <Route path="*" element={<HomePage />} />
             </Routes>

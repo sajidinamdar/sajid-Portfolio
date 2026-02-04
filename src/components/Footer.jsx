@@ -11,7 +11,8 @@ const Footer = () => {
                         <a href="https://github.com/sajidinamdar" target="_blank" rel="noreferrer" className="footer-link"> GitHub Developer</a> |
                         <a href="https://www.linkedin.com/in/sajidinamdar-sec/" target="_blank" rel="noreferrer" className="footer-link"> LinkedIn Professional</a> |
                         <a href="https://medium.com/@sajidinamdar" target="_blank" rel="noreferrer" className="footer-link"> Medium Blogs</a> |
-                        <a href="https://www.youtube.com/@sajid-inamdar" target="_blank" rel="noreferrer" className="footer-link"> YouTube Channel</a>
+                        <a href="https://www.youtube.com/@sajidinamdar" target="_blank" rel="noreferrer" className="footer-link"> YouTube Channel</a> |
+                        <a href="https://www.instagram.com/sajidinamdar_" target="_blank" rel="noreferrer" className="footer-link"> Instagram Feed</a>
                         <span className="copyright-text"> © 2025 Sajid Inamdar. All Rights Reserved.</span>
                     </p>
                 </div>

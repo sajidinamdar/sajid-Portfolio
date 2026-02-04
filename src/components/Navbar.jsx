@@ -15,7 +15,7 @@ const Navbar = () => {
         {
             name: 'YouTube',
             icon: 'fab fa-youtube',
-            url: 'https://www.youtube.com/@sajid-inamdar',
+            url: 'https://www.youtube.com/@sajidinamdar',
             color: '#FF0000'
         },
         {
@@ -51,7 +51,7 @@ const Navbar = () => {
         {
             name: 'Instagram',
             icon: 'fab fa-instagram',
-            url: 'https://www.instagram.com/sajidinamdar',
+            url: 'https://www.instagram.com/sajidinamdar_',
             color: '#E4405F'
         }
     ];
