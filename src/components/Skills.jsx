@@ -1,5 +1,12 @@
-import { FaPython, FaHtml5, FaCss3Alt, FaJs, FaReact, FaGitAlt } from 'react-icons/fa';
-import { SiKalilinux, SiWireshark, SiBurpsuite, SiGnubash, SiMysql, SiTryhackme } from 'react-icons/si';
+import { FaPython, FaHtml5, FaCss3Alt, FaJs, FaGitAlt, FaBootstrap } from 'react-icons/fa';
+import { SiKalilinux, SiGnubash, SiMysql, SiTryhackme, SiPandas, SiNumpy, SiFastapi, SiFlask } from 'react-icons/si';
+// Note: Matplotlib icon might not be in all versions of si, using a placeholder if needed or checking build. 
+// Assuming SiMatplotlib exists or using a fallback if build fails. Let's try SiPandas, SiNumpy, etc.
+// If SiMatplotlib is missing, I'll use FaChartBar as fallback in next step. For now attempting SiNumpy/Pandas. 
+// Actually, I'll skip importing SiMatplotlib explicitly if I'm unsure and use a generic or text.
+// Wait, I should try to make it look good. 
+// Let's use simple logic: Import what we are sure of.
+// user list: Python, JavaScript, Bash, SQL, Kali Linux, TryHackMe, pandas, matplotlib, numpy, fastapi, flask, bootstrap, Git, HTML5, CSS3
 
 const Skills = () => {
     const skills = [
@@ -8,11 +15,13 @@ const Skills = () => {
         { name: 'Bash', icon: <SiGnubash />, color: '#4EAA25' },
         { name: 'SQL', icon: <SiMysql />, color: '#4479A1' },
         { name: 'Kali Linux', icon: <SiKalilinux />, color: '#557C94' },
-        { name: 'Metasploit', icon: <SiKalilinux />, color: '#333' },
-        { name: 'Wireshark', icon: <SiWireshark />, color: '#1679A7' },
-        { name: 'Burp Suite', icon: <SiBurpsuite />, color: '#FF6633' },
         { name: 'TryHackMe', icon: <SiTryhackme />, color: '#C51C2C' },
-        { name: 'React', icon: <FaReact />, color: '#61DAFB' },
+        { name: 'pandas', icon: <SiPandas />, color: '#150458' },
+        { name: 'matplotlib', icon: <span style={{ fontWeight: 'bold', fontSize: '1.5rem' }}>Mat</span>, color: '#11557c' }, // Fallback for matplotlib
+        { name: 'numpy', icon: <SiNumpy />, color: '#013243' },
+        { name: 'fastapi', icon: <SiFastapi />, color: '#009688' },
+        { name: 'flask', icon: <SiFlask />, color: '#000000' },
+        { name: 'bootstrap', icon: <FaBootstrap />, color: '#7952B3' },
         { name: 'Git', icon: <FaGitAlt />, color: '#F05032' },
         { name: 'HTML5', icon: <FaHtml5 />, color: '#E34F26' },
         { name: 'CSS3', icon: <FaCss3Alt />, color: '#1572B6' }

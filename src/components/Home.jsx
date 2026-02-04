@@ -10,10 +10,8 @@ export default function Home() {
                     <div className="hero-text-content">
                         <span className="greeting">HELLO, I'M</span>
                         <h1 className="hero-name">Sajid Inamdar</h1>
-                        <h2 className="hero-role">Python Developer | Cybersecurity Student | Secure Web Developer</h2>
-                        <p className="hero-subtext">
-                            Building Secure APIs • Backend Development • Ethical Hacking • Network Security
-                        </p>
+                        <h2 className="hero-role">AI Developer | Cybersecurity Student</h2>
+
                         <div className="hero-cta">
                             <Link to="#projects" className="btn btn-primary" onClick={(e) => {
                                 e.preventDefault();
