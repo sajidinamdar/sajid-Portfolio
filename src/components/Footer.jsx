@@ -1,6 +1,9 @@
 import { Link } from 'react-router-dom';
 
+import { portfolioData } from '../data/portfolioData.jsx';
+
 const Footer = () => {
+    const { personal } = portfolioData;
     return (
         <footer className="footer-minimal">
             <div className="container">

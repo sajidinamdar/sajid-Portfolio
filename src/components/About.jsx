@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
+import { portfolioData } from '../data/portfolioData.jsx';
 
 // Counter animation hook
 const useCounter = (target, duration = 2000, isVisible) => {
@@ -30,10 +31,16 @@ const useCounter = (target, duration = 2000, isVisible) => {
 const About = () => {
     const [isVisible, setIsVisible] = useState(false);
     const sectionRef = useRef(null);
-    
-    const tryhackmeCount = useCounter(5, 1500, isVisible);
-    const githubCount = useCounter(15, 1500, isVisible);
-    const skillsCount = useCounter(12, 1500, isVisible);
+    const { personal, stats } = portfolioData;
+
+    // Extract targets from stats array (assuming fixed order for now or mapping)
+    const tryhackmeTarget = parseInt(stats[0].value.replace(/\D/g, '')) || 5;
+    const githubTarget = parseInt(stats[1].value.replace(/\D/g, '')) || 15;
+    const skillsTarget = parseInt(stats[2].value.replace(/\D/g, '')) || 12;
+
+    const tryhackmeCount = useCounter(tryhackmeTarget, 1500, isVisible);
+    const githubCount = useCounter(githubTarget, 1500, isVisible);
+    const skillsCount = useCounter(skillsTarget, 1500, isVisible);
 
     useEffect(() => {
         const observer = new IntersectionObserver(

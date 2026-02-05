@@ -30,8 +30,8 @@ const HomePage = () => {
                 }
             });
         }, {
-            threshold: 0.2, // Lower threshold to detect sections earlier
-            rootMargin: "-20% 0px -50% 0px" // Trigger when the top of the section is near the center/top of viewport
+            threshold: 0.1, // Even lower threshold for earlier detection
+            rootMargin: "-10% 0px -40% 0px"
         });
 
         sections.forEach(section => {

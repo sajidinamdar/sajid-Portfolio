@@ -10,7 +10,9 @@ export default function Home() {
                     <div className="hero-text-content">
                         <span className="greeting">HELLO, I'M</span>
                         <h1 className="hero-name">Sajid Inamdar</h1>
-                        <h2 className="hero-role">AI Developer | Cybersecurity Student</h2>
+                        <h2 className="hero-role">
+                            <span className="typewriter">AI Developer | Cybersecurity Student</span>
+                        </h2>
 
                         <div className="hero-cta">
                             <Link to="#projects" className="btn btn-primary" onClick={(e) => {
@@ -101,11 +103,29 @@ export default function Home() {
                     font-size: 1.5rem;
                     font-weight: 500;
                     margin-bottom: var(--spacing-lg);
-                    background: linear-gradient(90deg, #fff, var(--neon-cyan));
-                    -webkit-background-clip: text;
-                    background-clip: text;
-                    -webkit-text-fill-color: transparent;
+                    color: var(--neon-cyan);
                     line-height: 1.5;
+                }
+
+                .typewriter {
+                    overflow: hidden;
+                    border-right: .15em solid var(--neon-cyan);
+                    white-space: nowrap;
+                    margin: 0 auto;
+                    letter-spacing: .15em;
+                    animation: 
+                        typing 3.5s steps(40, end),
+                        blink-caret .75s step-end infinite;
+                }
+
+                @keyframes typing {
+                    from { width: 0 }
+                    to { width: 100% }
+                }
+
+                @keyframes blink-caret {
+                    from, to { border-color: transparent }
+                    50% { border-color: var(--neon-cyan); }
                 }
                 
                 .hero-subtext {
@@ -375,6 +395,38 @@ export default function Home() {
 
                     .c1, .c2 {
                         display: none;
+                    }
+                }
+
+                @media (max-width: 480px) {
+                    .typewriter {
+                        white-space: normal;
+                        border-right: none;
+                        width: 100% !important;
+                        animation: none;
+                        text-align: center;
+                    }
+                    .hero-role {
+                        width: 100%;
+                        display: block;
+                    }
+                }
+
+                @media (max-width: 350px) {
+                    .hero-name {
+                        font-size: 28px;
+                    }
+                    .hero-role {
+                        font-size: 16px;
+                    }
+                    .hero-subtext {
+                        font-size: 14px;
+                        max-width: 240px;
+                    }
+                    .btn {
+                        font-size: 14px;
+                        padding: 10px 15px;
+                        height: 45px;
                     }
                 }
             `}</style>

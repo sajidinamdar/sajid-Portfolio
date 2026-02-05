@@ -1,46 +1,56 @@
-import { FaPython, FaHtml5, FaCss3Alt, FaJs, FaGitAlt, FaBootstrap } from 'react-icons/fa';
-import { SiKalilinux, SiGnubash, SiMysql, SiTryhackme, SiPandas, SiNumpy, SiFastapi, SiFlask } from 'react-icons/si';
-// Note: Matplotlib icon might not be in all versions of si, using a placeholder if needed or checking build. 
-// Assuming SiMatplotlib exists or using a fallback if build fails. Let's try SiPandas, SiNumpy, etc.
-// If SiMatplotlib is missing, I'll use FaChartBar as fallback in next step. For now attempting SiNumpy/Pandas. 
-// Actually, I'll skip importing SiMatplotlib explicitly if I'm unsure and use a generic or text.
-// Wait, I should try to make it look good. 
-// Let's use simple logic: Import what we are sure of.
-// user list: Python, JavaScript, Bash, SQL, Kali Linux, TryHackMe, pandas, matplotlib, numpy, fastapi, flask, bootstrap, Git, HTML5, CSS3
+import { motion } from 'framer-motion';
+import { portfolioData } from '../data/portfolioData.jsx';
 
 const Skills = () => {
-    const skills = [
-        { name: 'Python', icon: <FaPython />, color: '#3776AB' },
-        { name: 'JavaScript', icon: <FaJs />, color: '#F7DF1E' },
-        { name: 'Bash', icon: <SiGnubash />, color: '#4EAA25' },
-        { name: 'SQL', icon: <SiMysql />, color: '#4479A1' },
-        { name: 'Kali Linux', icon: <SiKalilinux />, color: '#557C94' },
-        { name: 'TryHackMe', icon: <SiTryhackme />, color: '#C51C2C' },
-        { name: 'pandas', icon: <SiPandas />, color: '#150458' },
-        { name: 'matplotlib', icon: <span style={{ fontWeight: 'bold', fontSize: '1.5rem' }}>Mat</span>, color: '#11557c' }, // Fallback for matplotlib
-        { name: 'numpy', icon: <SiNumpy />, color: '#013243' },
-        { name: 'fastapi', icon: <SiFastapi />, color: '#009688' },
-        { name: 'flask', icon: <SiFlask />, color: '#000000' },
-        { name: 'bootstrap', icon: <FaBootstrap />, color: '#7952B3' },
-        { name: 'Git', icon: <FaGitAlt />, color: '#F05032' },
-        { name: 'HTML5', icon: <FaHtml5 />, color: '#E34F26' },
-        { name: 'CSS3', icon: <FaCss3Alt />, color: '#1572B6' }
-    ];
+    const { skills } = portfolioData;
+
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.1
+            }
+        }
+    };
+
+    const itemVariants = {
+        hidden: { y: 20, opacity: 0 },
+        visible: {
+            y: 0,
+            opacity: 1,
+            transition: {
+                type: 'spring',
+                stiffness: 100
+            }
+        }
+    };
 
     return (
         <section id="skills" className="skills-section">
             <div className="container">
                 <h2 className="section-title">Technical Skills</h2>
-                <div className="skills-grid-compact">
+                <motion.div
+                    className="skills-grid-compact"
+                    variants={containerVariants}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.2 }}
+                >
                     {skills.map((skill, index) => (
-                        <div key={index} className="skill-icon-card" style={{ '--skill-color': skill.color }}>
+                        <motion.div
+                            key={index}
+                            className="skill-icon-card"
+                            style={{ '--skill-color': skill.color }}
+                            variants={itemVariants}
+                        >
                             <div className="skill-icon-wrapper">
                                 {skill.icon}
                             </div>
                             <span className="skill-label">{skill.name}</span>
-                        </div>
+                        </motion.div>
                     ))}
-                </div>
+                </motion.div>
             </div>
 
             <style>{`
@@ -125,6 +135,17 @@ const Skills = () => {
                     .skill-icon-card {
                         width: 85px;
                         height: 85px;
+                    }
+                }
+
+                @media (max-width: 350px) {
+                    .skills-grid-compact {
+                        grid-template-columns: repeat(2, 1fr);
+                        gap: 15px;
+                    }
+                    .skill-icon-card {
+                        width: 100px;
+                        height: 100px;
                     }
                 }
             `}</style>

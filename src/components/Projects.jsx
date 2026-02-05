@@ -1,58 +1,10 @@
 import { useState } from 'react';
 
+import { portfolioData } from '../data/portfolioData.jsx';
+
 export default function Projects() {
     const [showAll, setShowAll] = useState(false);
-
-    const projects = [
-        {
-            title: 'Harisetu',
-            desc: 'Agricultural technology platform designed to connect farmers with consumers and optimize farm management.',
-            link: 'https://github.com/sajidinamdar/Harisetu',
-            tech: ['Python', 'Web Development', 'Database']
-        },
-        {
-            title: 'WebSocket Application',
-            desc: 'Real-time communication application using WebSocket protocol for instant data exchange.',
-            link: 'https://github.com/sajidinamdar/Websocket',
-            tech: ['WebSocket', 'Python', 'Real-time']
-        },
-        {
-            title: 'FastAPI Authentication',
-            desc: 'Complete authentication system with signup and login functionality using FastAPI framework.',
-            link: 'https://github.com/sajidinamdar/fastapi_signup',
-            tech: ['FastAPI', 'Authentication', 'Security']
-        },
-        {
-            title: 'FastAPI Backend Project',
-            desc: 'Full-stack backend API built with FastAPI, featuring authentication, database integration, and RESTful endpoints.',
-            link: 'https://github.com/sajidinamdar/my-fastapi-project-',
-            tech: ['FastAPI', 'Python', 'REST API']
-        },
-        {
-            title: 'Python Chatbot',
-            desc: 'AI-powered chatbot application with natural language processing capabilities for automated conversations.',
-            link: 'https://github.com/sajidinamdar/Python-chatbot',
-            tech: ['Python', 'NLP', 'AI']
-        },
-        {
-            title: 'File Shortener',
-            desc: 'Utility tool for optimizing and managing file path structures in complex directory systems.',
-            link: 'https://github.com/sajidinamdar/File-Shortener',
-            tech: ['Python', 'File Management', 'Automation']
-        },
-        {
-            title: 'SMTP API Service',
-            desc: 'Email service API built with SMTP protocol for sending automated emails and notifications.',
-            link: 'https://github.com/sajidinamdar/smtplib-API',
-            tech: ['Python', 'SMTP', 'API']
-        },
-        {
-            title: 'Weather API',
-            desc: 'Weather information service API that fetches and displays real-time weather data.',
-            link: 'https://github.com/sajidinamdar/Weather_api',
-            tech: ['Python', 'API', 'Weather Data']
-        }
-    ];
+    const { projects } = portfolioData;
 
     const visibleProjects = showAll ? projects : projects.slice(0, 3);
 

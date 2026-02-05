@@ -1,10 +1,18 @@
-import { useEffect } from 'react';
+import { useEffect, lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Preloader from './components/Preloader';
-import HomePage from './pages/HomePage';
+
+// Lazy load page components
+const HomePage = lazy(() => import('./pages/HomePage'));
+const About = lazy(() => import('./pages/AboutPage'));
+const ProjectsPage = lazy(() => import('./pages/ProjectsPage'));
+const BlogsPage = lazy(() => import('./pages/BlogsPage'));
+const SkillsPage = lazy(() => import('./pages/SkillsPage'));
+const CertificationsPage = lazy(() => import('./pages/CertificationsPage'));
+const ContactPage = lazy(() => import('./pages/ContactPage'));
 
 // ScrollToTop component to handle scroll on navigation (kept for refresh)
 function ScrollToTop() {
@@ -26,28 +34,29 @@ function AnimationTrigger() {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
+          observer.unobserve(entry.target); // Unobserve after it becomes visible for performance
         }
       });
     }, { threshold: 0.1 });
 
     // Delay to allow DOM update
-    setTimeout(() => {
+    const timer = setTimeout(() => {
       const hiddenElements = document.querySelectorAll('.section, .skill-card, .project-card, .blog-card, .visual-skill-card');
-      hiddenElements.forEach((el) => observer.observe(el));
-    }, 300); // Increased delay slightly
+      hiddenElements.forEach((el) => {
+        if (!el.classList.contains('visible')) {
+          observer.observe(el);
+        }
+      });
+    }, 150); // Reduced delay
 
-    return () => observer.disconnect();
+    return () => {
+      clearTimeout(timer);
+      observer.disconnect();
+    };
   }, [location]);
 
   return null;
 }
-
-import About from './pages/AboutPage';
-import ProjectsPage from './pages/ProjectsPage';
-import BlogsPage from './pages/BlogsPage';
-import SkillsPage from './pages/SkillsPage';
-import CertificationsPage from './pages/CertificationsPage';
-import ContactPage from './pages/ContactPage';
 
 function App() {
   return (
@@ -59,18 +68,20 @@ function App() {
         <div className="app-container">
           <Navbar />
           <main className="content-area">
-            <Routes>
-              {/* Only one route for Single Page Application */}
-              <Route path="/" element={<HomePage />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/projects" element={<ProjectsPage />} />
-              <Route path="/blogs" element={<BlogsPage />} />
-              <Route path="/skills" element={<SkillsPage />} />
-              <Route path="/certifications" element={<CertificationsPage />} />
-              <Route path="/contact" element={<ContactPage />} />
-              {/* Reroute matching routes to home if user tries direct access */}
-              <Route path="*" element={<HomePage />} />
-            </Routes>
+            <Suspense fallback={<Preloader />}>
+              <Routes>
+                {/* Only one route for Single Page Application */}
+                <Route path="/" element={<HomePage />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/projects" element={<ProjectsPage />} />
+                <Route path="/blogs" element={<BlogsPage />} />
+                <Route path="/skills" element={<SkillsPage />} />
+                <Route path="/certifications" element={<CertificationsPage />} />
+                <Route path="/contact" element={<ContactPage />} />
+                {/* Reroute matching routes to home if user tries direct access */}
+                <Route path="*" element={<HomePage />} />
+              </Routes>
+            </Suspense>
           </main>
           <Footer />
         </div>

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import './Navbar.css';
+import { portfolioData } from '../data/portfolioData.jsx';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -11,50 +12,8 @@ const Navbar = () => {
     const location = useLocation();
     const navigate = useNavigate();
 
-    const socialAccounts = [
-        {
-            name: 'YouTube',
-            icon: 'fab fa-youtube',
-            url: 'https://www.youtube.com/@sajidinamdar',
-            color: '#FF0000'
-        },
-        {
-            name: 'LinkedIn',
-            icon: 'fab fa-linkedin-in',
-            url: 'https://www.linkedin.com/in/sajidinamdar-sec/',
-            color: '#0077b5'
-        },
-        {
-            name: 'GitHub',
-            icon: 'fab fa-github',
-            url: 'https://github.com/sajidinamdar',
-            color: '#181717'
-        },
-        {
-            name: 'Medium',
-            icon: 'fab fa-medium',
-            url: 'https://medium.com/@sajidinamdar',
-            color: '#000000'
-        },
-        {
-            name: 'Dev.to',
-            icon: 'fab fa-dev',
-            url: 'https://dev.to/sajidinamdar',
-            color: '#0A0A0A'
-        },
-        {
-            name: 'TryHackMe',
-            icon: 'fas fa-flag',
-            url: 'https://tryhackme.com/p/Sajidinamdar',
-            color: '#C51C2C'
-        },
-        {
-            name: 'Instagram',
-            icon: 'fab fa-instagram',
-            url: 'https://www.instagram.com/sajidinamdar_',
-            color: '#E4405F'
-        }
-    ];
+    const { socialAccounts } = portfolioData;
+
 
     const navLinks = [
         { name: 'Home', id: 'home', path: '/', isRoute: false, icon: 'fas fa-home' },

@@ -1,6 +1,9 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
+import emailjs from '@emailjs/browser';
 
 const Contact = () => {
+    const form = useRef();
+    const [isSending, setIsSending] = useState(false);
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -9,10 +12,24 @@ const Contact = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Handle form submission
-        console.log('Form submitted:', formData);
-        alert('Message sent! (This is a demo)');
-        setFormData({ name: '', email: '', message: '' });
+        setIsSending(true);
+
+        // Replace these with your actual EmailJS IDs
+        const SERVICE_ID = 'service_placeholder';
+        const TEMPLATE_ID = 'template_placeholder';
+        const PUBLIC_KEY = 'public_key_placeholder';
+
+        emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form.current, PUBLIC_KEY)
+            .then((result) => {
+                console.log('SUCCESS!', result.text);
+                alert('Message sent successfully!');
+                setFormData({ name: '', email: '', message: '' });
+                setIsSending(false);
+            }, (error) => {
+                console.log('FAILED...', error.text);
+                alert('Failed to send message. Please try again later.');
+                setIsSending(false);
+            });
     };
 
     const handleChange = (e) => {
@@ -84,7 +101,7 @@ const Contact = () => {
                     </div>
 
                     {/* Contact Form */}
-                    <form className="contact-form" onSubmit={handleSubmit}>
+                    <form ref={form} className="contact-form" onSubmit={handleSubmit}>
                         <div className="form-header">
                             <h3>Send a Message</h3>
                         </div>
@@ -127,9 +144,9 @@ const Contact = () => {
                             <label>Your Message</label>
                         </div>
 
-                        <button type="submit" className="submit-btn">
-                            <span>Send Message</span>
-                            <i className="fas fa-paper-plane"></i>
+                        <button type="submit" className="submit-btn" disabled={isSending}>
+                            <span>{isSending ? 'Sending...' : 'Send Message'}</span>
+                            <i className={isSending ? 'fas fa-spinner fa-spin' : 'fas fa-paper-plane'}></i>
                         </button>
                     </form>
                 </div>
