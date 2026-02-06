@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { FaEye, FaTimes, FaRedo } from 'react-icons/fa';
 
 const Certifications = () => {
     const [selectedCert, setSelectedCert] = useState(null);
+    const [showAll, setShowAll] = useState(false);
+    const [rotation, setRotation] = useState(0);
 
     const certs = [
         { name: "Cyber Security 101", image: "/img/Certificates/ethical/cyber security 101.png", issuer: "TryHackMe", description: "Introduction to Cyber Security core concepts." },
@@ -21,20 +23,27 @@ const Certifications = () => {
         { name: "Encoding & Decoding", image: "/img/Certificates/programing/en-decoding.png", issuer: "Workshop", description: "Data encoding and decoding techniques." },
     ];
 
-    const [showAll, setShowAll] = useState(false);
-    const [rotation, setRotation] = useState(0);
-
     const visibleCerts = showAll ? certs : certs.slice(0, 3);
+
+    // Lock body scroll when modal is open
+    useEffect(() => {
+        if (selectedCert) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'auto';
+        }
+        return () => {
+            document.body.style.overflow = 'auto';
+        };
+    }, [selectedCert]);
 
     const openModal = (image) => {
         setSelectedCert(image);
         setRotation(0);
-        document.body.style.overflow = 'hidden';
     };
 
     const closeModal = () => {
         setSelectedCert(null);
-        document.body.style.overflow = 'auto';
     };
 
     const rotateImage = (e) => {
@@ -43,283 +52,347 @@ const Certifications = () => {
     };
 
     return (
-        <section id="certifications" className="section certs-section">
-            <div className="container">
-                <h2 className="section-title">Certifications</h2>
-                <div className="cert-grid">
+        <section id="certifications" className="certs-modern">
+            <div className="cyber-grid-overlay"></div>
+            <div className="container relative-z">
+                <div className="section-header">
+                    <h2 className="section-title-gradient">My Certifications</h2>
+                    <div className="section-divider"></div>
+                </div>
+
+                <div className="certs-grid">
                     {visibleCerts.map((cert, i) => (
-                        <div key={i} className="cert-card" onClick={() => openModal(cert.image)}>
-                            <div className="cert-img-wrapper">
+                        <article key={i} className="cert-module luminous-aura" onClick={() => openModal(cert.image)}>
+
+                            <div className="module-img-area">
                                 <img src={cert.image} alt={cert.name} loading="lazy" />
-                                <div className="cert-overlay">
+                                <div className="module-overlay">
                                     <FaEye className="view-icon" />
+                                    <span>PREVIEW_DOCUMENT</span>
                                 </div>
                             </div>
-                            <div className="cert-content">
-                                <div className="cert-badge">{cert.issuer}</div>
-                                <h4>{cert.name}</h4>
-                                <p>{cert.description}</p>
+
+                            <div className="module-body">
+                                <div className="issuer-tag">{cert.issuer}</div>
+                                <h4 className="cert-title">{cert.name}</h4>
+                                <p className="cert-desc">{cert.description}</p>
                             </div>
-                        </div>
+
+                            <div className="module-footer">
+                                <button className="view-cert-btn">
+                                    View Certificate <i className="fas fa-chevron-right"></i>
+                                </button>
+                                <div className="scan-line"></div>
+                            </div>
+                        </article>
                     ))}
                 </div>
 
-                <div className="view-all-container">
-                    <button className="btn btn-primary" onClick={() => setShowAll(!showAll)}>
-                        {showAll ? 'Show Less' : 'View All Certifications'}
+                <div className="discovery-center">
+                    <button className="cyber-btn" onClick={() => setShowAll(!showAll)}>
+                        <span className="btn-content">
+                            {showAll ? 'Show Less' : 'View All Certifications'}
+                        </span>
+                        <div className="btn-fill"></div>
                     </button>
                 </div>
             </div>
 
             {selectedCert && (
-                <div className="cert-modal" onClick={closeModal}>
-                    <div className="modal-content" onClick={e => e.stopPropagation()}>
-                        <div className="modal-controls">
-                            <button className="control-btn" onClick={rotateImage} title="Rotate Image">
-                                <FaRedo />
-                            </button>
-                            <button className="control-btn" onClick={closeModal} title="Close">
-                                <FaTimes />
-                            </button>
+                <div className="secure-modal" onClick={closeModal}>
+                    <div className="viewer-container" onClick={e => e.stopPropagation()}>
+                        <div className="viewer-header">
+                            <div className="viewer-info">
+                                <i className="fas fa-file-contract"></i>
+                                <span>DOCUMENT_VIEWER.v1</span>
+                            </div>
+                            <div className="viewer-actions">
+                                <button className="action-button" onClick={rotateImage} title="Rotate">
+                                    <FaRedo />
+                                </button>
+                                <button className="action-button close" onClick={closeModal} title="Close">
+                                    <FaTimes />
+                                </button>
+                            </div>
                         </div>
-                        <img
-                            src={selectedCert}
-                            alt="Certificate Preview"
-                            style={{ transform: `rotate(${rotation}deg)` }}
-                        />
+                        <div className="viewer-body">
+                            <img
+                                src={selectedCert}
+                                alt="Certificate Preview"
+                                style={{ transform: `rotate(${rotation}deg)` }}
+                            />
+                        </div>
+                        <div className="viewer-footer">
+                            <div className="security-tag">AUTHENTICATED DOCUMENT</div>
+                            <button className="close-action-btn" onClick={closeModal}>CLOSE</button>
+                        </div>
                     </div>
                 </div>
             )}
 
             <style>{`
-                :root {
-                    --gold-accent: #FFD700;
-                    --gold-glow: rgba(255, 215, 0, 0.2);
-                }
-
-                .cert-grid {
-                    display: grid;
-                    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-                    gap: 24px;
-                }
-
-                .cert-card {
-                    background: rgba(0, 0, 0, 0.85); /* Darker/Black background */
-                    border: 1px solid rgba(255, 215, 0, 0.1);
-                    border-radius: 16px;
-                    overflow: hidden;
-                    cursor: pointer;
-                    transition: all 0.4s ease;
-                    group: 1;
+                .certs-modern {
+                    padding: var(--section-padding) 0;
                     position: relative;
-                    backdrop-filter: blur(10px);
+                    overflow: hidden;
                 }
 
-                .cert-card:hover {
-                    box-shadow: 0 10px 40px rgba(255, 215, 0, 0.15);
-                    transform: translateY(-5px);
-                    border-color: rgba(255, 215, 0, 0.4);
-                    background: #000;
+                .cyber-grid-overlay {
+                    position: absolute;
+                    inset: 0;
+                    background-image: 
+                        linear-gradient(rgba(56, 189, 248, 0.03) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(56, 189, 248, 0.03) 1px, transparent 1px);
+                    background-size: 50px 50px;
+                    mask-image: radial-gradient(circle at center, black, transparent 80%);
+                    pointer-events: none;
                 }
 
-                .cert-img-wrapper {
-                    width: 100%;
+                .relative-z { position: relative; z-index: 10; }
+
+
+                .certs-grid {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                    gap: 30px;
+                    margin-bottom: 50px;
+                }
+
+                /* CERT MODULE CARD */
+                .cert-module {
+                    background: var(--glass-bg);
+                    backdrop-filter: blur(12px);
+                    -webkit-backdrop-filter: blur(12px);
+                    border: 1px solid var(--glass-border);
+                    border-radius: 20px;
+                    display: flex;
+                    flex-direction: column;
+                    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                    cursor: pointer;
+                    overflow: hidden;
+                    position: relative;
+                    box-shadow: var(--glass-glow);
+                }
+
+                .cert-module:hover {
+                    border-color: var(--glass-border-hover);
+                    transform: translateY(-8px) scale(1.02);
+                    background: rgba(30, 41, 59, 0.7);
+                    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+                }
+
+
+                .module-img-area {
                     height: 200px;
                     position: relative;
                     overflow: hidden;
-                    background: #0f0f0f;
-                    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+                    background: var(--bg-dark);
                 }
 
-                .cert-img-wrapper img {
+                .module-img-area img {
                     width: 100%;
                     height: 100%;
-                    object-fit: fill; /* Ensures full certificate is visible */
-                    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-                    opacity: 0.9;
+                    object-fit: cover;
+                    opacity: 0.7;
+                    transition: 0.53s;
                 }
 
-                .cert-card:hover .cert-img-wrapper img {
-                    transform: scale(1.1);
-                    opacity: 1;
+                .cert-module:hover .module-img-area img {
+                    opacity: 0.3;
+                    transform: scale(1.05);
                 }
 
-                .cert-overlay {
+                .module-overlay {
                     position: absolute;
                     inset: 0;
-                    background: rgba(0, 0, 0, 0.5);
                     display: flex;
-                    justify-content: center;
+                    flex-direction: column;
                     align-items: center;
+                    justify-content: center;
+                    gap: 10px;
                     opacity: 0;
-                    transition: opacity 0.3s ease;
+                    transition: 0.3s;
+                    color: #fff;
+                    font-family: 'Courier New', monospace;
+                    font-size: 0.7rem;
+                    letter-spacing: 2px;
                 }
 
-                .cert-card:hover .cert-overlay {
-                    opacity: 1;
+                .cert-module:hover .module-overlay { opacity: 1; }
+                .view-icon { font-size: 1.5rem; color: #38bdf8; }
+
+                .module-body { padding: 25px; flex-grow: 1; }
+                .issuer-tag {
+                    font-size: 0.65rem;
+                    color: #38bdf8;
+                    margin-bottom: 10px;
+                    font-weight: 700;
+                    text-transform: uppercase;
+                    letter-spacing: 1px;
                 }
 
-                .view-icon {
-                    font-size: 1.8rem;
-                    color: var(--gold-accent);
-                    transform: scale(0.5);
-                    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-                    filter: drop-shadow(0 0 10px var(--gold-accent));
-                }
+                .cert-title { font-size: 1.25rem; color: #fff; margin-bottom: 10px; }
+                .cert-desc { color: #94a3b8; font-size: 0.9rem; line-height: 1.6; }
 
-                .cert-card:hover .view-icon {
-                    transform: scale(1);
-                }
-
-                .cert-content {
-                    padding: 24px;
+                .module-footer {
+                    padding: 15px 25px;
+                    background: rgba(0, 0, 0, 0.2);
                     position: relative;
                 }
 
-                .cert-badge {
-                    display: inline-block;
-                    font-size: 0.7rem;
-                    padding: 6px 12px;
-                    background: linear-gradient(90deg, rgba(255, 215, 0, 0.1), transparent);
-                    color: var(--gold-accent);
-                    border-left: 2px solid var(--gold-accent);
-                    margin-bottom: 12px;
-                    font-weight: 600;
-                    letter-spacing: 1px;
-                    text-transform: uppercase;
-                }
-
-                .cert-content h4 {
-                    font-size: 1.2rem;
+                .view-cert-btn {
+                    background: transparent;
+                    border: none;
                     color: #fff;
-                    margin-bottom: 10px;
-                    font-weight: 600;
-                    line-height: 1.4;
-                    font-family: 'Outfit', sans-serif;
+                    font-size: 0.8rem;
+                    font-weight: 700;
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                    cursor: pointer;
+                    transition: 0.3s;
                 }
 
-                .cert-content p {
-                    font-size: 0.95rem;
-                    color: rgba(255, 255, 255, 0.7);
-                    line-height: 1.6;
-                    display: -webkit-box;
-                    -webkit-line-clamp: 2;
-                    -webkit-box-orient: vertical;
+                .view-cert-btn:hover { color: #38bdf8; }
+
+                .scan-line {
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    width: 0;
+                    height: 2px;
+                    background: #38bdf8;
+                    transition: 0.4s ease;
+                }
+
+                .cert-module:hover .scan-line {
+                    width: 100%;
+                    box-shadow: 0 0 10px #38bdf8;
+                }
+
+                .discovery-center { display: flex; justify-content: center; }
+
+                .cyber-btn {
+                    padding: 14px 35px;
+                    background: transparent;
+                    border: 1px solid rgba(56, 189, 248, 0.3);
+                    color: #38bdf8;
+                    border-radius: 12px;
+                    font-weight: 700;
+                    cursor: pointer;
+                    transition: 0.3s;
+                    position: relative;
                     overflow: hidden;
                 }
 
-                .view-all-container {
-                    display: flex;
-                    justify-content: center;
-                    margin-top: 50px;
-                }
+                .btn-fill { position: absolute; inset: 0; background: #38bdf8; opacity: 0; transition: 0.3s; z-index: 1; }
+                .btn-content { position: relative; z-index: 2; }
 
-                .btn {
-                    padding: 14px 36px;
-                    border-radius: 50px;
-                    font-weight: 600;
-                    font-size: 1rem;
-                    cursor: pointer;
-                    transition: all 0.3s ease;
-                    border: 1px solid var(--gold-accent);
-                    background: transparent;
-                    color: var(--gold-accent);
-                    display: inline-flex;
-                    align-items: center;
-                    gap: 10px;
-                    text-transform: uppercase;
-                    letter-spacing: 1px;
-                }
+                .cyber-btn:hover { color: var(--bg-dark); transform: translateY(-3px); }
+                .cyber-btn:hover .btn-fill { opacity: 1; }
 
-                .btn:hover {
-                    background: var(--gold-accent);
-                    color: #000;
-                    box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
-                    transform: translateY(-3px);
-                }
-
-                .cert-modal {
+                /* SECURE MODAL DESIGN */
+                .secure-modal {
                     position: fixed;
                     inset: 0;
-                    z-index: 1000;
-                    background: rgba(0, 0, 0, 0.95);
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    padding: 20px;
-                    animation: fadeIn 0.3s ease;
+                    z-index: 2000;
+                    background: rgba(10, 25, 47, 0.95);
                     backdrop-filter: blur(10px);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 20px;
                 }
 
-                .modal-content {
-                    position: relative;
-                    max-width: 900px;
+                .viewer-container {
+                    background: #0f172a;
                     width: 100%;
-                    background: transparent;
+                    max-width: 1000px;
+                    border: 1px solid rgba(255, 255, 255, 0.1);
+                    border-radius: 24px;
+                    overflow: hidden;
+                    box-shadow: 0 50px 100px rgba(0, 0, 0, 0.5);
                     display: flex;
-                    justify-content: center;
+                    flex-direction: column;
+                }
+
+                .viewer-header {
+                    padding: 20px 30px;
+                    background: rgba(255, 255, 255, 0.03);
+                    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                    display: flex;
+                    justify-content: space-between;
                     align-items: center;
                 }
 
-                .modal-content img {
-                    width: auto;
-                    height: auto;
-                    max-width: 100%;
-                    max-height: 85vh;
-                    object-fit: contain;
-                    border-radius: 8px;
-                    box-shadow: 0 0 50px rgba(255, 215, 0, 0.1);
+                .viewer-info { display: flex; align-items: center; gap: 15px; color: #38bdf8; font-family: 'Courier New', monospace; font-size: 0.8rem; font-weight: 700; }
+                .viewer-actions { display: flex; gap: 10px; }
+
+                .action-button {
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                    background: rgba(255, 255, 255, 0.05);
                     border: 1px solid rgba(255, 255, 255, 0.1);
+                    color: #fff;
+                    cursor: pointer;
+                    transition: 0.3s;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+
+                .action-button:hover { background: #38bdf8; color: var(--bg-dark); }
+                .action-button.close:hover { background: #ef4444; }
+
+                .viewer-body {
+                    padding: 40px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    background: var(--bg-dark);
+                    overflow: auto;
+                    max-height: 70vh;
+                }
+
+                .viewer-body img { 
+                    max-width: 100%; 
+                    height: auto; 
+                    border-radius: 8px; 
+                    box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
                     transition: transform 0.3s ease;
                 }
 
-                .modal-controls {
-                    position: absolute;
-                    top: -60px;
-                    right: 0;
+                .viewer-footer {
+                    padding: 20px 30px;
+                    background: rgba(255, 255, 255, 0.02);
+                    border-top: 1px solid rgba(255, 255, 255, 0.05);
                     display: flex;
-                    gap: 15px;
-                    z-index: 10;
-                }
-
-                .control-btn {
-                    background: rgba(0, 0, 0, 0.5);
-                    color: #fff;
-                    border: 1px solid rgba(255, 255, 255, 0.2);
-                    width: 44px;
-                    height: 44px;
-                    border-radius: 50%;
-                    font-size: 1.2rem;
-                    cursor: pointer;
-                    transition: all 0.3s ease;
-                    display: flex;
-                    justify-content: center;
+                    justify-content: space-between;
                     align-items: center;
-                    backdrop-filter: blur(5px);
                 }
 
-                .control-btn:hover {
-                    color: var(--gold-accent);
-                    border-color: var(--gold-accent);
-                    background: rgba(255, 215, 0, 0.1);
-                    transform: scale(1.1);
-                }
-
-                @keyframes fadeIn {
-                    from { opacity: 0; }
-                    to { opacity: 1; }
-                }
+                .security-tag { font-family: 'Courier New', monospace; font-size: 0.75rem; color: #10b981; font-weight: 700; }
+                .close-action-btn { background: #ef4444; color: #fff; border: none; padding: 10px 25px; border-radius: 8px; font-weight: 700; cursor: pointer; transition: 0.3s; }
+                .close-action-btn:hover { background: #dc2626; transform: scale(1.05); }
 
                 @media (max-width: 768px) {
-                    .cert-grid {
-                        grid-template-columns: 1fr;
-                        gap: 20px;
-                    }
-                    
-                    .modal-controls {
-                        top: -50px;
-                        right: 10px;
-                    }
+                    .certs-modern { padding: 60px 0; }
+                    .glitch-text { font-size: 2.5rem; }
+                    .certs-grid { grid-template-columns: 1fr; gap: 20px; }
+                    .sub-header { margin-bottom: 40px; }
+                    .module-img-area { height: 180px; }
+                    .viewer-body { padding: 15px; }
+                    .viewer-container { border-radius: 16px; }
+                    .viewer-header { padding: 15px 20px; }
+                }
+
+                @media (max-width: 480px) {
+                    .glitch-text { font-size: 2.2rem; }
+                    .module-body { padding: 20px; }
+                    .cert-title { font-size: 1.15rem; }
+                    .discovery-center { width: 100%; }
+                    .cyber-btn { width: 100%; }
                 }
             `}</style>
         </section >

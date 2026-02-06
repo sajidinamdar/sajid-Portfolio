@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { portfolioData } from '../data/portfolioData.jsx';
 
 const Blogs = () => {
@@ -9,585 +9,478 @@ const Blogs = () => {
 
     const visibleBlogs = showAll ? blogs : blogs.slice(0, 3);
 
+    // Lock body scroll when modal is open
+    useEffect(() => {
+        if (selectedBlog) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'auto';
+        }
+        return () => {
+            document.body.style.overflow = 'auto';
+        };
+    }, [selectedBlog]);
+
     const openBlog = (blog) => {
         setSelectedBlog(blog);
-        document.body.style.overflow = 'hidden';
     };
 
     const closeBlog = () => {
         setSelectedBlog(null);
-        document.body.style.overflow = 'auto';
     };
 
     return (
-        <section id="blogs" className="section blogs-section">
-            <div className="container">
-                <h2 className="section-title">Blogs</h2>
-
-                {/* Blogs Structured Data */}
-                <script type="application/ld+json">
-                    {JSON.stringify({
-                        "@context": "https://schema.org",
-                        "@type": "Blog",
-                        "name": "Sajid Inamdar's Cybersecurity Blog",
-                        "description": "Cybersecurity blogs and articles covering ethical hacking, Kali Linux, network security, and cybersecurity best practices",
-                        "author": {
-                            "@type": "Person",
-                            "name": "Sajid Inamdar",
-                            "url": "https://sajid-portfolio-nine.vercel.app/"
-                        },
-                        "blogPost": blogs.map(blog => ({
-                            "@type": "BlogPosting",
-                            "headline": blog.title,
-                            "description": blog.excerpt,
-                            "author": {
-                                "@type": "Person",
-                                "name": "Sajid Inamdar"
-                            },
-                            "datePublished": blog.date,
-                            "publisher": {
-                                "@type": "Person",
-                                "name": "Sajid Inamdar"
-                            }
-                        }))
-                    })}
-                </script>
+        <section id="blogs" className="blogs-modern">
+            <div className="cyber-grid-overlay"></div>
+            <div className="container relative-z">
+                <div className="section-header">
+                    <h2 className="section-title-gradient">My Blogs</h2>
+                    <div className="section-divider"></div>
+                </div>
 
                 <div className="blogs-grid">
-                    {visibleBlogs.map((blog) => (
-                        <article key={blog.id} className="blog-card">
-                            <h3>{blog.title}</h3>
-                            <p className="blog-date">
-                                <i className="far fa-calendar-alt"></i> {blog.date}
-                            </p>
-                            <p className="blog-excerpt">{blog.excerpt}</p>
-                            <button className="read-more-btn" onClick={() => openBlog(blog)}>
-                                Read Full Article <i className="fas fa-arrow-right"></i>
-                            </button>
+                    {visibleBlogs.map((blog, index) => (
+                        <article key={blog.id} className="cache-card luminous-aura" onClick={() => openBlog(blog)}>
+
+                            <div className="card-body">
+                                <div className="category-tag">{blog.category || 'INTEL'}</div>
+                                <h3 className="blog-title">{blog.title}</h3>
+                                <div className="metadata">
+                                    <span className="date"><i className="far fa-calendar-alt"></i> {blog.date}</span>
+                                    <span className="read-time"><i className="far fa-clock"></i> 5 MIN READ</span>
+                                </div>
+                                <p className="excerpt">{blog.excerpt}</p>
+                            </div>
+
+                            <div className="card-footer">
+                                <button className="access-btn">
+                                    Read Article <i className="fas fa-arrow-right"></i>
+                                </button>
+                                <div className="scan-line"></div>
+                            </div>
                         </article>
                     ))}
                 </div>
 
-                <div className="blog-footer">
-                    <button className="view-all-btn" onClick={() => setShowAll(!showAll)}>
-                        {showAll ? 'Show Less' : 'View All Blogs'}
+                <div className="discovery-center">
+                    <button className="cyber-btn" onClick={() => setShowAll(!showAll)}>
+                        <span className="btn-content">
+                            {showAll ? 'Show Less' : 'View All'}
+                        </span>
+                        <div className="btn-fill"></div>
                     </button>
-                    <a href="https://medium.com/@sajidinamdar" target="_blank" rel="noreferrer" className="view-all-btn medium-cta">
-                        <i className="fab fa-medium"></i> Follow on Medium
+
+                    <a href="https://medium.com/@sajidinamdar" target="_blank" rel="noreferrer" className="cyber-btn medium-btn">
+                        <span className="btn-content">
+                            <i className="fab fa-medium"></i> Follow on Medium
+                        </span>
+                        <div className="btn-fill"></div>
                     </a>
                 </div>
             </div>
 
-            {/* Full Blog Modal */}
+            {/* Premium Intelligence Report Modal */}
             {selectedBlog && (
-                <div className="blog-modal" onClick={closeBlog}>
-                    <div className="blog-modal-content" onClick={(e) => e.stopPropagation()}>
-                        <button className="close-btn" onClick={closeBlog} aria-label="Close article">
-                            <i className="fas fa-times"></i>
-                        </button>
+                <div className="intel-modal" onClick={closeBlog}>
+                    <div className="modal-container" onClick={(e) => e.stopPropagation()}>
+                        <div className="modal-bg-decor"></div>
 
-                        <div className="blog-header">
-                            <h1>{selectedBlog.title}</h1>
-                            <p className="blog-subtitle">{selectedBlog.subtitle}</p>
-                            <p className="blog-date">
-                                <i className="far fa-calendar-alt"></i> {selectedBlog.date}
-                            </p>
+                        <div className="modal-layout">
+                            <div className="modal-sidebar">
+                                <div className="author-node">
+                                    <img src="/img/sajid-inamdar.jpg" alt="Sajid Inamdar" />
+                                    <div className="author-info">
+                                        <span className="name">Sajid Inamdar</span>
+                                        <span className="rank">Author</span>
+                                    </div>
+                                </div>
+                                <div className="sidebar-stats">
+                                    <div className="stat-item">
+                                        <span className="label">SECURITY_LEVEL:</span>
+                                        <span className="value">CLASS_4</span>
+                                    </div>
+                                    <div className="stat-item">
+                                        <span className="label">ENCRYPTION:</span>
+                                        <span className="value">AES_256</span>
+                                    </div>
+                                </div>
+                                <button className="modal-close-btn" onClick={closeBlog}>
+                                    <i className="fas fa-times"></i> Close
+                                </button>
+                            </div>
+
+                            <div className="modal-main">
+                                <div className="report-header">
+                                    <div className="stamp">Article</div>
+                                    <h2 className="report-title">{selectedBlog.title}</h2>
+                                    <div className="report-meta">
+                                        <span>Date: {selectedBlog.date}</span>
+                                        <span>Category: {selectedBlog.category || 'Blog'}</span>
+                                    </div>
+                                </div>
+
+                                <div className="report-content" dangerouslySetInnerHTML={{ __html: selectedBlog.content || selectedBlog.excerpt }}>
+                                </div>
+
+                                {selectedBlog.mediumUrl && (
+                                    <div className="report-footer">
+                                        <a href={selectedBlog.mediumUrl} target="_blank" rel="noreferrer" className="medium-uplink">
+                                            Read on Medium <i className="fas fa-external-link-alt"></i>
+                                        </a>
+                                    </div>
+                                )}
+                            </div>
                         </div>
-
-                        <div className="blog-content" dangerouslySetInnerHTML={{ __html: selectedBlog.content }}></div>
                     </div>
                 </div>
             )}
 
             <style>{`
-                /* Blog Section */
-                .blogs-section {
+                .blogs-modern {
                     padding: var(--section-padding) 0;
+                    position: relative;
+                    overflow: hidden;
                 }
 
-                /* Blog Cards Grid */
+                .cyber-grid-overlay {
+                    position: absolute;
+                    inset: 0;
+                    background-image: 
+                        linear-gradient(rgba(56, 189, 248, 0.05) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(56, 189, 248, 0.05) 1px, transparent 1px);
+                    background-size: 50px 50px;
+                    mask-image: radial-gradient(circle at center, black, transparent 80%);
+                    pointer-events: none;
+                }
+
+                .relative-z { position: relative; z-index: 10; }
+
+
                 .blogs-grid {
                     display: grid;
                     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-                    gap: 24px;
-                    margin-bottom: 48px;
+                    gap: 30px;
+                    margin-bottom: 60px;
                 }
 
-                .blog-footer {
-                    display: flex;
-                    justify-content: center;
-                    gap: 20px;
-                    padding-top: 24px;
-                    border-top: 1px solid rgba(255, 255, 255, 0.05);
-                    flex-wrap: wrap;
-                }
-
-                .view-all-btn {
-                    display: inline-flex;
-                    align-items: center;
-                    justify-content: center;
-                    padding: 12px 36px;
-                    background: transparent;
-                    border: 2px solid var(--neon-cyan);
-                    color: var(--neon-cyan);
-                    font-weight: 600;
-                    font-size: 0.95rem;
-                    border-radius: 8px;
-                    transition: all 0.3s ease;
-                    letter-spacing: 0.5px;
-                    text-decoration: none;
+                /* CACHE CARD STYLE */
+                .cache-card {
+                    background: var(--glass-bg);
+                    backdrop-filter: blur(12px);
+                    -webkit-backdrop-filter: blur(12px);
+                    border: 1px solid var(--glass-border);
+                    border-radius: 20px;
+                    overflow: hidden;
+                    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
                     cursor: pointer;
-                    font-family: inherit;
-                }
-
-                .view-all-btn:hover {
-                    background: var(--neon-cyan);
-                    color: #000;
-                    transform: translateY(-2px);
-                    box-shadow: 0 8px 24px rgba(0, 243, 255, 0.3);
-                }
-
-                .medium-cta {
-                    border-color: rgba(255, 255, 255, 0.2);
-                    color: #fff;
-                    background: transparent;
-                    box-shadow: none;
-                    gap: 10px;
-                }
-
-                .medium-cta:hover {
-                     background: #fff;
-                     color: #000;
-                     border-color: #fff;
-                     box-shadow: 0 8px 24px rgba(255, 255, 255, 0.1);
-                     filter: none;
-                }
-                
-                .medium-cta i {
-                    font-size: 1.2rem;
-                }
-                
-                .blog-card {
-                    background: rgba(30, 41, 59, 0.3);
-                    border: 1px solid rgba(255,255,255,0.06);
-                    padding: 28px;
-                    border-radius: 16px;
-                    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
                     display: flex;
                     flex-direction: column;
-                    gap: 14px;
-                    height: 100%;
-                    backdrop-filter: blur(10px);
                     position: relative;
-                    overflow: hidden;
+                    box-shadow: var(--glass-glow);
                 }
 
-                .blog-card::before {
-                    content: '';
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    right: 0;
-                    height: 3px;
-                    background: linear-gradient(90deg, var(--neon-cyan), var(--accent));
-                    transform: scaleX(0);
-                    transform-origin: left;
-                    transition: transform 0.4s ease;
+                .cache-card:hover {
+                    transform: translateY(-10px) scale(1.02);
+                    border-color: var(--glass-border-hover);
+                    background: rgba(30, 41, 59, 0.7);
+                    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
                 }
 
-                .blog-card:hover::before {
-                    transform: scaleX(1);
-                }
 
-                .blog-card:hover {
-                    transform: translateY(-8px);
-                    border-color: rgba(0, 243, 255, 0.3);
-                    background: rgba(30, 41, 59, 0.5);
-                    box-shadow: 0 20px 48px rgba(0, 243, 255, 0.2);
-                }
-
-                .blog-category {
+                .card-body { padding: 30px; flex-grow: 1; }
+                
+                .category-tag {
                     display: inline-block;
-                    font-size: 0.75rem;
-                    color: var(--neon-cyan);
-                    background: rgba(0, 243, 255, 0.1);
-                    padding: 6px 14px;
-                    border-radius: 50px;
-                    font-weight: 600;
-                    letter-spacing: 0.5px;
-                    text-transform: uppercase;
-                    width: fit-content;
-                    border: 1px solid rgba(0, 243, 255, 0.2);
-                }
-                
-                .blog-card h3 {
-                    color: #fff;
-                    font-size: 1.3rem;
-                    font-weight: 600;
-                    line-height: 1.4;
-                    margin: 0;
-                }
-                
-                .blog-date {
-                    color: #8892b0;
-                    font-size: 0.85rem;
-                    display: flex;
-                    align-items: center;
-                    gap: 8px;
-                    margin: 0;
+                    font-size: 0.65rem;
+                    color: #38bdf8;
+                    padding: 4px 10px;
+                    border: 1px solid rgba(56, 189, 248, 0.2);
+                    border-radius: 4px;
+                    margin-bottom: 20px;
+                    font-weight: 800;
+                    letter-spacing: 2px;
                 }
 
-                .blog-date i {
-                    color: var(--neon-cyan);
+                .blog-title {
+                    font-size: 1.4rem;
+                    color: #fff;
+                    margin-bottom: 15px;
+                    line-height: 1.4;
                 }
-                
-                .blog-excerpt {
-                    color: var(--text-secondary);
-                    line-height: 1.7;
-                    margin: 0;
+
+                .metadata {
+                    display: flex;
+                    gap: 15px;
+                    margin-bottom: 20px;
+                    font-size: 0.75rem;
+                    color: #64748b;
+                }
+
+                .metadata i { color: #38bdf8; margin-right: 5px; }
+
+                .excerpt {
+                    color: #94a3b8;
                     font-size: 0.95rem;
-                    flex-grow: 1;
+                    line-height: 1.7;
                     display: -webkit-box;
-                    -webkit-line-clamp: 4;
+                    -webkit-line-clamp: 3;
                     -webkit-box-orient: vertical;
                     overflow: hidden;
                 }
-                
-                .read-more-btn {
+
+                .card-footer {
+                    padding: 20px 30px;
+                    background: rgba(255, 255, 255, 0.02);
+                    border-top: 1px solid rgba(255, 255, 255, 0.05);
+                    position: relative;
+                }
+
+                .access-btn {
                     background: transparent;
-                    border: 2px solid var(--neon-cyan);
-                    color: var(--neon-cyan);
-                    padding: 12px 24px;
-                    border-radius: 8px;
-                    font-weight: 600;
-                    font-size: 0.9rem;
-                    cursor: pointer;
-                    display: inline-flex;
+                    border: none;
+                    color: #fff;
+                    font-family: 'Courier New', monospace;
+                    font-size: 0.8rem;
+                    font-weight: 700;
+                    display: flex;
                     align-items: center;
+                    gap: 10px;
+                    cursor: pointer;
+                    letter-spacing: 2px;
+                }
+
+                .scan-line {
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    width: 0;
+                    height: 2px;
+                    background: #38bdf8;
+                    transition: 0.4s;
+                }
+
+                .cache-card:hover .scan-line {
+                    width: 100%;
+                    box-shadow: 0 0 15px #38bdf8;
+                }
+
+                .discovery-center {
+                    display: flex;
                     justify-content: center;
-                    gap: 8px;
-                    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-                    margin-top: auto;
+                    gap: 20px;
+                    flex-wrap: wrap;
+                }
+
+                /* CYBER BUTTON INHERITED */
+                .cyber-btn {
+                    padding: 12px 35px;
+                    background: transparent;
+                    border: 1px solid rgba(56, 189, 248, 0.3);
+                    color: #fff;
+                    font-size: 0.9rem;
+                    font-weight: 700;
+                    border-radius: 8px;
+                    cursor: pointer;
                     position: relative;
                     overflow: hidden;
+                    transition: all 0.3s;
+                    text-decoration: none;
+                    display: flex;
+                    align-items: center;
                 }
 
-                .read-more-btn::before {
-                    content: '';
-                    position: absolute;
-                    top: 0;
-                    left: -100%;
-                    width: 100%;
-                    height: 100%;
-                    background: var(--neon-cyan);
-                    transition: left 0.4s ease;
-                    z-index: -1;
-                }
+                .btn-content { position: relative; z-index: 2; letter-spacing: 2px; }
+                .btn-fill { position: absolute; inset: 0; background: #38bdf8; transform: skewX(-45deg) translateX(-150%); transition: 0.5s; z-index: 1; }
+                .cyber-btn:hover .btn-fill { transform: skewX(-45deg) translateX(-50%); }
+                .cyber-btn:hover { color: var(--bg-dark); border-color: #38bdf8; transform: translateY(-3px); }
 
-                .read-more-btn:hover::before {
-                    left: 0;
-                }
+                .medium-btn { border-color: rgba(255, 255, 255, 0.1); }
+                .medium-btn .btn-fill { background: #fff; }
 
-                .read-more-btn:hover {
-                    color: #000;
-                    transform: translateY(-3px);
-                    box-shadow: 0 12px 32px rgba(0, 243, 255, 0.4);
-                    border-color: var(--neon-cyan);
-                }
-
-                .read-more-btn:active {
-                    transform: translateY(-1px);
-                }
-
-                .read-more-btn i {
-                    transition: transform 0.3s ease;
-                }
-
-                .read-more-btn:hover i {
-                    transform: translateX(4px);
-                }
-
-                /* Full Blog Modal */
-                .blog-modal {
+                /* INTEL MODAL STYLE */
+                .intel-modal {
                     position: fixed;
                     inset: 0;
-                    background: rgba(0, 0, 0, 0.92);
-                    backdrop-filter: blur(8px);
                     z-index: 2000;
+                    background: rgba(10, 25, 47, 0.98);
                     display: flex;
                     align-items: center;
                     justify-content: center;
                     padding: 20px;
+                    animation: modalFadeIn 0.3s ease;
+                }
+
+                .modal-container {
+                    background: #0f172a;
+                    width: 100%;
+                    max-width: 1100px;
+                    height: 85vh;
+                    border: 1px solid rgba(255, 255, 255, 0.1);
+                    border-radius: 24px;
+                    position: relative;
+                    overflow: hidden;
+                    box-shadow: 0 0 100px rgba(0, 0, 0, 0.8);
+                }
+
+                .modal-bg-decor {
+                    position: absolute;
+                    inset: 0;
+                    background-image: radial-gradient(circle at 10% 10%, rgba(56, 189, 248, 0.05), transparent 40%);
+                    pointer-events: none;
+                }
+
+                .modal-layout {
+                    display: flex;
+                    height: 100%;
+                }
+
+                .modal-sidebar {
+                    width: 250px;
+                    background: rgba(255, 255, 255, 0.02);
+                    border-right: 1px solid rgba(255, 255, 255, 0.05);
+                    padding: 40px 25px;
+                    display: flex;
+                    flex-direction: column;
+                }
+
+                .author-node {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    text-align: center;
+                    margin-bottom: 40px;
+                }
+
+                .author-node img {
+                    width: 80px;
+                    height: 80px;
+                    border-radius: 50%;
+                    border: 2px solid #38bdf8;
+                    margin-bottom: 15px;
+                    padding: 3px;
+                }
+
+                .author-info .name { display: block; color: #fff; font-weight: 700; font-size: 1rem; }
+                .author-info .rank { color: #38bdf8; font-family: 'Courier New', monospace; font-size: 0.7rem; font-weight: 800; }
+
+                .sidebar-stats {
+                    flex-grow: 1;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 20px;
+                }
+
+                .stat-item { display: flex; flex-direction: column; gap: 5px; }
+                .stat-item .label { color: #64748b; font-size: 0.6rem; font-weight: 800; }
+                .stat-item .value { color: #e2e8f0; font-family: 'Courier New', monospace; font-size: 0.8rem; }
+
+                .modal-close-btn {
+                    background: rgba(239, 68, 68, 0.1);
+                    border: 1px solid rgba(239, 68, 68, 0.2);
+                    color: #ef4444;
+                    padding: 12px;
+                    border-radius: 8px;
+                    font-size: 0.75rem;
+                    font-weight: 800;
+                    cursor: pointer;
+                    transition: 0.3s;
+                    font-family: 'Courier New', monospace;
+                }
+
+                .modal-close-btn:hover { background: #ef4444; color: #fff; }
+
+                .modal-main {
+                    flex-grow: 1;
+                    padding: 60px;
                     overflow-y: auto;
-                    animation: fadeIn 0.3s ease;
-                    scrollbar-width: none; /* Firefox */
-                    -ms-overflow-style: none;  /* IE and Edge */
+                    scrollbar-width: thin;
+                    scrollbar-color: #38bdf8 transparent;
                 }
 
-                .blog-modal::-webkit-scrollbar {
-                    display: none;
+                .report-header {
+                    margin-bottom: 40px;
+                    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+                    padding-bottom: 30px;
                 }
 
-                @keyframes fadeIn {
+                .stamp {
+                    display: inline-block;
+                    padding: 5px 15px;
+                    border: 2px solid #ef4444;
+                    color: #ef4444;
+                    font-weight: 900;
+                    font-size: 0.8rem;
+                    transform: rotate(-5deg);
+                    margin-bottom: 20px;
+                    letter-spacing: 2px;
+                }
+
+                .report-title {
+                    font-size: 2.5rem;
+                    color: #fff;
+                    line-height: 1.2;
+                    margin-bottom: 20px;
+                }
+
+                .report-meta {
+                    display: flex;
+                    gap: 30px;
+                    font-family: 'Courier New', monospace;
+                    font-size: 0.85rem;
+                    color: #38bdf8;
+                }
+
+                .report-content {
+                    color: #cbd5e1;
+                    font-size: 1.1rem;
+                    line-height: 1.8;
+                }
+
+                .report-content p { margin-bottom: 20px; }
+
+                .report-footer {
+                    margin-top: 50px;
+                    padding-top: 30px;
+                    border-top: 1px dashed rgba(255, 255, 255, 0.1);
+                }
+
+                .medium-uplink {
+                    color: #38bdf8;
+                    text-decoration: none;
+                    font-weight: 700;
+                    font-size: 0.9rem;
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                }
+
+                @keyframes modalFadeIn {
                     from { opacity: 0; }
                     to { opacity: 1; }
                 }
 
-                .blog-modal-content {
-                    background: rgba(15, 23, 42, 0.95);
-                    border: 1px solid rgba(255, 255, 255, 0.1);
-                    border-radius: 20px;
-                    max-width: 900px;
-                    width: 100%;
-                    max-height: 90vh;
-                    overflow-y: auto;
-                    position: relative;
-                    animation: slideUp 0.4s ease;
-                    scrollbar-width: none; /* Firefox */
-                    -ms-overflow-style: none;  /* IE and Edge */
+                @media (max-width: 968px) {
+                    .modal-layout { flex-direction: column; }
+                    .modal-sidebar { width: 100%; border-right: none; border-bottom: 1px solid rgba(255, 255, 255, 0.05); padding: 20px; flex-direction: row; align-items: center; justify-content: space-between; gap: 15px; }
+                    .author-node { margin-bottom: 0; flex-direction: row; }
+                    .author-node img { width: 40px; height: 40px; margin-right: 12px; margin-bottom: 0; }
+                    .author-info .name { font-size: 0.85rem; }
+                    .sidebar-stats { display: none; }
+                    .modal-main { padding: 25px; }
+                    .report-title { font-size: 1.6rem; }
+                    .glitch-text { font-size: 2.5rem; }
                 }
 
-                .blog-modal-content::-webkit-scrollbar {
-                    display: none;
-                }
-
-                @keyframes slideUp {
-                    from {
-                        transform: translateY(30px);
-                        opacity: 0;
-                    }
-                    to {
-                        transform: translateY(0);
-                        opacity: 1;
-                    }
-                }
-
-                .close-btn {
-                    position: sticky;
-                    top: 20px;
-                    right: 20px;
-                    margin-left: auto;
-                    display: block;
-                    width: 44px;
-                    height: 44px;
-                    background: rgba(0, 0, 0, 0.7);
-                    border: 1px solid rgba(255, 255, 255, 0.1);
-                    border-radius: 50%;
-                    color: #fff;
-                    font-size: 1.3rem;
-                    cursor: pointer;
-                    transition: all 0.3s ease;
-                    z-index: 10;
-                    margin-right: 20px;
-                    margin-top: 20px;
-                }
-
-                .close-btn:hover {
-                    background: var(--neon-cyan);
-                    color: #000;
-                    transform: rotate(90deg);
-                    border-color: var(--neon-cyan);
-                }
-
-                .blog-header {
-                    background: rgba(30, 41, 59, 0.4);
-                    padding: 48px 40px;
-                    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-                    text-align: center;
-                }
-
-                .blog-header h1 {
-                    font-size: 2.5rem;
-                    font-weight: 700;
-                    color: #fff;
-                    margin: 20px 0 12px 0;
-                    line-height: 1.3;
-                }
-
-                .blog-subtitle {
-                    font-size: 1.2rem;
-                    color: var(--text-secondary);
-                    margin: 0 0 20px 0;
-                    font-style: italic;
-                }
-
-                .blog-content {
-                    padding: 48px 40px;
-                }
-
-                .blog-content h3 {
-                    font-size: 1.6rem;
-                    font-weight: 600;
-                    color: #fff;
-                    margin: 32px 0 20px 0;
-                    position: relative;
-                    padding-bottom: 12px;
-                }
-
-                .blog-content h3::after {
-                    content: '';
-                    position: absolute;
-                    left: 0;
-                    bottom: 0;
-                    width: 50px;
-                    height: 3px;
-                    background: linear-gradient(90deg, var(--neon-cyan), transparent);
-                }
-
-                .blog-content h4 {
-                    font-size: 1.3rem;
-                    font-weight: 600;
-                    color: #fff;
-                    margin: 24px 0 16px 0;
-                }
-
-                .blog-content blockquote {
-                    margin: 20px 0;
-                    padding: 20px 24px;
-                    background: rgba(0, 243, 255, 0.05);
-                    border-left: 4px solid var(--neon-cyan);
-                    border-radius: 8px;
-                    font-size: 1.1rem;
-                    font-style: italic;
-                    color: rgba(255, 255, 255, 0.9);
-                    line-height: 1.7;
-                }
-
-                .blog-content p {
-                    font-size: 1.05rem;
-                    line-height: 1.8;
-                    color: var(--text-secondary);
-                    margin-bottom: 18px;
-                }
-
-                .blog-content strong {
-                    color: var(--neon-cyan);
-                    font-weight: 600;
-                }
-
-                .blog-content code {
-                    background: rgba(0, 243, 255, 0.1);
-                    color: var(--neon-cyan);
-                    padding: 4px 10px;
-                    border-radius: 6px;
-                    font-family: 'Courier New', monospace;
-                    font-size: 0.95rem;
-                    border: 1px solid rgba(0, 243, 255, 0.2);
-                }
-
-                .blog-content ul {
-                    list-style: none;
-                    padding: 0;
-                    margin: 20px 0;
-                }
-
-                .blog-content ul li {
-                    font-size: 1.05rem;
-                    line-height: 1.8;
-                    color: var(--text-secondary);
-                    padding-left: 28px;
-                    position: relative;
-                    margin-bottom: 12px;
-                }
-
-                .blog-content ul li::before {
-                    content: '▹';
-                    color: var(--neon-cyan);
-                    font-size: 1.2rem;
-                    position: absolute;
-                    left: 0;
-                }
-
-                .blog-content table {
-                    width: 100%;
-                    border-collapse: collapse;
-                    margin: 24px 0;
-                    background: rgba(30, 41, 59, 0.3);
-                    border-radius: 12px;
-                    overflow: hidden;
-                    border: 1px solid rgba(255, 255, 255, 0.06);
-                }
-
-                .blog-content table thead {
-                    background: rgba(0, 243, 255, 0.1);
-                }
-
-                .blog-content table th {
-                    padding: 14px 18px;
-                    text-align: left;
-                    font-size: 0.95rem;
-                    font-weight: 600;
-                    color: var(--neon-cyan);
-                    text-transform: uppercase;
-                    letter-spacing: 0.5px;
-                    border-bottom: 2px solid rgba(0, 243, 255, 0.2);
-                }
-
-                .blog-content table td {
-                    padding: 12px 18px;
-                    font-size: 1rem;
-                    color: var(--text-secondary);
-                    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-                }
-
-                .blog-content table tbody tr:last-child td {
-                    border-bottom: none;
-                }
-
-                .blog-content table tbody tr:hover {
-                    background: rgba(0, 243, 255, 0.05);
-                }
-
-                .blog-content table td strong {
-                    color: #fff;
-                    font-weight: 600;
-                }
-
-                /* Responsive */
-                @media (max-width: 768px) {
-                    .blogs-grid {
-                        grid-template-columns: 1fr;
-                        gap: 15px;
-                    }
-
-                    .blog-card {
-                        padding: 15px;
-                    }
-
-                    .blog-card h3 {
-                        font-size: 1.1rem;
-                    }
-
-                    .blog-header {
-                        padding: 32px 24px;
-                    }
-
-                    .blog-header h1 {
-                        font-size: 2rem;
-                    }
-
-                    .blog-subtitle {
-                        font-size: 1rem;
-                    }
-
-                    .blog-content {
-                        padding: 32px 24px;
-                    }
-
-                    .blog-content h3 {
-                        font-size: 1.4rem;
-                    }
-
-                    .blog-content p,
-                    .blog-content ul li {
-                        font-size: 1rem;
-                    }
-
-                    .close-btn {
-                        top: 10px;
-                        right: 10px;
-                        margin: 10px;
-                    }
+                @media (max-width: 480px) {
+                    .blogs-modern { padding: 60px 0; }
+                    .glitch-text { font-size: 2.2rem; }
+                    .card-body { padding: 20px; }
+                    .blog-title { font-size: 1.25rem; }
+                    .modal-container { height: 95vh; border-radius: 16px; }
+                    .modal-main { padding: 20px; }
+                    .report-title { font-size: 1.4rem; }
+                    .discovery-center { gap: 15px; }
+                    .cyber-btn { width: 100%; justify-content: center; padding: 10px 20px; font-size: 0.8rem; }
                 }
             `}</style>
         </section>
@@ -595,3 +488,4 @@ const Blogs = () => {
 };
 
 export default Blogs;
+

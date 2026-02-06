@@ -1,5 +1,4 @@
 import { useState } from 'react';
-
 import { portfolioData } from '../data/portfolioData.jsx';
 
 export default function Projects() {
@@ -9,305 +8,232 @@ export default function Projects() {
     const visibleProjects = showAll ? projects : projects.slice(0, 3);
 
     return (
-        <section id="projects" className="section projects-section">
-            <div className="container">
-                <h2 className="section-title">My Projects</h2>
+        <section id="projects" className="projects-modern">
+            <div className="cyber-grid-overlay"></div>
+            <div className="container relative-z">
+                <div className="section-header">
+                    <h2 className="section-title-gradient">My Projects</h2>
+                    <div className="section-divider"></div>
+                </div>
 
-                {/* Projects Structured Data */}
-                <script type="application/ld+json">
-                    {JSON.stringify({
-                        "@context": "https://schema.org",
-                        "@type": "ItemList",
-                        "name": "Sajid Inamdar's Projects",
-                        "description": "Portfolio of cybersecurity and Python development projects",
-                        "itemListElement": projects.map((project, index) => ({
-                            "@type": "ListItem",
-                            "position": index + 1,
-                            "item": {
-                                "@type": "SoftwareApplication",
-                                "name": project.title,
-                                "description": project.desc,
-                                "applicationCategory": "DeveloperApplication",
-                                "operatingSystem": "Web",
-                                "offers": {
-                                    "@type": "Offer",
-                                    "price": "0",
-                                    "priceCurrency": "USD"
-                                },
-                                "url": project.link,
-                                "programmingLanguage": project.tech.join(", ")
-                            }
-                        }))
-                    })}
-                </script>
+                <div className="projects-grid">
+                    {visibleProjects.map((project, index) => (
+                        <article key={index} className="project-module luminous-aura">
 
-                <div className="project-grid">
-                    {visibleProjects.map((p, i) => (
-                        <article key={i} className="project-card">
-                            <div className="card-left-accent"></div>
-
-                            <div className="card-body">
-                                <div className="card-header">
-                                    <h3 className="project-title">{p.title}</h3>
-                                    <a href={p.link} target="_blank" className="github-link" title="View on GitHub" rel="noreferrer" aria-label={`View ${p.title} on GitHub`}>
-                                        <i className="fab fa-github"></i>
-                                    </a>
+                            <div className="module-body">
+                                <div className="tech-stack">
+                                    {project.tech.map(tag => (
+                                        <span key={tag} className="tech-badge">{tag}</span>
+                                    ))}
                                 </div>
+                                <h3 className="project-title">{project.title}</h3>
+                                <p className="project-desc">{project.desc}</p>
+                            </div>
 
-                                <p className="project-desc">{p.desc}</p>
-
-                                <div className="tech-tags">
-                                    {p.tech.map(t => <span key={t} className="tech-tag">{t}</span>)}
-                                </div>
+                            <div className="module-footer">
+                                <a href={project.link} target="_blank" rel="noreferrer" className="view-code-btn">
+                                    <i className="fab fa-github"></i> View Code
+                                </a>
+                                <div className="hover-scan"></div>
                             </div>
                         </article>
                     ))}
                 </div>
 
-                <div className="view-all-container">
-                    <button className="view-all-btn" onClick={() => setShowAll(!showAll)}>
-                        {showAll ? 'Show Less' : 'View All Projects'}
+                <div className="action-center">
+                    <button className="cyber-action-btn" onClick={() => setShowAll(!showAll)}>
+                        <span className="btn-text">{showAll ? 'Show Less' : 'View All Projects'}</span>
+                        <div className="btn-glow"></div>
                     </button>
-                    <a href="https://github.com/sajidinamdar?tab=repositories" target="_blank" className="view-all-btn github-btn" rel="noreferrer">
-                        <i className="fab fa-github"></i> View on GitHub
+
+                    <a href="https://github.com/sajidinamdar" target="_blank" rel="noreferrer" className="cyber-action-btn github-alt">
+                        <span className="btn-text"><i className="fab fa-github"></i> More on GitHub</span>
+                        <div className="btn-glow"></div>
                     </a>
                 </div>
             </div>
 
             <style>{`
-                .projects-section {
+                .projects-modern {
                     padding: var(--section-padding) 0;
-                }
-
-                .project-grid {
-                    display: grid;
-                    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-                    gap: 24px;
-                }
-
-                /* Compact Card Design with Left Accent */
-                .project-card {
-                    background: rgba(30, 41, 59, 0.3);
-                    border: 1px solid rgba(255, 255, 255, 0.06);
-                    border-radius: 12px;
-                    padding: 0;
-                    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
                     position: relative;
                     overflow: hidden;
-                    display: flex;
-                    min-height: 180px;
-                    backdrop-filter: blur(10px);
                 }
 
-                .project-card::before {
-                    content: '';
+                .cyber-grid-overlay {
                     position: absolute;
-                    top: 0;
-                    left: 0;
-                    right: 0;
-                    bottom: 0;
-                    background: linear-gradient(135deg, rgba(0, 243, 255, 0.05), transparent);
-                    opacity: 0;
-                    transition: opacity 0.4s ease;
+                    inset: 0;
+                    background-image: 
+                        linear-gradient(rgba(56, 189, 248, 0.03) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(56, 189, 248, 0.03) 1px, transparent 1px);
+                    background-size: 40px 40px;
+                    mask-image: radial-gradient(circle at center, black, transparent 90%);
                     pointer-events: none;
                 }
 
-                .project-card:hover::before {
-                    opacity: 1;
+                .relative-z { position: relative; z-index: 10; }
+
+
+                .projects-grid {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                    gap: 30px;
+                    margin-bottom: 60px;
                 }
 
-                .card-left-accent {
-                    width: 4px;
-                    background: linear-gradient(180deg, var(--neon-cyan), var(--accent));
-                    flex-shrink: 0;
-                    opacity: 0.5;
-                    transition: all 0.3s ease;
-                }
-
-                .project-card:hover .card-left-accent {
-                    opacity: 1;
-                    box-shadow: 0 0 20px var(--neon-cyan);
-                }
-
-                .project-card:hover {
-                    transform: translateX(4px) translateY(-4px);
-                    border-color: rgba(0, 243, 255, 0.3);
-                    background: rgba(30, 41, 59, 0.5);
-                    box-shadow: -4px 0 32px rgba(0, 243, 255, 0.2), 0 8px 24px rgba(0, 0, 0, 0.3);
-                }
-
-                .card-body {
-                    padding: 24px;
+                /* PROJECT MODULE CARD */
+                .project-module {
+                    background: var(--glass-bg);
+                    backdrop-filter: blur(12px);
+                    -webkit-backdrop-filter: blur(12px);
+                    border: 1px solid var(--glass-border);
+                    border-radius: 20px;
                     display: flex;
                     flex-direction: column;
-                    gap: 14px;
-                    flex: 1;
+                    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                    overflow: hidden;
+                    position: relative;
+                    box-shadow: var(--glass-glow);
                 }
 
-                .card-header {
+                .project-module:hover {
+                    transform: translateY(-8px) scale(1.02);
+                    border-color: var(--glass-border-hover);
+                    background: rgba(30, 41, 59, 0.7);
+                    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+                }
+
+
+                .module-body { padding: 35px; flex-grow: 1; }
+
+                .tech-stack {
                     display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    gap: 12px;
+                    flex-wrap: wrap;
+                    gap: 10px;
+                    margin-bottom: 25px;
+                }
+
+                .tech-badge {
+                    font-size: 0.65rem;
+                    color: #94a3b8;
+                    padding: 4px 12px;
+                    background: rgba(255, 255, 255, 0.03);
+                    border: 1px solid rgba(255, 255, 255, 0.08);
+                    border-radius: 6px;
+                    font-weight: 700;
+                    text-transform: uppercase;
+                    letter-spacing: 1px;
                 }
 
                 .project-title {
-                    font-size: 1.2rem;
+                    font-size: 1.6rem;
                     color: #fff;
-                    font-weight: 600;
-                    line-height: 1.3;
-                    margin: 0;
-                }
-
-                .github-link {
-                    width: 32px;
-                    height: 32px;
-                    border-radius: 8px;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    color: var(--text-secondary);
-                    transition: all 0.3s ease;
-                    flex-shrink: 0;
-                    background: rgba(255, 255, 255, 0.03);
-                    border: 1px solid rgba(255, 255, 255, 0.05);
-                }
-
-                .github-link i {
-                    font-size: 1rem;
-                }
-
-                .github-link:hover {
-                    background: var(--neon-cyan);
-                    color: #000;
-                    border-color: var(--neon-cyan);
-                    transform: scale(1.1);
+                    margin-bottom: 15px;
+                    letter-spacing: -0.5px;
                 }
 
                 .project-desc {
-                    color: var(--text-secondary);
-                    font-size: 0.9rem;
-                    line-height: 1.6;
-                    margin: 0;
-                }
-
-                .tech-tags {
-                    display: flex;
-                    flex-wrap: wrap;
-                    gap: 6px;
-                    margin-top: auto;
-                }
-
-                .tech-tag {
-                    font-size: 0.7rem;
-                    background: transparent;
-                    color: var(--neon-cyan);
-                    padding: 4px 12px;
-                    border-radius: 6px;
-                    border: 1px solid rgba(0, 243, 255, 0.3);
-                    font-weight: 500;
-                    letter-spacing: 0.3px;
-                    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-                    position: relative;
+                    color: #94a3b8;
+                    font-size: 0.95rem;
+                    line-height: 1.7;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 3;
+                    -webkit-box-orient: vertical;
                     overflow: hidden;
                 }
 
-                .tech-tag::before {
-                    content: '';
+                .module-footer {
+                    padding: 20px 35px;
+                    background: rgba(0, 0, 0, 0.2);
+                    position: relative;
+                }
+
+                .view-code-btn {
+                    color: #fff;
+                    text-decoration: none;
+                    font-size: 0.85rem;
+                    font-weight: 700;
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    transition: 0.3s;
+                }
+
+                .view-code-btn i { color: #38bdf8; font-size: 1.1rem; }
+                .view-code-btn:hover { color: #38bdf8; }
+
+                .hover-scan {
                     position: absolute;
-                    top: 0;
-                    left: -100%;
+                    bottom: 0;
+                    left: 0;
+                    width: 0;
+                    height: 2px;
+                    background: #38bdf8;
+                    transition: 0.4s ease;
+                }
+
+                .project-module:hover .hover-scan {
                     width: 100%;
-                    height: 100%;
-                    background: linear-gradient(90deg, transparent, rgba(0, 243, 255, 0.2), transparent);
-                    transition: left 0.5s ease;
+                    box-shadow: 0 0 15px #38bdf8;
                 }
 
-                .tech-tag:hover::before {
-                    left: 100%;
-                }
-
-                .tech-tag:hover {
-                    background: rgba(0, 243, 255, 0.15);
-                    border-color: var(--neon-cyan);
-                    transform: translateY(-2px);
-                    box-shadow: 0 4px 12px rgba(0, 243, 255, 0.2);
-                }
-                
-                .view-all-container {
+                .action-center {
                     display: flex;
                     justify-content: center;
-                    margin-top: 48px;
                     gap: 20px;
                     flex-wrap: wrap;
                 }
 
-                .view-all-btn {
-                    display: inline-flex;
-                    align-items: center;
-                    justify-content: center;
-                    padding: 12px 36px;
+                .cyber-action-btn {
+                    padding: 14px 40px;
                     background: transparent;
-                    border: 2px solid var(--neon-cyan);
-                    color: var(--neon-cyan);
-                    font-weight: 600;
-                    font-size: 0.95rem;
-                    border-radius: 8px;
-                    transition: all 0.3s ease;
-                    letter-spacing: 0.5px;
-                    text-decoration: none;
+                    border: 1px solid rgba(56, 189, 248, 0.2);
+                    color: #fff;
+                    font-weight: 700;
+                    border-radius: 12px;
                     cursor: pointer;
-                    font-family: inherit;
+                    position: relative;
+                    overflow: hidden;
+                    transition: 0.3s;
+                    text-decoration: none;
+                    display: flex;
+                    align-items: center;
                     gap: 10px;
                 }
 
-                .view-all-btn:hover {
-                    background: var(--neon-cyan);
-                    color: #000;
-                    transform: translateY(-2px);
-                    box-shadow: 0 8px 24px rgba(0, 243, 255, 0.3);
-                }
-
-                .github-btn {
-                    border-color: rgba(255, 255, 255, 0.2);
-                    color: #fff;
-                }
-
-                .github-btn:hover {
-                    background: #fff;
-                    color: #000;
-                    border-color: #fff;
-                    box-shadow: 0 8px 24px rgba(255, 255, 255, 0.1);
+                .btn-text { position: relative; z-index: 2; }
+                .btn-glow { position: absolute; inset: 0; background: #38bdf8; opacity: 0; transition: 0.3s; }
+                
+                .cyber-action-btn:hover {
+                    color: var(--bg-dark);
+                    border-color: #38bdf8;
+                    transform: translateY(-3px);
                 }
                 
-                @media (max-width: 768px) {
-                    .project-grid {
-                        grid-template-columns: 1fr;
-                        gap: 12px;
-                    }
+                .cyber-action-btn:hover .btn-glow {
+                    opacity: 1;
+                }
 
-                    .project-card {
-                        min-height: auto;
-                    }
+                .github-alt { border-color: rgba(255, 255, 255, 0.1); }
+                .github-alt .btn-glow { background: #fff; }
 
-                    .card-body {
-                        padding: 15px;
-                    }
+                @media (max-width: 968px) {
+                    .glitch-text { font-size: 2.5rem; }
+                    .projects-grid { grid-template-columns: 1fr; gap: 24px; }
+                    .project-module { max-width: 100%; margin: 0 auto; }
+                }
 
-                    .project-title {
-                        font-size: 1.1rem;
-                    }
-
-                    .github-link {
-                        width: 28px;
-                        height: 28px;
-                    }
-
-                    .view-all-container {
-                        margin-top: 20px;
-                    }
+                @media (max-width: 480px) {
+                    .projects-modern { padding: 60px 0; }
+                    .glitch-text { font-size: 2.2rem; }
+                    .module-body { padding: 25px; }
+                    .module-footer { padding: 15px 25px; }
+                    .project-title { font-size: 1.4rem; }
+                    .action-center { gap: 15px; }
+                    .cyber-action-btn { width: 100%; justify-content: center; padding: 12px 20px; font-size: 0.8rem; }
                 }
             `}</style>
         </section>
-    )
+    );
 }
+

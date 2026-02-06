@@ -10,38 +10,77 @@ import { useEffect } from 'react';
 
 const HomePage = () => {
 
+    // Initial scroll on mount based on URL
+    useEffect(() => {
+        const path = window.location.pathname.substring(1);
+        const sectionId = path === 'home' ? 'home' : path;
+
+        if (sectionId) {
+            // Small delay to ensure all components are rendered and heights are stable
+            setTimeout(() => {
+                const element = document.getElementById(sectionId);
+                if (element) {
+                    const navHeight = 72;
+                    const elementPosition = element.offsetTop - navHeight;
+                    window.scrollTo({
+                        top: elementPosition,
+                        behavior: 'auto' // Use 'auto' for instant jump on refresh
+                    });
+                }
+            }, 100);
+        }
+    }, []);
+
     useEffect(() => {
         const sections = document.querySelectorAll('section[id]');
 
-        const observer = new IntersectionObserver((entries) => {
+        // IntersectionObserver for URL synchronization
+        const scrollObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const id = entry.target.getAttribute('id');
-                    const path = id === 'home' ? '/home' : `/${id}`;
+                    const path = id === 'home' ? '/' : `/${id}`;
 
-                    // Only replace state if the path is different to avoid redundant updates
                     if (window.location.pathname !== path) {
-                        try {
-                            window.history.replaceState(null, '', path);
-                        } catch (e) {
-                            console.error('Error updating URL:', e);
-                        }
+                        window.history.replaceState(null, '', path);
+                        // Notify Navbar to update its active state
+                        window.dispatchEvent(new Event('sectionChange'));
                     }
                 }
             });
         }, {
-            threshold: 0.1, // Even lower threshold for earlier detection
-            rootMargin: "-10% 0px -40% 0px"
+            threshold: 0.5, // Center-focused detection
+            rootMargin: "-72px 0px -20% 0px" // Exact offset for navbar top
         });
+
+        // IntersectionObserver for reveal animations
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
 
         sections.forEach(section => {
-            observer.observe(section);
+            scrollObserver.observe(section);
         });
 
-        return () => {
-            sections.forEach(section => {
-                observer.unobserve(section);
+        // Delay observing reveal elements to ensure sub-components are rendered
+        const timer = setTimeout(() => {
+            const hiddenElements = document.querySelectorAll('.page-section, .skill-module, .project-module, .cert-module, .cache-card, .reveal');
+            hiddenElements.forEach((el) => {
+                if (!el.classList.contains('visible')) {
+                    revealObserver.observe(el);
+                }
             });
+        }, 300); // Increased delay for safety
+
+        return () => {
+            scrollObserver.disconnect();
+            revealObserver.disconnect();
+            clearTimeout(timer);
         };
     }, []);
 

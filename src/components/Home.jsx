@@ -4,430 +4,265 @@ import { motion } from 'framer-motion';
 export default function Home() {
 
     return (
-        <section id="home" className="section home-section">
-            <div className="container">
+        <section id="home" className="home-modern">
+            <div className="cyber-grid-overlay"></div>
+            <div className="container relative-z">
                 <div className="hero-layout">
                     <div className="hero-text-content">
-                        <span className="greeting">HELLO, I'M</span>
-                        <h1 className="hero-name">Sajid Inamdar</h1>
-                        <h2 className="hero-role">
-                            <span className="typewriter">AI Developer | Cybersecurity Student</span>
-                        </h2>
+                        <div className="greeting-badge">
+                            HELLO, I'M
+                        </div>
+
+                        <h1 className="hero-name-serif">
+                            Sajid Inamdar
+                        </h1>
+
+                        <div className="hero-role-typewriter">
+                            AI Developer | Cybersecurity Student<span className="cursor">|</span>
+                        </div>
 
                         <div className="hero-cta">
-                            <Link to="#projects" className="btn btn-primary" onClick={(e) => {
+                            <Link to="#projects" className="btn-modern btn-yellow-glow" onClick={(e) => {
                                 e.preventDefault();
                                 document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
                             }}>
-                                <i className="fas fa-layer-group"></i> View Projects
+                                <i className="fas fa-layer-group"></i> VIEW PROJECTS
                             </Link>
-                            <a href="https://www.linkedin.com/in/sajidinamdar-sec/" target="_blank" className="btn btn-outline" rel="noreferrer">
-                                <i className="fab fa-linkedin-in"></i> Connect Me
+
+                            <a href="https://www.linkedin.com/in/sajidinamdar-sec/" target="_blank" className="btn-modern btn-yellow-outline" rel="noreferrer">
+                                <i className="fab fa-linkedin-in"></i> CONNECT ME
                             </a>
                         </div>
                     </div>
+
                     <div className="hero-image-content">
-                        <motion.div
-                            className="img-frame"
-                            animate={{ y: [-15, 15, -15] }}
-                            transition={{
-                                duration: 6,
-                                repeat: Infinity,
-                                ease: "easeInOut"
-                            }}
-                        >
-                            <img src="/img/sajid-inamdar.jpg" alt="Sajid Inamdar - Cybersecurity Student" loading="eager" style={{ pointerEvents: 'none' }} />
-                        </motion.div>
-                        {/* Decorative Elements */}
-                        <div className="deco-circle c1"></div>
-                        <div className="deco-circle c2"></div>
+                        <div className="scan-module luminous-aura">
+
+                            <motion.div
+                                className="img-container"
+                                animate={{ y: [-10, 10, -10] }}
+                                transition={{
+                                    duration: 5,
+                                    repeat: Infinity,
+                                    ease: "easeInOut"
+                                }}
+                            >
+                                <img src="/img/sajid-inamdar.jpg" alt="Sajid Inamdar" loading="eager" />
+                                <div className="scan-bar"></div>
+                                <div className="overlay-grid"></div>
+                            </motion.div>
+
+                            <div className="scan-footer">
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                {/* SEO Power Text */}
-                <section style={{ display: 'none' }}>
-                    <h1>Sajid Inamdar | Cybersecurity Student & Ethical Hacker</h1>
-                    <p>
-                        Sajid Inamdar is a cybersecurity student and Python developer specializing in ethical
-                        hacking, network security, FastAPI backend development, Linux and cloud computing.
-                    </p>
-                    <p>
-                        This portfolio showcases cybersecurity projects, Python automation tools,
-                        ethical hacking labs, and secure API development.
-                    </p>
-                </section>
             </div>
 
             <style>{`
-                .home-section {
+                .home-modern {
                     min-height: auto;
                     display: flex;
-                    align-items: flex-start;
-                    padding: calc(72px + var(--section-padding)) 0 20px 0;
+                    align-items: center;
+                    padding: var(--section-padding) 0;
+                    padding-top: calc(var(--navbar-height) + 24px);
+                    position: relative;
+                    overflow: hidden;
+                    box-sizing: border-box;
                 }
-                
+
+                .cyber-grid-overlay {
+                    position: absolute;
+                    inset: 0;
+                    background-image: 
+                        linear-gradient(rgba(56, 189, 248, 0.05) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(56, 189, 248, 0.05) 1px, transparent 1px);
+                    background-size: 50px 50px;
+                    mask-image: radial-gradient(circle at center, black, transparent 85%);
+                    pointer-events: none;
+                }
+
+                .relative-z { position: relative; z-index: 10; width: 100%; }
+
                 .hero-layout {
                     display: grid;
-                    grid-template-columns: 1fr 1fr;
-                    gap: var(--spacing-3xl);
+                    grid-template-columns: 1.2fr 0.8fr;
+                    gap: 60px;
                     align-items: center;
                 }
-                
-                .hero-text-content {
-                    max-width: 600px;
-                }
-                
-                .greeting {
+
+                .greeting-badge {
                     display: inline-block;
-                    padding: var(--spacing-xs) var(--spacing-sm);
+                    padding: 8px 24px;
                     background: rgba(255, 255, 255, 0.05);
                     border: 1px solid rgba(255, 255, 255, 0.1);
-                    color: var(--neon-cyan);
-                    font-weight: 600;
+                    color: #38bdf8;
+                    font-weight: 800;
                     font-size: 0.85rem;
-                    margin-bottom: var(--spacing-md);
                     border-radius: 50px;
                     letter-spacing: 2px;
+                    margin-bottom: clamp(15px, 4vh, 40px);
                 }
-                
-                .hero-name {
+
+                .hero-name-serif {
                     font-family: 'Playfair Display', serif;
-                    font-size: 3.5rem;
+                    font-size: clamp(2.5rem, 10vw, 5rem);
                     font-weight: 700;
-                    line-height: 1.2;
                     color: #fff;
-                    margin-bottom: var(--spacing-sm);
-                }
-                
-                .hero-role {
-                    font-size: 1.5rem;
-                    font-weight: 500;
-                    margin-bottom: var(--spacing-lg);
-                    color: var(--neon-cyan);
-                    line-height: 1.5;
+                    line-height: 1.1;
+                    margin-bottom: 30px;
                 }
 
-                .typewriter {
-                    overflow: hidden;
-                    border-right: .15em solid var(--neon-cyan);
-                    white-space: nowrap;
-                    margin: 0 auto;
-                    letter-spacing: .15em;
-                    animation: 
-                        typing 3.5s steps(40, end),
-                        blink-caret .75s step-end infinite;
+                .hero-role-typewriter {
+                    font-size: 1.8rem;
+                    font-weight: 600;
+                    color: #38bdf8;
+                    margin-bottom: 50px;
+                    display: flex;
+                    align-items: center;
+                    gap: 5px;
                 }
 
-                @keyframes typing {
-                    from { width: 0 }
-                    to { width: 100% }
+                .cursor {
+                    color: #38bdf8;
+                    animation: blink 1s step-end infinite;
+                    font-weight: 400;
                 }
 
-                @keyframes blink-caret {
-                    from, to { border-color: transparent }
-                    50% { border-color: var(--neon-cyan); }
+                @keyframes blink {
+                    from, to { opacity: 1; }
+                    50% { opacity: 0; }
                 }
-                
-                .hero-subtext {
-                    font-size: 1.1rem;
-                    color: var(--text-secondary);
-                    margin-bottom: var(--spacing-xl);
-                    border-left: 3px solid var(--neon-cyan);
-                    padding-left: var(--spacing-md);
-                    line-height: 1.8;
-                }
-                
+
                 .hero-cta {
                     display: flex;
-                    gap: var(--spacing-md);
+                    gap: 25px;
                     flex-wrap: wrap;
                 }
-                
-                .btn {
-                    padding: var(--spacing-sm) var(--spacing-lg);
+
+                .btn-modern {
+                    padding: 18px 40px;
                     border-radius: 50px;
-                    font-weight: 600;
-                    font-size: 1rem;
+                    font-weight: 700;
+                    font-size: 0.9rem;
+                    text-transform: uppercase;
+                    letter-spacing: 1px;
                     display: inline-flex;
                     align-items: center;
-                    gap: var(--spacing-xs);
-                    transition: all 0.3s ease;
+                    gap: 12px;
+                    transition: 0.3s;
                     cursor: pointer;
                 }
-                
-                .btn-primary {
-                    background: linear-gradient(135deg, var(--neon-cyan), var(--accent));
-                    color: #000;
-                    border: none;
-                    position: relative;
-                    overflow: hidden;
+
+                .btn-yellow-glow {
+                    background: transparent;
+                    border: 1.5px solid #FFD700;
+                    color: #FFD700;
+                    box-shadow: 0 0 30px rgba(56, 189, 248, 0.3);
                 }
 
-                .btn-primary::before {
-                    content: '';
-                    position: absolute;
-                    top: 0;
-                    left: -100%;
+                .btn-yellow-glow:hover {
+                    background: rgba(255, 215, 0, 0.1);
+                    transform: translateY(-5px);
+                    box-shadow: 0 0 50px rgba(56, 189, 248, 0.5);
+                }
+
+                .btn-yellow-outline {
+                    background: transparent;
+                    border: 1.5px solid #FFD700;
+                    color: #FFD700;
+                }
+
+                .btn-yellow-outline:hover {
+                    background: rgba(255, 215, 0, 0.1);
+                    transform: translateY(-5px);
+                }
+
+                .scan-module {
+                    background: var(--bg-card);
+                    backdrop-filter: blur(20px);
+                    border: 1px solid var(--glass-border);
+                    border-radius: 30px;
+                    padding: 20px;
                     width: 100%;
-                    height: 100%;
-                    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-                    transition: left 0.5s ease;
+                    max-width: 420px;
+                    box-shadow: var(--glass-glow);
                 }
 
-                .btn-primary:hover::before {
-                    left: 100%;
-                }
-                
-                .btn-primary:hover {
-                    transform: translateY(-3px) scale(1.02);
-                    box-shadow: 0 12px 32px rgba(0, 243, 255, 0.4);
-                }
 
-                .btn-primary:active {
-                    transform: translateY(-1px) scale(0.98);
-                }
-                
-                .btn-outline {
-                    background: rgba(255, 255, 255, 0.03);
-                    backdrop-filter: blur(10px);
-                    border: 1px solid rgba(255, 255, 255, 0.2);
-                    color: #fff;
+                .img-container {
                     position: relative;
-                    overflow: hidden;
-                }
-
-                .btn-outline::before {
-                    content: '';
-                    position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    width: 0;
-                    height: 0;
-                    border-radius: 50%;
-                    background: rgba(255, 255, 255, 0.1);
-                    transform: translate(-50%, -50%);
-                    transition: width 0.6s ease, height 0.6s ease;
-                }
-
-                .btn-outline:hover::before {
-                    width: 300px;
-                    height: 300px;
-                }
-                
-                .btn-outline:hover {
-                    background: rgba(255, 255, 255, 0.08);
-                    border-color: rgba(255, 255, 255, 0.4);
-                    transform: translateY(-3px);
-                    box-shadow: 0 8px 24px rgba(255, 255, 255, 0.1);
-                }
-
-                .btn-outline:active {
-                    transform: translateY(-1px);
-                }
-                
-                .hero-image-content {
-                    position: relative;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                }
-                
-                .img-frame {
                     width: 100%;
-                    max-width: 400px;
                     aspect-ratio: 1;
                     border-radius: 20px;
                     overflow: hidden;
-                    border: 2px solid rgba(255, 255, 255, 0.1);
-                    position: relative;
-                    z-index: 2;
-                    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-                    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+                    background: var(--bg-dark);
+                    border: 1px solid var(--glass-border);
                 }
 
-                .img-frame::before {
-                    content: '';
-                    position: absolute;
-                    inset: -2px;
-                    border-radius: 20px;
-                    padding: 2px;
-                    background: linear-gradient(135deg, var(--neon-cyan), var(--accent), var(--neon-cyan));
-                    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-                    -webkit-mask-composite: xor;
-                    mask-composite: exclude;
-                    opacity: 0;
-                    transition: opacity 0.4s ease;
-                    z-index: -1;
-                }
-
-                .img-frame img {
+                .img-container img {
                     width: 100%;
                     height: 100%;
                     object-fit: cover;
+                    opacity: 0.8;
                 }
 
-
-                
-                .deco-circle {
+                .scan-bar {
                     position: absolute;
-                    border-radius: 50%;
-                    z-index: 1;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 4px;
+                    background: linear-gradient(to right, transparent, #38bdf8, transparent);
+                    box-shadow: 0 0 15px #38bdf8;
+                    animation: scan 4s linear infinite;
+                    z-index: 5;
                 }
-                
-                .c1 {
-                    width: 420px;
-                    height: 420px;
-                    border: 1px solid rgba(255, 255, 255, 0.05);
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
+
+                @keyframes scan {
+                    0% { top: 0; }
+                    50% { top: 100%; }
+                    100% { top: 0; }
                 }
-                
-                .c2 {
-                    width: 400px;
-                    height: 400px;
-                    border: 1px dashed rgba(255, 255, 255, 0.1);
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%) rotate(45deg);
+
+                .overlay-grid {
+                    position: absolute;
+                    inset: 0;
+                    background-image: radial-gradient(rgba(56, 189, 248, 0.2) 1px, transparent 1px);
+                    background-size: 20px 20px;
+                    opacity: 0.3;
+                    pointer-events: none;
                 }
-                
 
-                
-                @media (max-width: 968px) {
-                    .home-section {
-                        padding: 80px 0 20px 0 !important;
-                        min-height: auto;
-                        display: block;
-                        width: 100%;
-                        overflow: hidden;
-                    }
+                .scan-footer {
+                    margin-top: 15px;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding: 0 10px;
+                }
 
-                    .home-section .container {
-                        padding: 0 20px !important;
-                    }
+                .auth-status { font-family: 'Courier New', monospace; font-size: 0.65rem; color: #10b981; font-weight: 800; }
+                .corner-tag { background: rgba(255, 255, 255, 0.05); color: #fff; font-size: 0.6rem; padding: 4px 10px; border-radius: 4px; border: 1px solid rgba(255, 255, 255, 0.1); }
 
-                    .hero-layout {
-                        grid-template-columns: 1fr;
-                        gap: 20px;
-                        text-align: center;
-                        align-items: center;
-                        width: 100%;
-                        margin: 0 auto;
-                    }
-                    
-                    .hero-text-content {
-                        max-width: 100%;
-                        order: 1;
-                        display: flex;
-                        flex-direction: column;
-                        align-items: center;
-                        margin: 0 auto;
-                    }
-
-                    .greeting {
-                        margin-bottom: 4px;
-                        padding: 2px 10px;
-                        font-size: 0.7rem;
-                        letter-spacing: 1px;
-                        width: fit-content;
-                    }
-
-                    .hero-name {
-                        font-size: 32px;
-                        margin-bottom: 4px;
-                    }
-
-                    .hero-role {
-                        font-size: 18px;
-                        margin-bottom: 8px;
-                    }
-
-                    .hero-subtext {
-                        margin: 0 auto 15px auto;
-                        font-size: 16px;
-                        line-height: 1.6;
-                        padding: 0 12px;
-                        border-left: 2px solid var(--neon-cyan);
-                        text-align: center;
-                        max-width: 280px;
-                    }
-                    
-                    .hero-image-content {
-                        order: 2;
-                        width: 100%;
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        margin: 0 auto;
-                    }
-                    
-                    .hero-cta {
-                        display: flex;
-                        flex-direction: column;
-                        width: 100%;
-                        gap: 10px;
-                        align-items: center;
-                        margin-bottom: 20px;
-                    }
-
-                    .btn {
-                        width: 100%;
-                        max-width: 280px;
-                        height: 50px;
-                        justify-content: center;
-                        border-radius: 50px;
-                        font-size: 16px;
-                    }
-
-                    .btn-primary {
-                        box-shadow: 0 0 20px rgba(0, 243, 255, 0.4);
-                    }
-
-                    .btn-primary:hover {
-                        box-shadow: 0 0 30px rgba(0, 243, 255, 0.6);
-                    }
-                    
-                    .img-frame {
-                        max-width: 280px;
-                        margin: 0 auto;
-                    }
-
-                    .c1, .c2 {
-                        display: none;
-                    }
+                @media (max-width: 1024px) {
+                    .home-modern { padding-top: calc(var(--navbar-height) + 24px); }
+                    .hero-layout { grid-template-columns: 1fr; text-align: center; gap: 40px; }
+                    .greeting-badge { margin-bottom: 20px; }
+                    .hero-name-serif { font-size: clamp(3rem, 10vw, 5rem); }
+                    .hero-role-typewriter { justify-content: center; font-size: 1.3rem; margin-bottom: 30px; }
+                    .hero-cta { justify-content: center; }
+                    .hero-image-content { display: flex; justify-content: center; }
                 }
 
                 @media (max-width: 480px) {
-                    .typewriter {
-                        white-space: normal;
-                        border-right: none;
-                        width: 100% !important;
-                        animation: none;
-                        text-align: center;
-                    }
-                    .hero-role {
-                        width: 100%;
-                        display: block;
-                    }
-                }
-
-                @media (max-width: 350px) {
-                    .hero-name {
-                        font-size: 28px;
-                    }
-                    .hero-role {
-                        font-size: 16px;
-                    }
-                    .hero-subtext {
-                        font-size: 14px;
-                        max-width: 240px;
-                    }
-                    .btn {
-                        font-size: 14px;
-                        padding: 10px 15px;
-                        height: 45px;
-                    }
+                    .home-modern { padding-top: calc(var(--navbar-height) + 24px) !important; padding-bottom: 20px; }
+                    .hero-name-serif { font-size: 2rem; line-height: 1.1; margin-bottom: 20px; }
+                    .btn-modern { width: 100%; justify-content: center; padding: 16px 20px; font-size: 0.8rem; }
+                    .hero-role-typewriter { font-size: 1.1rem; line-height: 1.4; flex-direction: column; height: auto; margin-bottom: 30px; }
+                    .hero-cta { gap: 15px; }
+                    .scan-module { padding: 15px; border-radius: 20px; }
                 }
             `}</style>
         </section>

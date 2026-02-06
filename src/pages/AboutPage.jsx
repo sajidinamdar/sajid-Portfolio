@@ -3,7 +3,7 @@ import About from '../components/About';
 
 const AboutPage = () => {
     return (
-        <section className="page-section about-page" style={{ paddingTop: '100px' }}>
+        <section className="page-section about-page">
             <Helmet>
                 <title>About Me - Sajid Inamdar | Cybersecurity Student & Python Developer</title>
                 <meta name="description" content="Learn about Sajid Inamdar - Cybersecurity Student, Ethical Hacker, and Python Developer from Sangamner, Maharashtra. Discover his journey, skills, and passion for cybersecurity." />

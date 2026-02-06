@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 import { HelmetProvider } from 'react-helmet-async';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-import Preloader from './components/Preloader';
+
 
 // Lazy load page components
 const HomePage = lazy(() => import('./pages/HomePage'));
@@ -14,71 +14,47 @@ const SkillsPage = lazy(() => import('./pages/SkillsPage'));
 const CertificationsPage = lazy(() => import('./pages/CertificationsPage'));
 const ContactPage = lazy(() => import('./pages/ContactPage'));
 
-// ScrollToTop component to handle scroll on navigation (kept for refresh)
+// ScrollToTop component - Only for real page changes
 function ScrollToTop() {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    // Disable browser default scroll restoration
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+    // Only scroll to top if not on a hashed/mapped sub-page
+    if (pathname === '/' || pathname === '/home') {
+      // window.scrollTo(0, 0); // HomePage handles initial scroll placement
+    }
   }, [pathname]);
 
   return null;
 }
 
-// Animation triggering wrapper
-function AnimationTrigger() {
-  const location = useLocation();
-
-  useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target); // Unobserve after it becomes visible for performance
-        }
-      });
-    }, { threshold: 0.1 });
-
-    // Delay to allow DOM update
-    const timer = setTimeout(() => {
-      const hiddenElements = document.querySelectorAll('.section, .skill-card, .project-card, .blog-card, .visual-skill-card');
-      hiddenElements.forEach((el) => {
-        if (!el.classList.contains('visible')) {
-          observer.observe(el);
-        }
-      });
-    }, 150); // Reduced delay
-
-    return () => {
-      clearTimeout(timer);
-      observer.disconnect();
-    };
-  }, [location]);
-
-  return null;
-}
+// Animation Triggering logic moved to HomePage.jsx to support lazy-loading
 
 function App() {
   return (
     <HelmetProvider>
       <Router>
-        <Preloader />
+
         <ScrollToTop />
-        <AnimationTrigger />
         <div className="app-container">
           <Navbar />
           <main className="content-area">
-            <Suspense fallback={<Preloader />}>
+            <Suspense fallback={null}>
               <Routes>
-                {/* Only one route for Single Page Application */}
+                {/* All routes point to HomePage for a unified SPA experience */}
                 <Route path="/" element={<HomePage />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/projects" element={<ProjectsPage />} />
-                <Route path="/blogs" element={<BlogsPage />} />
-                <Route path="/skills" element={<SkillsPage />} />
-                <Route path="/certifications" element={<CertificationsPage />} />
-                <Route path="/contact" element={<ContactPage />} />
-                {/* Reroute matching routes to home if user tries direct access */}
+                <Route path="/home" element={<HomePage />} />
+                <Route path="/about" element={<HomePage />} />
+                <Route path="/projects" element={<HomePage />} />
+                <Route path="/blogs" element={<HomePage />} />
+                <Route path="/skills" element={<HomePage />} />
+                <Route path="/certifications" element={<HomePage />} />
+                <Route path="/contact" element={<HomePage />} />
+                {/* Fallback to HomePage */}
                 <Route path="*" element={<HomePage />} />
               </Routes>
             </Suspense>

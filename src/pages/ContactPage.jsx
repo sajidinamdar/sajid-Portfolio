@@ -3,7 +3,7 @@ import Contact from '../components/Contact';
 
 const ContactPage = () => {
     return (
-        <section className="page-section contact-page" style={{ paddingTop: '100px' }}>
+        <section className="page-section contact-page">
             <Helmet>
                 <title>Contact - Sajid Inamdar</title>
                 <meta name="description" content="Get in touch with Sajid Inamdar for collaborations or inquiries." />

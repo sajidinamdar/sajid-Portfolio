@@ -16,35 +16,26 @@ const Navbar = () => {
 
 
     const navLinks = [
-        { name: 'Home', id: 'home', path: '/', isRoute: false, icon: 'fas fa-home' },
-        { name: 'About', id: 'about', path: '/about', isRoute: true, icon: 'fas fa-user' },
-        { name: 'Skills', id: 'skills', path: '#skills', isRoute: false, icon: 'fas fa-code' },
-        { name: 'Certifications', id: 'certifications', path: '#certifications', isRoute: false, icon: 'fas fa-certificate' },
-        { name: 'Projects', id: 'projects', path: '/projects', isRoute: true, icon: 'fas fa-briefcase' },
-        { name: 'Blogs', id: 'blogs', path: '/blogs', isRoute: true, icon: 'fas fa-blog' },
-        { name: 'Contact', id: 'contact', path: '#contact', isRoute: false, icon: 'fas fa-envelope' }
+        { name: 'Home', id: 'home', path: '/', icon: 'fas fa-home' },
+        { name: 'About', id: 'about', path: '/about', icon: 'fas fa-user' },
+        { name: 'Skills', id: 'skills', path: '/skills', icon: 'fas fa-code' },
+        { name: 'Certifications', id: 'certifications', path: '/certifications', icon: 'fas fa-certificate' },
+        { name: 'Projects', id: 'projects', path: '/projects', icon: 'fas fa-briefcase' },
+        { name: 'Blogs', id: 'blogs', path: '/blogs', icon: 'fas fa-blog' },
+        { name: 'Contact', id: 'contact', path: '/contact', icon: 'fas fa-envelope' }
     ];
 
     // Handle scroll to section
     const scrollToSection = (sectionId) => {
-        // If not on home page, navigate first
-        if (location.pathname !== '/') {
-            navigate('/');
-            // Wait for navigation and DOM update, then scroll
-            setTimeout(() => {
-                const element = document.getElementById(sectionId);
-                if (element) {
-                    const navHeight = 72;
-                    const elementPosition = element.offsetTop - navHeight;
-                    window.scrollTo({
-                        top: elementPosition,
-                        behavior: 'smooth'
-                    });
-                }
-            }, 150);
+        // Find if the link is a route-based link
+        const targetLink = navLinks.find(l => l.id === sectionId);
+
+        // If not on home page or the link is not part of home page, navigate
+        if (location.pathname !== '/' && location.pathname !== '/home') {
+            navigate(targetLink ? targetLink.path : '/');
         } else {
-            // Already on home page, just scroll
-            const element = document.getElementById(sectionId);
+            // On home page, just scroll to the actual section element
+            const element = document.getElementById(sectionId === 'home' ? 'home' : sectionId);
             if (element) {
                 const navHeight = 72;
                 const elementPosition = element.offsetTop - navHeight;
@@ -52,51 +43,45 @@ const Navbar = () => {
                     top: elementPosition,
                     behavior: 'smooth'
                 });
+            } else if (targetLink) {
+                // Fallback if element not found on home page for some reason
+                navigate(targetLink.path);
             }
         }
         setIsOpen(false);
     };
 
-    // Track active section based on route or scroll
+    // Track scroll-dependent UI (scrolled state, progress)
     useEffect(() => {
-        // Set active section based on current route
-        const currentPath = location.pathname;
-        const currentLink = navLinks.find(link => link.path === currentPath);
-        if (currentLink) {
-            setActiveSection(currentLink.id);
-        } else if (currentPath === '/') {
-            setActiveSection('home');
-        }
-
         const handleScroll = () => {
-            // Check if scrolled
             setScrolled(window.scrollY > 20);
 
-            // Calculate scroll progress
             const windowHeight = window.innerHeight;
             const documentHeight = document.documentElement.scrollHeight;
-            const scrollTop = window.scrollY;
-            const progress = (scrollTop / (documentHeight - windowHeight)) * 100;
+            const progress = (documentHeight - windowHeight) > 0
+                ? (window.scrollY / (documentHeight - windowHeight)) * 100
+                : 0;
             setScrollProgress(Math.min(progress, 100));
-
-            // Only determine active section if we're on the home page
-            if (location.pathname === '/') {
-                const sections = navLinks.map(link => link.id);
-                const scrollPosition = window.scrollY + 100;
-
-                for (let i = sections.length - 1; i >= 0; i--) {
-                    const section = document.getElementById(sections[i]);
-                    if (section && section.offsetTop <= scrollPosition) {
-                        setActiveSection(sections[i]);
-                        break;
-                    }
-                }
-            }
         };
 
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, [location]);
+        const handleSectionChange = () => {
+            const path = window.location.pathname.substring(1) || 'home';
+            setActiveSection(path);
+        };
+
+        handleScroll();
+        handleSectionChange();
+
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        window.addEventListener('popstate', handleSectionChange);
+        window.addEventListener('sectionChange', handleSectionChange);
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+            window.removeEventListener('popstate', handleSectionChange);
+            window.removeEventListener('sectionChange', handleSectionChange);
+        };
+    }, []);
 
     // Close mobile menu on resize
     useEffect(() => {
@@ -135,37 +120,21 @@ const Navbar = () => {
                             scrollToSection('home');
                         }
                     }}>
-                        <span className="logo-text">Sajid Inamdar</span>
+                        <span className="logo-text-serif">Sajid Inamdar</span>
                     </Link>
 
                     {/* Desktop Navigation */}
                     <ul className="nav-links">
                         {navLinks.map((link) => (
                             <li key={link.id}>
-                                {link.isRoute ? (
-                                    <Link
-                                        to={link.path}
-                                        className={`nav-link ${activeSection === link.id ? 'active' : ''}`}
-                                        onClick={() => setIsOpen(false)}
-                                        aria-current={activeSection === link.id ? 'page' : undefined}
-                                    >
-                                        <i className={link.icon}></i>
-                                        <span>{link.name}</span>
-                                    </Link>
-                                ) : (
-                                    <a
-                                        href={link.path}
-                                        className={`nav-link ${activeSection === link.id ? 'active' : ''}`}
-                                        onClick={(e) => {
-                                            e.preventDefault();
-                                            scrollToSection(link.id);
-                                        }}
-                                        aria-current={activeSection === link.id ? 'page' : undefined}
-                                    >
-                                        <i className={link.icon}></i>
-                                        <span>{link.name}</span>
-                                    </a>
-                                )}
+                                <button
+                                    className={`nav-link-btn ${activeSection === link.id ? 'active' : ''}`}
+                                    onClick={() => scrollToSection(link.id)}
+                                    aria-current={activeSection === link.id ? 'page' : undefined}
+                                >
+                                    <i className={link.icon}></i>
+                                    <span>{link.name}</span>
+                                </button>
                             </li>
                         ))}
                     </ul>
@@ -173,7 +142,7 @@ const Navbar = () => {
                     {/* Follow Me Button */}
                     <button
                         onClick={() => setShowSocialModal(true)}
-                        className="hire-btn"
+                        className="btn-nav-yellow"
                         aria-label="Follow me on social media"
                     >
                         Follow Me
@@ -197,30 +166,14 @@ const Navbar = () => {
                     <ul className="mobile-nav-links">
                         {navLinks.map((link) => (
                             <li key={link.id}>
-                                {link.isRoute ? (
-                                    <Link
-                                        to={link.path}
-                                        className={`mobile-nav-link ${activeSection === link.id ? 'active' : ''}`}
-                                        onClick={() => setIsOpen(false)}
-                                        aria-current={activeSection === link.id ? 'page' : undefined}
-                                    >
-                                        <i className={link.icon}></i>
-                                        <span>{link.name}</span>
-                                    </Link>
-                                ) : (
-                                    <a
-                                        href={link.path}
-                                        className={`mobile-nav-link ${activeSection === link.id ? 'active' : ''}`}
-                                        onClick={(e) => {
-                                            e.preventDefault();
-                                            scrollToSection(link.id);
-                                        }}
-                                        aria-current={activeSection === link.id ? 'page' : undefined}
-                                    >
-                                        <i className={link.icon}></i>
-                                        <span>{link.name}</span>
-                                    </a>
-                                )}
+                                <button
+                                    className={`mobile-nav-link-btn ${activeSection === link.id ? 'active' : ''}`}
+                                    onClick={() => scrollToSection(link.id)}
+                                    aria-current={activeSection === link.id ? 'page' : undefined}
+                                >
+                                    <i className={link.icon}></i>
+                                    <span>{link.name}</span>
+                                </button>
                             </li>
                         ))}
                         <li>

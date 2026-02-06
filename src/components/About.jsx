@@ -31,9 +31,9 @@ const useCounter = (target, duration = 2000, isVisible) => {
 const About = () => {
     const [isVisible, setIsVisible] = useState(false);
     const sectionRef = useRef(null);
-    const { personal, stats } = portfolioData;
+    const { stats } = portfolioData;
 
-    // Extract targets from stats array (assuming fixed order for now or mapping)
+    // Extract targets from stats array
     const tryhackmeTarget = parseInt(stats[0].value.replace(/\D/g, '')) || 5;
     const githubTarget = parseInt(stats[1].value.replace(/\D/g, '')) || 15;
     const skillsTarget = parseInt(stats[2].value.replace(/\D/g, '')) || 12;
@@ -64,288 +64,282 @@ const About = () => {
     }, []);
 
     return (
-        <section id="about" className="about-section" aria-labelledby="about-heading" ref={sectionRef}>
-            <div className="container">
-                <h2 id="about-heading" className="about-heading">About Me</h2>
+        <section id="about" className="about-modern" ref={sectionRef}>
+            <div className="cyber-grid-overlay"></div>
+            <div className="container relative-z">
+                <div className="section-header">
+                    <h2 className="section-title-gradient">About Me</h2>
+                    <div className="section-divider"></div>
+                </div>
 
                 <div className="about-layout">
-                    <div className="about-content-card">
-                        <div className="accent-bar"></div>
-                        <div className="content-text">
-                            <p className="about-paragraph intro">
-                                My name is <strong className="highlight">Sajid Inamdar</strong>. I am a <strong className="highlight">Cybersecurity Student and Python Developer from Sangamner, Maharashtra, India</strong>.
-                                I am passionate about ethical hacking, network security, and secure backend & API development.
-                            </p>
+                    {/* SYSTEM PROFILE MODULE */}
+                    <div className="profile-module luminous-aura">
+                        <div className="module-body">
+                            <div className="dossier-content">
+                                <div className="profile-text">
+                                    <p className="p-text intro">
+                                        Hi, I'm <strong className="highlight">Sajid Inamdar</strong>. I study <strong className="highlight">Cybersecurity</strong> and develop with <strong className="highlight">Python</strong>. I live in Sangamner, Maharashtra.
+                                    </p>
 
-                            <p className="about-paragraph">
-                                I am currently a BCA student and I actively practice cybersecurity through platforms like
-                                <strong className="highlight"> TryHackMe</strong>, hands-on labs, and real-world security projects.
-                                My goal is to become a professional ethical hacker and cybersecurity analyst.
-                            </p>
+                                    <p className="p-text">
+                                        I love ethical hacking, network security, and building secure apps. I am currently a student, and I practice every day on <strong className="highlight">TryHackMe</strong> and other security platforms. My goal is to work as a professional security expert.
+                                    </p>
 
-                            <p className="about-paragraph">
-                                I have experience working with <strong className="highlight">Python, Linux, networking</strong>, penetration testing tools,
-                                and web security testing. I enjoy learning new technologies and applying them to solve real cybersecurity problems.
-                            </p>
+                                    <p className="p-text">
+                                        I have experience with <strong className="highlight">Linux, networking</strong>, and security tools. I enjoy finding new ways to solve technical problems and keeping systems safe.
+                                    </p>
 
-                            <p className="about-paragraph">
-                                This website is my <strong className="highlight">official portfolio</strong> where I showcase my projects, certifications, blogs, and technical skills.
-                            </p>
+                                    <p className="p-text">
+                                        This is my portfolio where I share my work, certificates, and skills with the world.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="module-footer">
+                            <div className="security-status"></div>
+                            <div className="scan-line"></div>
                         </div>
                     </div>
 
-                    <div className="about-stats">
-                        <div className={`stat-card ${isVisible ? 'animate-stat' : ''}`} style={{ animationDelay: '0.1s' }}>
-                            <div className="stat-icon">
-                                <i className="fas fa-trophy"></i>
+                    {/* DATA BLOCKS (STATS) */}
+                    <div className="data-blocks">
+                        <div className={`data-block luminous-aura ${isVisible ? 'animate-in' : ''}`} style={{ animationDelay: '0.1s' }}>
+                            <div className="block-icon">
+                                <i className="fas fa-shield-alt"></i>
                             </div>
-                            <div className="stat-info">
-                                <h3>TryHackMe</h3>
-                                <p className="stat-number">{tryhackmeCount}</p>
-                                <p className="stat-label">Top % Global Rank</p>
+                            <div className="block-details">
+                                <span className="block-title">TryHackMe Rank</span>
+                                <div className="block-value-row">
+                                    <span className="block-value">Top {tryhackmeCount}%</span>
+                                    <span className="unit">GLOBAL</span>
+                                </div>
                             </div>
+                            <div className="block-glow"></div>
                         </div>
 
-                        <div className={`stat-card ${isVisible ? 'animate-stat' : ''}`} style={{ animationDelay: '0.2s' }}>
-                            <div className="stat-icon">
+                        <div className={`data-block luminous-aura ${isVisible ? 'animate-in' : ''}`} style={{ animationDelay: '0.2s' }}>
+                            <div className="block-icon">
                                 <i className="fab fa-github"></i>
                             </div>
-                            <div className="stat-info">
-                                <h3>GitHub</h3>
-                                <p className="stat-number">{githubCount}+</p>
-                                <p className="stat-label">Projects</p>
+                            <div className="block-details">
+                                <span className="block-title">Codestbase</span>
+                                <div className="block-value-row">
+                                    <span className="block-value">{githubCount}+</span>
+                                    <span className="unit">REPOS</span>
+                                </div>
                             </div>
+                            <div className="block-glow"></div>
                         </div>
 
-                        <div className={`stat-card ${isVisible ? 'animate-stat' : ''}`} style={{ animationDelay: '0.3s' }}>
-                            <div className="stat-icon">
-                                <i className="fas fa-code"></i>
+                        <div className={`data-block ${isVisible ? 'animate-in' : ''}`} style={{ animationDelay: '0.3s' }}>
+                            <div className="block-icon">
+                                <i className="fas fa-microchip"></i>
                             </div>
-                            <div className="stat-info">
-                                <h3>Skills</h3>
-                                <p className="stat-number">{skillsCount}+</p>
-                                <p className="stat-label">Technologies</p>
+                            <div className="block-details">
+                                <span className="block-title">Tech Stack</span>
+                                <div className="block-value-row">
+                                    <span className="block-value">{skillsCount}+</span>
+                                    <span className="unit">SKILLS</span>
+                                </div>
                             </div>
+                            <div className="block-glow"></div>
                         </div>
                     </div>
                 </div>
             </div>
 
             <style>{`
-                .about-section {
+                .about-modern {
                     padding: var(--section-padding) 0;
+                    position: relative;
+                    overflow: hidden;
                 }
 
-                .about-heading {
-                    font-size: 2.5rem;
-                    font-weight: 700;
+                .cyber-grid-overlay {
+                    position: absolute;
+                    inset: 0;
+                    background-image: 
+                        linear-gradient(rgba(56, 189, 248, 0.03) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(56, 189, 248, 0.03) 1px, transparent 1px);
+                    background-size: 50px 50px;
+                    mask-image: radial-gradient(circle at center, black, transparent 80%);
+                    pointer-events: none;
+                }
+
+                .relative-z { position: relative; z-index: 10; }
+
+                .section-head { text-align: center; margin-bottom: 30px; }
+
+                .glitch-text {
+                    font-size: clamp(2.2rem, 8vw, 3.5rem);
+                    font-weight: 800;
                     color: #fff;
-                    margin-bottom: 48px;
-                    letter-spacing: -0.5px;
-                    text-align: center;
+                    text-transform: uppercase;
+                    letter-spacing: 2px;
+                }
+
+                .sub-header {
+                    color: #94a3b8;
+                    font-size: clamp(0.9rem, 3vw, 1.1rem);
+                    margin-top: 15px;
                 }
 
                 .about-layout {
                     display: grid;
-                    grid-template-columns: 1.5fr 1fr;
-                    gap: 48px;
+                    grid-template-columns: 1.2fr 1fr;
+                    gap: clamp(24px, 4vw, 40px);
                     align-items: start;
                 }
 
-                /* Content Card with Left Accent */
-                .about-content-card {
-                    display: flex;
-                    gap: 24px;
-                    background: rgba(30, 41, 59, 0.2);
-                    border: 1px solid rgba(255, 255, 255, 0.05);
-                    border-radius: 16px;
-                    padding: 0;
+                /* PROFILE MODULE */
+                .profile-module {
+                    background: var(--glass-bg);
+                    backdrop-filter: blur(12px);
+                    -webkit-backdrop-filter: blur(12px);
+                    border: 1px solid var(--glass-border);
+                    border-radius: 24px;
                     overflow: hidden;
-                }
-
-                .accent-bar {
-                    width: 6px;
-                    background: linear-gradient(180deg, var(--neon-cyan), var(--accent));
-                    flex-shrink: 0;
-                    box-shadow: 0 0 20px rgba(0, 243, 255, 0.4);
-                }
-
-                .content-text {
-                    padding: 32px 32px 32px 0;
-                }
-
-                .about-paragraph {
-                    font-size: 1.05rem;
-                    line-height: 1.75;
-                    color: var(--text-secondary);
-                    margin-bottom: 20px;
-                }
-
-                .about-paragraph.intro {
-                    font-size: 1.1rem;
-                }
-
-                .about-paragraph:last-child {
-                    margin-bottom: 0;
-                }
-
-                .about-paragraph em {
-                    font-style: italic;
-                    color: rgba(255, 255, 255, 0.85);
-                }
-
-                .highlight {
-                    color: var(--neon-cyan);
-                    font-weight: 600;
-                }
-
-                /* Stats Cards */
-                .about-stats {
                     display: flex;
                     flex-direction: column;
-                    gap: 16px;
+                    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                    width: 100%;
+                    box-shadow: var(--glass-glow);
                 }
 
-                .stat-card {
-                    background: rgba(30, 41, 59, 0.2);
-                    border: 1px solid rgba(255, 255, 255, 0.05);
-                    border-radius: 12px;
-                    padding: 20px;
+                .profile-module:hover {
+                    border-color: var(--glass-border-hover);
+                    box-shadow: 0 0 50px rgba(56, 189, 248, 0.15);
+                    transform: translateY(-5px);
+                }
+
+
+                .module-body { 
+                    padding: clamp(20px, 5vw, 40px);
+                    flex-grow: 1;
+                }
+                .p-text { font-size: clamp(0.95rem, 2.5vw, 1.1rem); line-height: 1.8; color: #94a3b8; margin-bottom: 25px; }
+                .p-text:last-child { margin-bottom: 0; }
+                .p-text.intro { font-size: clamp(1.1rem, 3vw, 1.25rem); color: #e2e8f0; }
+                .highlight { color: #38bdf8; font-weight: 700; }
+
+                .module-footer {
+                    padding: 15px 25px;
+                    background: rgba(0, 0, 0, 0.2);
+                    position: relative;
+                }
+
+
+                .scan-line {
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    width: 0;
+                    height: 2px;
+                    background: #38bdf8;
+                    transition: 0.6s ease;
+                }
+
+                .profile-module:hover .scan-line { width: 100%; box-shadow: 0 0 10px #38bdf8; }
+
+                /* DATA BLOCKS */
+                .data-blocks { display: flex; flex-direction: column; gap: 20px; }
+
+                .data-block {
+                    background: var(--glass-bg);
+                    backdrop-filter: blur(12px);
+                    -webkit-backdrop-filter: blur(12px);
+                    border: 1px solid var(--glass-border);
+                    border-radius: 20px;
+                    padding: 25px;
                     display: flex;
                     align-items: center;
-                    gap: 16px;
-                    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                    gap: 20px;
+                    position: relative;
+                    overflow: hidden;
+                    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                    box-shadow: var(--glass-glow);
                     opacity: 0;
-                    transform: translateY(20px);
+                    transform: translateX(30px);
                 }
 
-                .stat-card.animate-stat {
-                    animation: slideUpFade 0.6s ease forwards;
+                .data-block.animate-in {
+                    opacity: 1;
+                    transform: translateX(0);
+                    transition: opacity 0.6s, transform 0.6s;
                 }
 
-                @keyframes slideUpFade {
-                    to {
-                        opacity: 1;
-                        transform: translateY(0);
-                    }
+                .data-block:hover {
+                    border-color: var(--glass-border-hover);
+                    transform: scale(1.03);
+                    background: rgba(30, 41, 59, 0.7);
+                    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
                 }
 
-                .stat-card:hover {
-                    background: rgba(30, 41, 59, 0.4);
-                    border-color: rgba(0, 243, 255, 0.3);
-                    transform: translateX(4px) translateY(-4px);
-                    box-shadow: 0 8px 24px rgba(0, 243, 255, 0.15);
-                }
-
-                .stat-icon {
-                    width: 48px;
-                    height: 48px;
-                    background: rgba(0, 243, 255, 0.1);
-                    border-radius: 10px;
+                .block-icon {
+                    width: 54px;
+                    height: 54px;
+                    background: rgba(56, 189, 248, 0.1);
+                    border-radius: 12px;
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    color: var(--neon-cyan);
-                    font-size: 1.5rem;
+                    color: #38bdf8;
+                    font-size: 1.6rem;
                     flex-shrink: 0;
+                    transition: 0.3s;
                 }
 
-                .stat-info h3 {
-                    font-size: 1rem;
-                    color: #fff;
-                    font-weight: 600;
-                    margin: 0 0 4px 0;
+                .data-block:hover .block-icon {
+                    background: #38bdf8;
+                    color: var(--bg-dark);
+                    box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
                 }
 
-                .stat-info p {
-                    font-size: 0.85rem;
-                    color: var(--text-secondary);
-                    margin: 0;
+                .block-details { flex-grow: 1; }
+                .block-title { font-size: 0.85rem; color: #94a3b8; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+                .block-value-row { display: flex; align-items: baseline; gap: 8px; margin-top: 5px; }
+                .block-value { font-size: 2.2rem; font-weight: 800; color: #fff; font-family: 'Outfit', sans-serif; }
+                .unit { font-size: 0.75rem; color: #38bdf8; font-weight: 700; }
+
+                .block-glow {
+                    position: absolute;
+                    bottom: -20px;
+                    right: -20px;
+                    width: 60px;
+                    height: 60px;
+                    background: #38bdf8;
+                    filter: blur(40px);
+                    opacity: 0;
+                    transition: 0.4s;
                 }
 
-                .stat-number {
-                    font-size: 1.8rem !important;
-                    font-weight: 700 !important;
-                    color: var(--neon-cyan) !important;
-                    margin: 4px 0 !important;
-                    background: linear-gradient(135deg, var(--neon-cyan), var(--accent));
-                    -webkit-background-clip: text;
-                    background-clip: text;
-                    -webkit-text-fill-color: transparent;
+                .data-block:hover .block-glow { opacity: 0.2; }
+
+                /* RESPONSIVENESS */
+                @media (max-width: 1024px) {
+                    .about-layout { grid-template-columns: 1fr; gap: 30px; }
+                    .data-blocks { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+                    .data-block { transform: translateY(30px) !important; padding: 20px; gap: 15px; }
+                    .data-block.animate-in { transform: translateY(0) !important; }
+                    .block-value { font-size: 1.8rem; }
                 }
 
-                .stat-label {
-                    font-size: 0.75rem !important;
-                    color: var(--text-secondary) !important;
-                    margin-top: 2px !important;
+                @media (max-width: 768px) {
+                    .about-modern { padding: 60px 0; }
+                    .data-blocks { grid-template-columns: 1fr; }
+                    .block-value { font-size: 2rem; }
+                    .profile-module { border-radius: 20px; }
                 }
 
-                /* Responsive */
-                @media (max-width: 968px) {
-                    .about-heading {
-                        font-size: 2.25rem;
-                        margin-bottom: 10px; /* Reduced from 32px */
-                    }
-
-                    .about-layout {
-                        grid-template-columns: 1fr;
-                        gap: 20px; /* Reduced from 32px */
-                    }
-
-                    .about-content-card {
-                        flex-direction: column;
-                    }
-
-                    .accent-bar {
-                        width: 100%;
-                        height: 4px;
-                    }
-
-                    .content-text {
-                        padding: var(--spacing-sm); /* More compact padding */
-                    }
-
-                    .about-paragraph {
-                        font-size: 1rem;
-                        margin-bottom: 12px;
-                    }
-
-                    .about-paragraph.intro {
-                        font-size: 1.05rem;
-                    }
-
-                    .about-stats {
-                        flex-direction: row;
-                        gap: 12px;
-                    }
-
-                    .stat-card {
-                        flex: 1;
-                        flex-direction: column;
-                        text-align: center;
-                        padding: 12px;
-                    }
-
-                    .stat-icon {
-                        width: 44px;
-                        height: 44px;
-                        font-size: 1.3rem;
-                    }
+                @media (max-width: 480px) {
+                    .section-head { margin-bottom: 40px; }
                 }
 
-                @media (max-width: 640px) {
-                    .about-heading {
-                        font-size: 2rem;
-                    }
-
-                    .about-stats {
-                        flex-direction: column;
-                    }
-
-                    .stat-card {
-                        flex-direction: row;
-                        text-align: left;
-                    }
+                @media (max-width: 350px) {
+                    .module-body { padding: 15px; }
+                    .data-block { padding: 15px; }
                 }
             `}</style>
         </section>

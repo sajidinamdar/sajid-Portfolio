@@ -5,7 +5,7 @@ export const portfolioData = {
     personal: {
         name: "Sajid Inamdar",
         role: "AI Developer | Cybersecurity Student",
-        email: "sajidinamdar@gmail.com",
+        email: "sajitenamdar@gmail.com",
         location: "Sangamner, Maharashtra",
         github: "https://github.com/sajidinamdar",
         linkedin: "https://www.linkedin.com/in/sajidinamdar-sec/",
