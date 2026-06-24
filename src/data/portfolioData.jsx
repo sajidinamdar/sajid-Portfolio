@@ -1,12 +1,13 @@
-import { FaPython, FaHtml5, FaCss3Alt, FaJs, FaGitAlt, FaBootstrap, FaGithub, FaLinkedinIn, FaMedium, FaYoutube, FaInstagram, FaTrophy, FaCode } from 'react-icons/fa';
-import { SiKalilinux, SiGnubash, SiMysql, SiTryhackme, SiPandas, SiNumpy, SiFastapi, SiFlask } from 'react-icons/si';
+import { FaPython, FaGitAlt, FaGithub, FaLinkedinIn, FaMedium, FaYoutube, FaInstagram, FaTrophy, FaCode, FaShieldAlt, FaTerminal, FaSearch, FaNetworkWired } from 'react-icons/fa';
+import { SiKalilinux, SiGnubash, SiMysql, SiTryhackme, SiWireshark, SiMetasploit, SiPostman, SiBurpsuite } from 'react-icons/si';
 
 export const portfolioData = {
     personal: {
-        name: "Sajid Inamdar",
-        role: "AI Developer | Cybersecurity Student",
-        email: "sajitenamdar@gmail.com",
-        location: "Sangamner, Maharashtra",
+        name: "SAJID INAMDAR",
+        role: "Cybersecurity Researcher | Ethical Hacker",
+        email: "inamdarsajid46@gmail.com",
+        phone: "+91 8329465339",
+        location: "Sangamner, Maharashtra, India",
         github: "https://github.com/sajidinamdar",
         linkedin: "https://www.linkedin.com/in/sajidinamdar-sec/",
         instagram: "https://www.instagram.com/sajidinamdar_",
@@ -16,9 +17,9 @@ export const portfolioData = {
     },
 
     stats: [
-        { label: "TryHackMe", value: "Top 5%", icon: <FaTrophy />, sublabel: "Global Rank" },
-        { label: "GitHub", value: "15+", icon: <FaGithub />, sublabel: "Projects" },
-        { label: "Skills", value: "12+", icon: <FaCode />, sublabel: "Technologies" }
+        { label: "TryHackMe", value: "Top 2%", icon: <FaTrophy />, sublabel: "Global Rank" },
+        { label: "Labs Solved", value: "200+", icon: <SiTryhackme />, sublabel: "Security Labs" },
+        { label: "Skills", value: "12+", icon: <FaCode />, sublabel: "Security Tools" }
     ],
 
     socialAccounts: [
@@ -32,71 +33,131 @@ export const portfolioData = {
     ],
 
     skills: [
-        { name: 'Python', icon: <FaPython />, color: '#3776AB' },
-        { name: 'JavaScript', icon: <FaJs />, color: '#F7DF1E' },
-        { name: 'Bash', icon: <SiGnubash />, color: '#4EAA25' },
-        { name: 'SQL', icon: <SiMysql />, color: '#4479A1' },
-        { name: 'Kali Linux', icon: <SiKalilinux />, color: '#557C94' },
-        { name: 'TryHackMe', icon: <SiTryhackme />, color: '#C51C2C' },
-        { name: 'pandas', icon: <SiPandas />, color: '#150458' },
-        { name: 'matplotlib', icon: <span style={{ fontWeight: 'bold', fontSize: '1.5rem' }}>Mat</span>, color: '#11557c' },
-        { name: 'numpy', icon: <SiNumpy />, color: '#013243' },
-        { name: 'fastapi', icon: <SiFastapi />, color: '#009688' },
-        { name: 'flask', icon: <SiFlask />, color: '#000000' },
-        { name: 'bootstrap', icon: <FaBootstrap />, color: '#7952B3' },
-        { name: 'Git', icon: <FaGitAlt />, color: '#F05032' },
-        { name: 'HTML5', icon: <FaHtml5 />, color: '#E34F26' },
-        { name: 'CSS3', icon: <FaCss3Alt />, color: '#1572B6' }
+        { 
+            name: 'Web Application Security', 
+            category: 'Application & API Security', 
+            desc: 'Performed vulnerability assessments following the OWASP Top 10 framework to secure active backends.', 
+            icon: <FaShieldAlt />, 
+            color: '#3b82f6' 
+        },
+        { 
+            name: 'Burp Suite', 
+            category: 'Application & API Security', 
+            desc: 'Intercepted, analyzed, and modified HTTP/S requests using Proxy and Repeater tools to map target structures.', 
+            icon: <SiBurpsuite />, 
+            color: '#ff6600' 
+        },
+        { 
+            name: 'Postman', 
+            category: 'Application & API Security', 
+            desc: 'Tested REST API endpoints and verified authentication token persistence and handling.', 
+            icon: <SiPostman />, 
+            color: '#ff6c37' 
+        },
+        { 
+            name: 'Nmap', 
+            category: 'Network & Threat Analysis', 
+            desc: 'Conducted host discovery, port scanning, service detection, and OS version enumeration across target subnets.', 
+            icon: <FaNetworkWired />, 
+            color: '#0ea5e9' 
+        },
+        { 
+            name: 'Wireshark', 
+            category: 'Network & Threat Analysis', 
+            desc: 'Captured and analyzed local network traffic to dissect protocol behaviors and detect unencrypted text transmissions.', 
+            icon: <SiWireshark />, 
+            color: '#167ec2' 
+        },
+        { 
+            name: 'Metasploit', 
+            category: 'Network & Threat Analysis', 
+            desc: 'Validated known CVEs and executed payloads on authorized legacy target machines.', 
+            icon: <SiMetasploit />, 
+            color: '#2496ed' 
+        },
+        { 
+            name: 'Gobuster', 
+            category: 'Reconnaissance & OSINT', 
+            desc: 'Enumerated hidden directories and performed content discovery via active directory fuzzing.', 
+            icon: <FaSearch />, 
+            color: '#eab308' 
+        },
+        { 
+            name: 'OSINT & Dorking', 
+            category: 'Reconnaissance & OSINT', 
+            desc: 'Gathered open-source intelligence and leaked sensitive assets using advanced search operators.', 
+            icon: <FaTerminal />, 
+            color: '#10b981' 
+        },
+        { 
+            name: 'Kali Linux', 
+            category: 'Automation & Systems', 
+            desc: 'Performed manual security evaluations using Kali Linux terminal tools and deployment configurations.', 
+            icon: <SiKalilinux />, 
+            color: '#557c94' 
+        },
+        { 
+            name: 'Git & Version Control', 
+            category: 'Automation & Systems', 
+            desc: 'Maintained target documentation and vulnerability writeups via Git workflows.', 
+            icon: <FaGitAlt />, 
+            color: '#f05032' 
+        },
+        { 
+            name: 'Python', 
+            category: 'Automation & Systems', 
+            desc: 'Developed custom reconnaissance scanners and scripting utilities for automation tasks.', 
+            icon: <FaPython />, 
+            color: '#3776ab' 
+        },
+        { 
+            name: 'Bash', 
+            category: 'Automation & Systems', 
+            desc: 'Wrote shell scripts to automate network monitoring and log evaluation scans.', 
+            icon: <SiGnubash />, 
+            color: '#4eaa25' 
+        },
+        { 
+            name: 'SQL', 
+            category: 'Automation & Systems', 
+            desc: 'Identified and validated SQL injection vulnerabilities within application databases.', 
+            icon: <SiMysql />, 
+            color: '#4479a1' 
+        }
     ],
 
     projects: [
         {
-            title: 'Harisetu',
-            desc: 'Agricultural technology platform designed to connect farmers with consumers and optimize farm management.',
-            link: 'https://github.com/sajidinamdar/Harisetu',
-            tech: ['Python', 'Web Development', 'Database']
+            title: 'VAPT Report: Shell Access on Metasploitable 2',
+            domain: 'Network Pentesting',
+            desc: 'Conducted a full-scope vulnerability assessment and penetration test on a legacy network host. Successfully exploited unpatched services (FTP, SMB) using Metasploit to obtain root access and compiled a remediation report.',
+            remediation: 'Disable obsolete services (FTP, SMB v1, Telnet), enforce kernel level patching, and configure host firewall rules to restrict root access.',
+            tech: ['Nmap', 'Metasploit', 'Kali Linux', 'VAPT'],
+            link: 'https://github.com/sajidinamdar'
         },
         {
-            title: 'WebSocket Application',
-            desc: 'Real-time communication application using WebSocket protocol for instant data exchange.',
-            link: 'https://github.com/sajidinamdar/Websocket',
-            tech: ['WebSocket', 'Python', 'Real-time']
+            title: 'Network Scanning Assessment & Host Identification',
+            domain: 'Network Security',
+            desc: 'Mapped topology and evaluated the attack surface of a sandbox lab environment. Performed host discovery, port scanning, and analyzed active handshake sequences via Wireshark to locate unencrypted network traffic.',
+            remediation: 'Restrict ICMP echo response sequences, close unused network ports, and enforce SSH/TLS encryption for all management protocols.',
+            tech: ['Nmap', 'Wireshark', 'Linux', 'Networking'],
+            link: 'https://github.com/sajidinamdar'
         },
         {
-            title: 'FastAPI Authentication',
-            desc: 'Complete authentication system with signup and login functionality using FastAPI framework.',
-            link: 'https://github.com/sajidinamdar/fastapi_signup',
-            tech: ['FastAPI', 'Authentication', 'Security']
+            title: 'OSINT Reconnaissance Report: wscubetech.com',
+            domain: 'Reconnaissance',
+            desc: 'Gathered open-source intelligence on exposed corporate subdomains and unindexed directories. Used advanced Google Dorking queries and Gobuster directory fuzzing to locate leaked configuration metadata.',
+            remediation: 'Implement robots.txt directives to restrict search crawlers, disable directory listings, and encrypt exposed subdomain metadata files.',
+            tech: ['OSINT', 'Google Dorking', 'Gobuster', 'Recon'],
+            link: 'https://github.com/sajidinamdar'
         },
         {
-            title: 'FastAPI Backend Project',
-            desc: 'Full-stack backend API built with FastAPI, featuring authentication, database integration, and RESTful endpoints.',
-            link: 'https://github.com/sajidinamdar/my-fastapi-project-',
-            tech: ['FastAPI', 'Python', 'REST API']
-        },
-        {
-            title: 'Python Chatbot',
-            desc: 'AI-powered chatbot application with natural language processing capabilities for automated conversations.',
-            link: 'https://github.com/sajidinamdar/Python-chatbot',
-            tech: ['Python', 'NLP', 'AI']
-        },
-        {
-            title: 'File Shortener',
-            desc: 'Utility tool for optimizing and managing file path structures in complex directory systems.',
-            link: 'https://github.com/sajidinamdar/File-Shortener',
-            tech: ['Python', 'File Management', 'Automation']
-        },
-        {
-            title: 'SMTP API Service',
-            desc: 'Email service API built with SMTP protocol for sending automated emails and notifications.',
-            link: 'https://github.com/sajidinamdar/smtplib-API',
-            tech: ['Python', 'SMTP', 'API']
-        },
-        {
-            title: 'Weather API',
-            desc: 'Weather information service API that fetches and displays real-time weather data.',
-            link: 'https://github.com/sajidinamdar/Weather_api',
-            tech: ['Python', 'API', 'Weather Data']
+            title: 'Credential Exposure Risk Analysis',
+            domain: 'Threat Intelligence',
+            desc: 'Audited corporate data leaks and credentials to identify initial access risks. Queried public breach repositories, assessed weak password reuse patterns, and developed risk mitigation metrics.',
+            remediation: 'Enforce Multi-Factor Authentication (MFA), establish mandatory password rotation policies, and monitor breached data dumps.',
+            tech: ['OSINT', 'Linux', 'Risk Analysis', 'Threat Intel'],
+            link: 'https://github.com/sajidinamdar'
         }
     ],
 
@@ -106,7 +167,7 @@ export const portfolioData = {
             title: "Learning Journey of Programming Language",
             date: "June 12, 2025",
             category: "My Journey",
-            excerpt: "Every programmer has a starting point. My journey into programming began with a simple curiosity — how do websites and apps actually work behind the screen?",
+            excerpt: "Every programmer has a starting point. My journey into programming began with a simple curiosity — how do websites and apps work behind the screen?",
             mediumUrl: "https://medium.com/@sajidinamdar"
         },
         {

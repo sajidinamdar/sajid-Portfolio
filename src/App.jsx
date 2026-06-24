@@ -5,14 +5,8 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 
 
-// Lazy load page components
+// Lazy load HomePage component
 const HomePage = lazy(() => import('./pages/HomePage'));
-const About = lazy(() => import('./pages/AboutPage'));
-const ProjectsPage = lazy(() => import('./pages/ProjectsPage'));
-const BlogsPage = lazy(() => import('./pages/BlogsPage'));
-const SkillsPage = lazy(() => import('./pages/SkillsPage'));
-const CertificationsPage = lazy(() => import('./pages/CertificationsPage'));
-const ContactPage = lazy(() => import('./pages/ContactPage'));
 
 // ScrollToTop component - Only for real page changes
 function ScrollToTop() {
@@ -45,16 +39,7 @@ function App() {
           <main className="content-area">
             <Suspense fallback={null}>
               <Routes>
-                {/* All routes point to HomePage for a unified SPA experience */}
-                <Route path="/" element={<HomePage />} />
-                <Route path="/home" element={<HomePage />} />
-                <Route path="/about" element={<HomePage />} />
-                <Route path="/projects" element={<HomePage />} />
-                <Route path="/blogs" element={<HomePage />} />
-                <Route path="/skills" element={<HomePage />} />
-                <Route path="/certifications" element={<HomePage />} />
-                <Route path="/contact" element={<HomePage />} />
-                {/* Fallback to HomePage */}
+                {/* Catch-all route to HomePage for a unified SPA experience */}
                 <Route path="*" element={<HomePage />} />
               </Routes>
             </Suspense>
